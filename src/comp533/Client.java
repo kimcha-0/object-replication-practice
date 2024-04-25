@@ -12,15 +12,16 @@ import util.tags.DistributedTags;
 @Tags({DistributedTags.CLIENT, DistributedTags.RMI})
 public class Client extends AStandAloneTwoCoupledHalloweenSimulations {
 	Server serverProxy;
+	InCoupler in;
+	OutCoupler out;
 	
 	public Client() {
-		
 	}
 	
 	public static void main(String args[]) {
 		try {
 			Registry registry = LocateRegistry.getRegistry(4999);
-			Client client = new Client());
+			Client client = new Client();
 		}
 	}
 	
