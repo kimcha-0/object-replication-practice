@@ -1,6 +1,6 @@
 package comp533;
 import grader.basics.execution.BasicProjectExecution;
-import gradingTools.comp533s24.assignment4.S24Assignment3Suite;
+import gradingTools.comp533s24.assignment4.S24Assignment4Suite;
 import trace.grader.basics.GraderBasicsTraceUtility;
 
 public class A4Grader {
