@@ -90,9 +90,9 @@ public class Server extends AStandAloneTwoCoupledHalloweenSimulations implements
 					if (msg instanceof IPCMechanism)
 						c.receiveIPCChange((IPCMechanism)msg);
 					else if (msg instanceof String)
-						c.receiveChange((String)msg);
+						c.receiveChangeRMI((String)msg);
 					else
-						c.receiveMetaStateChange((boolean)msg);
+						c.receiveMetaStateChange((boolean)msg);	
 					ProposalLearnedNotificationSent.newCase(this, CommunicationStateNames.BROADCAST_MODE, -1, msg);
 				} catch (Exception e) {
 					e.printStackTrace();

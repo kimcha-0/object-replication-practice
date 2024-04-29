@@ -13,8 +13,8 @@ public interface RemoteClient extends Remote, Serializable {
 	public static final String CLIENT = "CLIENT";
 	int getId() throws RemoteException;
 	void setId(int id) throws RemoteException;
-	void broadcastChange(String command) throws RemoteException;
-	void receiveChange(String command) throws RemoteException;
+	void broadcastChangeRMI(String command) throws RemoteException;
+	void receiveChangeRMI(String command) throws RemoteException;
 	void receiveIPCChange(IPCMechanism ipc) throws RemoteException;
 	void receiveMetaStateChange(boolean newValue) throws RemoteException;
 	void ipcMechanism(IPCMechanism newValue) throws RemoteException;
