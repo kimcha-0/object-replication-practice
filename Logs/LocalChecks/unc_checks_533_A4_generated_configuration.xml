@@ -1,0 +1,3 @@
+	<module name="ClassDefined">
+		<property name="severity" value="info"/>
+	</module>

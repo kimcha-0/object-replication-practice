@@ -1,0 +1,1069 @@
+
+0,Thu Apr 25 00:35:36 EDT 2024*PRE_OUTPUT*
+>>Running suite Assignment4TwoClientSuite
+<<
+>>Running test RMITwoClientConnection
+<<
+>>Running test RMITwoClientReadWriteNonAtomic
+<<
+*OUTPUT*
+*ERROR*
+
+*POST_OUTPUT*
+>>Test Result:
+RMITwoClientConnection,0.0% complete,0.0,20.0,In Server enabling RMI, no line found matching regex: .*?\{main\}.*?RMIRegistryLocated.*
+<<
+>>Test Result:
+RMITwoClientReadWriteNonAtomic,0.0% complete,0.0,20.0,In Server enabling RMI, no line found matching regex: .*?\{main\}.*?RMIRegistryLocated.*
+<<
+*END_OUTPUT*
+
+
+
+0,Thu Apr 25 00:35:38 EDT 2024*PRE_OUTPUT*
+>>Running suite A4GeneralStyleSuite
+<<
+>>Running test A4NoCheckstyleWarnings
+<<
+>>Running test A4NamedConstants
+<<
+>>Running test A4PublicMethodsOverride
+<<
+>>Running test A4InterfaceAsType
+<<
+>>Running test A4MnemonicNames
+<<
+>>Running test A4AccessModifiersMatched
+<<
+*OUTPUT*
+*ERROR*
+
+*POST_OUTPUT*
+>>Test Result:
+RMITwoClientConnection,0.0% complete,0.0,20.0,In Server enabling RMI, no line found matching regex: .*?\{main\}.*?RMIRegistryLocated.*
+<<
+>>Test Result:
+RMITwoClientReadWriteNonAtomic,0.0% complete,0.0,20.0,In Server enabling RMI, no line found matching regex: .*?\{main\}.*?RMIRegistryLocated.*
+<<
+>>Test Result:
+A4NoCheckstyleWarnings,0.0% complete,0.0,10.0,Could not run checkstyle
+<<
+>>Test Result:
+A4NamedConstants,0.0% complete,0.0,1.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A4PublicMethodsOverride,0.0% complete,0.0,5.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A4InterfaceAsType,0.0% complete,0.0,10.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A4MnemonicNames,0.0% complete,0.0,10.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A4AccessModifiersMatched,0.0% complete,0.0,5.0,No checkstyle output, check console error messages
+<<
+*END_OUTPUT*
+
+
+
+0,Thu Apr 25 00:35:45 EDT 2024*PRE_OUTPUT*
+>>Running suite Assignment4OneClientSuite
+<<
+>>Running test RMIStaticArguments
+<<
+>>Running test RMIOneClientConnection
+<<
+>>Running test RMIOneClientReadWriteNonAtomic
+<<
+*OUTPUT*
+*ERROR*
+
+*POST_OUTPUT*
+>>Test Result:
+RMITwoClientConnection,0.0% complete,0.0,20.0,In Server enabling RMI, no line found matching regex: .*?\{main\}.*?RMIRegistryLocated.*
+<<
+>>Test Result:
+RMITwoClientReadWriteNonAtomic,0.0% complete,0.0,20.0,In Server enabling RMI, no line found matching regex: .*?\{main\}.*?RMIRegistryLocated.*
+<<
+>>Test Result:
+A4NoCheckstyleWarnings,0.0% complete,0.0,10.0,Could not run checkstyle
+<<
+>>Test Result:
+A4NamedConstants,0.0% complete,0.0,1.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A4PublicMethodsOverride,0.0% complete,0.0,5.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A4InterfaceAsType,0.0% complete,0.0,10.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A4MnemonicNames,0.0% complete,0.0,10.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A4AccessModifiersMatched,0.0% complete,0.0,5.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+RMIStaticArguments,0.0% complete,0.0,20.0,Couldn't run code:Tags:[Registry]not found:
+<<
+>>Test Result:
+RMIOneClientConnection,0.0% complete,0.0,20.0,In Server enabling RMI, no line found matching regex: .*?\{main\}.*?RMIRegistryLocated.*
+<<
+>>Test Result:
+RMIOneClientReadWriteNonAtomic,0.0% complete,0.0,20.0,In Server enabling RMI, no line found matching regex: .*?\{main\}.*?RMIRegistryLocated.*
+<<
+*END_OUTPUT*
+
+
+
+0,Thu Apr 25 00:35:45 EDT 2024*PRE_OUTPUT*
+>>Running suite A4SpecificStyleSuite
+<<
+>>Running test A4TaggedClassesDefined
+<<
+>>Running test A4ExpectedInterfaces
+<<
+>>Running test A4ExpectedCalls
+<<
+>>Running test A4SpuriousCalls
+<<
+>>Running test A4ExpectedSignatures
+<<
+*OUTPUT*
+*ERROR*
+
+*POST_OUTPUT*
+>>Test Result:
+RMITwoClientConnection,0.0% complete,0.0,20.0,In Server enabling RMI, no line found matching regex: .*?\{main\}.*?RMIRegistryLocated.*
+<<
+>>Test Result:
+RMITwoClientReadWriteNonAtomic,0.0% complete,0.0,20.0,In Server enabling RMI, no line found matching regex: .*?\{main\}.*?RMIRegistryLocated.*
+<<
+>>Test Result:
+A4NoCheckstyleWarnings,0.0% complete,0.0,10.0,Could not run checkstyle
+<<
+>>Test Result:
+A4NamedConstants,0.0% complete,0.0,1.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A4PublicMethodsOverride,0.0% complete,0.0,5.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A4InterfaceAsType,0.0% complete,0.0,10.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A4MnemonicNames,0.0% complete,0.0,10.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A4AccessModifiersMatched,0.0% complete,0.0,5.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+RMIStaticArguments,0.0% complete,0.0,20.0,Couldn't run code:Tags:[Registry]not found:
+<<
+>>Test Result:
+RMIOneClientConnection,0.0% complete,0.0,20.0,In Server enabling RMI, no line found matching regex: .*?\{main\}.*?RMIRegistryLocated.*
+<<
+>>Test Result:
+RMIOneClientReadWriteNonAtomic,0.0% complete,0.0,20.0,In Server enabling RMI, no line found matching regex: .*?\{main\}.*?RMIRegistryLocated.*
+<<
+>>Test Result:
+A4TaggedClassesDefined,0.0% complete,0.0,10.0,Did not find checkstyle text
+<<
+>>Test Result:
+A4ExpectedInterfaces,0.0% complete,0.0,5.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A4ExpectedCalls,0.0% complete,0.0,20.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A4SpuriousCalls,0.0% complete,0.0,20.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A4ExpectedSignatures,0.0% complete,0.0,5.0,No checkstyle output, check console error messages
+<<
+*END_OUTPUT*
+
+
+
+1,Sun Apr 28 14:25:02 EDT 2024*PRE_OUTPUT*
+>>Running suite A4SpecificStyleSuite
+<<
+>>Running test A4TaggedClassesDefined
+<<
+>>Running test A4ExpectedInterfaces
+<<
+>>Running test A4ExpectedCalls
+<<
+>>Running test A4SpuriousCalls
+<<
+>>Running test A4ExpectedSignatures
+<<
+*OUTPUT*
+*ERROR*
+
+*POST_OUTPUT*
+>>Test Result:
+A4TaggedClassesDefined,0.0% complete,0.0,10.0,Did not find checkstyle text
+<<
+>>Test Result:
+A4ExpectedInterfaces,0.0% complete,0.0,5.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A4ExpectedCalls,0.0% complete,0.0,20.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A4SpuriousCalls,0.0% complete,0.0,20.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A4ExpectedSignatures,0.0% complete,0.0,5.0,No checkstyle output, check console error messages
+<<
+*END_OUTPUT*
+
+
+
+2,Sun Apr 28 14:29:11 EDT 2024*PRE_OUTPUT*
+>>Running suite Assignment4OneClientSuite
+<<
+>>Running test RMIStaticArguments
+<<
+>>Running test RMIOneClientConnection
+<<
+>>Running test RMIOneClientReadWriteNonAtomic
+<<
+*OUTPUT*
+*ERROR*
+
+*POST_OUTPUT*
+>>Test Result:
+RMIStaticArguments,100.0% complete,20.0,20.0,
+<<
+>>Test Result:
+RMIOneClientConnection,100.0% complete,20.0,20.0,
+<<
+>>Test Result:
+RMIOneClientReadWriteNonAtomic,0.0% complete,0.0,20.0,In Client writing to server via RMI, no line found matching regex: .*?\{main\}.*?NotifiedPropertyChangeEvent.*
+<<
+*END_OUTPUT*
+
+
+
+2,Sun Apr 28 14:29:31 EDT 2024*PRE_OUTPUT*
+>>Running suite Assignment4OneClientSuite
+<<
+*OUTPUT*
+*ERROR*
+
+*POST_OUTPUT*
+>>Test Result:
+RMIStaticArguments,100.0% complete,20.0,20.0,
+<<
+>>Test Result:
+RMIOneClientConnection,100.0% complete,20.0,20.0,
+<<
+>>Test Result:
+RMIOneClientReadWriteNonAtomic,0.0% complete,0.0,20.0,In Client writing to server via RMI, no line found matching regex: .*?\{main\}.*?NotifiedPropertyChangeEvent.*
+<<
+*END_OUTPUT*
+
+
+
+2,Sun Apr 28 14:32:33 EDT 2024*PRE_OUTPUT*
+>>Running suite Assignment4TwoClientSuite
+<<
+>>Running test RMITwoClientConnection
+<<
+>>Running test RMITwoClientReadWriteNonAtomic
+<<
+*OUTPUT*
+*ERROR*
+
+*POST_OUTPUT*
+>>Test Result:
+RMIStaticArguments,100.0% complete,20.0,20.0,
+<<
+>>Test Result:
+RMIOneClientConnection,100.0% complete,20.0,20.0,
+<<
+>>Test Result:
+RMIOneClientReadWriteNonAtomic,0.0% complete,0.0,20.0,In Client writing to server via RMI, no line found matching regex: .*?\{main\}.*?NotifiedPropertyChangeEvent.*
+<<
+>>Test Result:
+RMITwoClientConnection,100.0% complete,20.0,20.0,
+<<
+>>Test Result:
+RMITwoClientReadWriteNonAtomic,0.0% complete,0.0,20.0,In Client 0 writing to server via RMI, no line found matching regex: .*?\{main\}.*?NotifiedPropertyChangeEvent.*
+<<
+*END_OUTPUT*
+
+
+
+2,Sun Apr 28 14:33:42 EDT 2024*PRE_OUTPUT*
+>>Running suite A4GeneralStyleSuite
+<<
+>>Running test A4NoCheckstyleWarnings
+<<
+>>Running test A4NamedConstants
+<<
+>>Running test A4PublicMethodsOverride
+<<
+>>Running test A4InterfaceAsType
+<<
+>>Running test A4MnemonicNames
+<<
+>>Running test A4AccessModifiersMatched
+<<
+*OUTPUT*
+*ERROR*
+
+*POST_OUTPUT*
+>>Test Result:
+RMIStaticArguments,100.0% complete,20.0,20.0,
+<<
+>>Test Result:
+RMIOneClientConnection,100.0% complete,20.0,20.0,
+<<
+>>Test Result:
+RMIOneClientReadWriteNonAtomic,0.0% complete,0.0,20.0,In Client writing to server via RMI, no line found matching regex: .*?\{main\}.*?NotifiedPropertyChangeEvent.*
+<<
+>>Test Result:
+RMITwoClientConnection,100.0% complete,20.0,20.0,
+<<
+>>Test Result:
+RMITwoClientReadWriteNonAtomic,0.0% complete,0.0,20.0,In Client 0 writing to server via RMI, no line found matching regex: .*?\{main\}.*?NotifiedPropertyChangeEvent.*
+<<
+>>Test Result:
+A4NoCheckstyleWarnings,100.0% complete,10.0,10.0,
+<<
+>>Test Result:
+A4NamedConstants,0.0% complete,0.0,1.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A4PublicMethodsOverride,0.0% complete,0.0,5.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A4InterfaceAsType,0.0% complete,0.0,10.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A4MnemonicNames,0.0% complete,0.0,10.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A4AccessModifiersMatched,0.0% complete,0.0,5.0,No checkstyle output, check console error messages
+<<
+*END_OUTPUT*
+
+
+
+2,Sun Apr 28 14:33:48 EDT 2024*PRE_OUTPUT*
+>>Running suite A4SpecificStyleSuite
+<<
+>>Running test A4TaggedClassesDefined
+<<
+>>Running test A4ExpectedInterfaces
+<<
+>>Running test A4ExpectedCalls
+<<
+>>Running test A4SpuriousCalls
+<<
+>>Running test A4ExpectedSignatures
+<<
+*OUTPUT*
+*ERROR*
+
+*POST_OUTPUT*
+>>Test Result:
+RMIStaticArguments,100.0% complete,20.0,20.0,
+<<
+>>Test Result:
+RMIOneClientConnection,100.0% complete,20.0,20.0,
+<<
+>>Test Result:
+RMIOneClientReadWriteNonAtomic,0.0% complete,0.0,20.0,In Client writing to server via RMI, no line found matching regex: .*?\{main\}.*?NotifiedPropertyChangeEvent.*
+<<
+>>Test Result:
+RMITwoClientConnection,100.0% complete,20.0,20.0,
+<<
+>>Test Result:
+RMITwoClientReadWriteNonAtomic,0.0% complete,0.0,20.0,In Client 0 writing to server via RMI, no line found matching regex: .*?\{main\}.*?NotifiedPropertyChangeEvent.*
+<<
+>>Test Result:
+A4NoCheckstyleWarnings,100.0% complete,10.0,10.0,
+<<
+>>Test Result:
+A4NamedConstants,0.0% complete,0.0,1.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A4PublicMethodsOverride,0.0% complete,0.0,5.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A4InterfaceAsType,0.0% complete,0.0,10.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A4MnemonicNames,0.0% complete,0.0,10.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A4AccessModifiersMatched,0.0% complete,0.0,5.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A4TaggedClassesDefined,100.0% complete,10.0,10.0,
+<<
+>>Test Result:
+A4ExpectedInterfaces,0.0% complete,0.0,5.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A4ExpectedCalls,0.0% complete,0.0,20.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A4SpuriousCalls,0.0% complete,0.0,20.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A4ExpectedSignatures,0.0% complete,0.0,5.0,No checkstyle output, check console error messages
+<<
+*END_OUTPUT*
+
+
+
+3,Sun Apr 28 14:56:45 EDT 2024*PRE_OUTPUT*
+>>Running suite Assignment4OneClientSuite
+<<
+>>Running test RMIStaticArguments
+<<
+>>Running test RMIOneClientConnection
+<<
+>>Running test RMIOneClientReadWriteNonAtomic
+<<
+*OUTPUT*
+*ERROR*
+
+*POST_OUTPUT*
+>>Test Result:
+RMIStaticArguments,100.0% complete,20.0,20.0,
+<<
+>>Test Result:
+RMIOneClientConnection,100.0% complete,20.0,20.0,
+<<
+>>Test Result:
+RMIOneClientReadWriteNonAtomic,0.0% complete,0.0,20.0,In Client writing to server via RMI, no line found matching regex: .*?\{main\}.*?NotifiedPropertyChangeEvent.*
+<<
+*END_OUTPUT*
+
+
+
+4,Sun Apr 28 15:06:38 EDT 2024*PREVIOUS_OUTPUT*
+
+
+5,Sun Apr 28 16:09:31 EDT 2024*PRE_OUTPUT*
+>>Running suite A4SpecificStyleSuite
+<<
+>>Running test A4TaggedClassesDefined
+<<
+>>Running test A4ExpectedInterfaces
+<<
+>>Running test A4ExpectedCalls
+<<
+>>Running test A4SpuriousCalls
+<<
+>>Running test A4ExpectedSignatures
+<<
+*OUTPUT*
+*ERROR*
+
+*POST_OUTPUT*
+>>Test Result:
+A4TaggedClassesDefined,100.0% complete,10.0,10.0,
+<<
+>>Test Result:
+A4ExpectedInterfaces,0.0% complete,0.0,5.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A4ExpectedCalls,0.0% complete,0.0,20.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A4SpuriousCalls,0.0% complete,0.0,20.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A4ExpectedSignatures,0.0% complete,0.0,5.0,No checkstyle output, check console error messages
+<<
+*END_OUTPUT*
+
+
+
+6,Sun Apr 28 16:09:56 EDT 2024*PREVIOUS_OUTPUT*
+
+
+7,Sun Apr 28 16:11:22 EDT 2024*PRE_OUTPUT*
+>>Running test A4TaggedClassesDefined
+<<
+*OUTPUT*
+*ERROR*
+
+*POST_OUTPUT*
+>>Test Result:
+A4TaggedClassesDefined,100.0% complete,10.0,10.0,
+<<
+*END_OUTPUT*
+
+
+
+7,Sun Apr 28 16:11:33 EDT 2024*PRE_OUTPUT*
+>>Running suite A4GeneralStyleSuite
+<<
+>>Running test A4NoCheckstyleWarnings
+<<
+>>Running test A4NamedConstants
+<<
+>>Running test A4PublicMethodsOverride
+<<
+>>Running test A4InterfaceAsType
+<<
+>>Running test A4MnemonicNames
+<<
+>>Running test A4AccessModifiersMatched
+<<
+*OUTPUT*
+*ERROR*
+
+*POST_OUTPUT*
+>>Test Result:
+A4TaggedClassesDefined,100.0% complete,10.0,10.0,
+<<
+>>Test Result:
+A4NoCheckstyleWarnings,100.0% complete,10.0,10.0,
+<<
+>>Test Result:
+A4NamedConstants,0.0% complete,0.0,1.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A4PublicMethodsOverride,0.0% complete,0.0,5.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A4InterfaceAsType,0.0% complete,0.0,10.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A4MnemonicNames,0.0% complete,0.0,10.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A4AccessModifiersMatched,0.0% complete,0.0,5.0,No checkstyle output, check console error messages
+<<
+*END_OUTPUT*
+
+
+
+7,Sun Apr 28 16:11:43 EDT 2024*PRE_OUTPUT*
+>>Running test A4ExpectedInterfaces
+<<
+*OUTPUT*
+*ERROR*
+
+*POST_OUTPUT*
+>>Test Result:
+A4TaggedClassesDefined,100.0% complete,10.0,10.0,
+<<
+>>Test Result:
+A4NoCheckstyleWarnings,100.0% complete,10.0,10.0,
+<<
+>>Test Result:
+A4NamedConstants,0.0% complete,0.0,1.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A4PublicMethodsOverride,0.0% complete,0.0,5.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A4InterfaceAsType,0.0% complete,0.0,10.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A4MnemonicNames,0.0% complete,0.0,10.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A4AccessModifiersMatched,0.0% complete,0.0,5.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A4ExpectedInterfaces,0.0% complete,0.0,5.0,No checkstyle output, check console error messages
+<<
+*END_OUTPUT*
+
+
+
+7,Sun Apr 28 16:11:45 EDT 2024*PRE_OUTPUT*
+>>Running test A4ExpectedCalls
+<<
+*OUTPUT*
+*ERROR*
+
+*POST_OUTPUT*
+>>Test Result:
+A4TaggedClassesDefined,100.0% complete,10.0,10.0,
+<<
+>>Test Result:
+A4NoCheckstyleWarnings,100.0% complete,10.0,10.0,
+<<
+>>Test Result:
+A4NamedConstants,0.0% complete,0.0,1.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A4PublicMethodsOverride,0.0% complete,0.0,5.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A4InterfaceAsType,0.0% complete,0.0,10.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A4MnemonicNames,0.0% complete,0.0,10.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A4AccessModifiersMatched,0.0% complete,0.0,5.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A4ExpectedInterfaces,0.0% complete,0.0,5.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A4ExpectedCalls,0.0% complete,0.0,20.0,No checkstyle output, check console error messages
+<<
+*END_OUTPUT*
+
+
+
+8,Sun Apr 28 16:12:36 EDT 2024*PRE_OUTPUT*
+>>Running suite A4SpecificStyleSuite
+<<
+>>Running test A4TaggedClassesDefined
+<<
+>>Running test A4ExpectedInterfaces
+<<
+>>Running test A4ExpectedCalls
+<<
+>>Running test A4SpuriousCalls
+<<
+>>Running test A4ExpectedSignatures
+<<
+*OUTPUT*
+*ERROR*
+
+*POST_OUTPUT*
+>>Test Result:
+A4TaggedClassesDefined,100.0% complete,10.0,10.0,
+<<
+>>Test Result:
+A4ExpectedInterfaces,0.0% complete,0.0,5.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A4ExpectedCalls,0.0% complete,0.0,20.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A4SpuriousCalls,0.0% complete,0.0,20.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A4ExpectedSignatures,0.0% complete,0.0,5.0,No checkstyle output, check console error messages
+<<
+*END_OUTPUT*
+
+
+
+9,Sun Apr 28 16:13:16 EDT 2024*PREVIOUS_OUTPUT*
+
+
+10,Sun Apr 28 22:15:01 EDT 2024*PREVIOUS_OUTPUT*
+
+
+10,Sun Apr 28 22:18:14 EDT 2024*PRE_OUTPUT*
+>>Running suite Assignment4TwoClientSuite
+<<
+>>Running test RMITwoClientConnection
+<<
+>>Running test RMITwoClientReadWriteNonAtomic
+<<
+*OUTPUT*
+*ERROR*
+
+*POST_OUTPUT*
+>>Test Result:
+A4TaggedClassesDefined,100.0% complete,10.0,10.0,
+<<
+>>Test Result:
+A4ExpectedInterfaces,0.0% complete,0.0,5.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A4ExpectedCalls,0.0% complete,0.0,20.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A4SpuriousCalls,0.0% complete,0.0,20.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A4ExpectedSignatures,0.0% complete,0.0,5.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+RMITwoClientConnection,100.0% complete,20.0,20.0,
+<<
+>>Test Result:
+RMITwoClientReadWriteNonAtomic,0.0% complete,0.0,20.0,In Client 0 writing to server via RMI, no line found matching regex: .*?\{main\}.*?NotifiedPropertyChangeEvent.*
+<<
+*END_OUTPUT*
+
+
+
+11,Sun Apr 28 22:29:40 EDT 2024*PRE_OUTPUT*
+>>Running suite A4SpecificStyleSuite
+<<
+>>Running test A4TaggedClassesDefined
+<<
+>>Running test A4ExpectedInterfaces
+<<
+>>Running test A4ExpectedCalls
+<<
+>>Running test A4SpuriousCalls
+<<
+>>Running test A4ExpectedSignatures
+<<
+*OUTPUT*
+*ERROR*
+
+*POST_OUTPUT*
+>>Test Result:
+A4TaggedClassesDefined,100.0% complete,10.0,10.0,
+<<
+>>Test Result:
+A4ExpectedInterfaces,0.0% complete,0.0,5.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A4ExpectedCalls,0.0% complete,0.0,20.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A4SpuriousCalls,0.0% complete,0.0,20.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A4ExpectedSignatures,0.0% complete,0.0,5.0,No checkstyle output, check console error messages
+<<
+*END_OUTPUT*
+
+
+
+11,Sun Apr 28 22:41:02 EDT 2024*PRE_OUTPUT*
+>>Running suite Assignment4TwoClientSuite
+<<
+>>Running test RMITwoClientConnection
+<<
+>>Running test RMITwoClientReadWriteNonAtomic
+<<
+*OUTPUT*
+*ERROR*
+
+*POST_OUTPUT*
+>>Test Result:
+A4TaggedClassesDefined,100.0% complete,10.0,10.0,
+<<
+>>Test Result:
+A4ExpectedInterfaces,0.0% complete,0.0,5.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A4ExpectedCalls,0.0% complete,0.0,20.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A4SpuriousCalls,0.0% complete,0.0,20.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A4ExpectedSignatures,0.0% complete,0.0,5.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+RMITwoClientConnection,100.0% complete,20.0,20.0,
+<<
+>>Test Result:
+RMITwoClientReadWriteNonAtomic,0.0% complete,0.0,20.0,In Client 0 writing to server via RMI, no line found matching regex: .*?\{main\}.*?NotifiedPropertyChangeEvent.*
+<<
+*END_OUTPUT*
+
+
+
+12,Sun Apr 28 22:48:03 EDT 2024*PRE_OUTPUT*
+>>Running suite Assignment4OneClientSuite
+<<
+>>Running test RMIStaticArguments
+<<
+>>Running test RMIOneClientConnection
+<<
+>>Running test RMIOneClientReadWriteNonAtomic
+<<
+*OUTPUT*
+*ERROR*
+
+*POST_OUTPUT*
+>>Test Result:
+RMIStaticArguments,100.0% complete,20.0,20.0,
+<<
+>>Test Result:
+RMIOneClientConnection,100.0% complete,20.0,20.0,
+<<
+>>Test Result:
+RMIOneClientReadWriteNonAtomic,0.0% complete,0.0,20.0,In Client writing to server via RMI, no line found matching regex: .*?\{main\}.*?NotifiedPropertyChangeEvent.*
+<<
+*END_OUTPUT*
+
+
+
+12,Sun Apr 28 22:48:14 EDT 2024*PRE_OUTPUT*
+>>Running suite Assignment4OneClientSuite
+<<
+*OUTPUT*
+*ERROR*
+
+*POST_OUTPUT*
+>>Test Result:
+RMIStaticArguments,100.0% complete,20.0,20.0,
+<<
+>>Test Result:
+RMIOneClientConnection,100.0% complete,20.0,20.0,
+<<
+>>Test Result:
+RMIOneClientReadWriteNonAtomic,0.0% complete,0.0,20.0,In Client writing to server via RMI, no line found matching regex: .*?\{main\}.*?NotifiedPropertyChangeEvent.*
+<<
+*END_OUTPUT*
+
+
+
+13,Sun Apr 28 22:49:01 EDT 2024*PRE_OUTPUT*
+>>Running suite A4SpecificStyleSuite
+<<
+>>Running test A4TaggedClassesDefined
+<<
+>>Running test A4ExpectedInterfaces
+<<
+>>Running test A4ExpectedCalls
+<<
+>>Running test A4SpuriousCalls
+<<
+>>Running test A4ExpectedSignatures
+<<
+*OUTPUT*
+*ERROR*
+
+*POST_OUTPUT*
+>>Test Result:
+A4TaggedClassesDefined,100.0% complete,10.0,10.0,
+<<
+>>Test Result:
+A4ExpectedInterfaces,0.0% complete,0.0,5.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A4ExpectedCalls,0.0% complete,0.0,20.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A4SpuriousCalls,0.0% complete,0.0,20.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A4ExpectedSignatures,0.0% complete,0.0,5.0,No checkstyle output, check console error messages
+<<
+*END_OUTPUT*
+
+
+
+13,Sun Apr 28 22:52:06 EDT 2024*PRE_OUTPUT*
+>>Running suite Assignment4TwoClientSuite
+<<
+>>Running test RMITwoClientConnection
+<<
+>>Running test RMITwoClientReadWriteNonAtomic
+<<
+*OUTPUT*
+*ERROR*
+
+*POST_OUTPUT*
+>>Test Result:
+A4TaggedClassesDefined,100.0% complete,10.0,10.0,
+<<
+>>Test Result:
+A4ExpectedInterfaces,0.0% complete,0.0,5.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A4ExpectedCalls,0.0% complete,0.0,20.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A4SpuriousCalls,0.0% complete,0.0,20.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A4ExpectedSignatures,0.0% complete,0.0,5.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+RMITwoClientConnection,100.0% complete,20.0,20.0,
+<<
+>>Test Result:
+RMITwoClientReadWriteNonAtomic,0.0% complete,0.0,20.0,In Client 0 writing to server via RMI, no line found matching regex: .*?\{main\}.*?NotifiedPropertyChangeEvent.*
+<<
+*END_OUTPUT*
+
+
+
+14,Sun Apr 28 23:21:19 EDT 2024*PRE_OUTPUT*
+>>Running suite Assignment4TwoClientSuite
+<<
+>>Running test RMITwoClientConnection
+<<
+>>Running test RMITwoClientReadWriteNonAtomic
+<<
+*OUTPUT*
+*ERROR*
+
+*POST_OUTPUT*
+>>Test Result:
+RMITwoClientConnection,100.0% complete,20.0,20.0,
+<<
+>>Test Result:
+RMITwoClientReadWriteNonAtomic,100.0% complete,20.0,20.0,
+<<
+*END_OUTPUT*
+
+
+
+14,Sun Apr 28 23:22:28 EDT 2024*PRE_OUTPUT*
+>>Running suite Assignment4OneClientSuite
+<<
+>>Running test RMIStaticArguments
+<<
+>>Running test RMIOneClientConnection
+<<
+>>Running test RMIOneClientReadWriteNonAtomic
+<<
+*OUTPUT*
+*ERROR*
+
+*POST_OUTPUT*
+>>Test Result:
+RMITwoClientConnection,100.0% complete,20.0,20.0,
+<<
+>>Test Result:
+RMITwoClientReadWriteNonAtomic,100.0% complete,20.0,20.0,
+<<
+>>Test Result:
+RMIStaticArguments,100.0% complete,20.0,20.0,
+<<
+>>Test Result:
+RMIOneClientConnection,100.0% complete,20.0,20.0,
+<<
+>>Test Result:
+RMIOneClientReadWriteNonAtomic,100.0% complete,20.0,20.0,
+<<
+*END_OUTPUT*
+
+
+
+14,Sun Apr 28 23:23:03 EDT 2024*PRE_OUTPUT*
+>>Running suite A4GeneralStyleSuite
+<<
+>>Running test A4NoCheckstyleWarnings
+<<
+>>Running test A4NamedConstants
+<<
+>>Running test A4PublicMethodsOverride
+<<
+>>Running test A4InterfaceAsType
+<<
+>>Running test A4MnemonicNames
+<<
+>>Running test A4AccessModifiersMatched
+<<
+*OUTPUT*
+*ERROR*
+
+*POST_OUTPUT*
+>>Test Result:
+RMITwoClientConnection,100.0% complete,20.0,20.0,
+<<
+>>Test Result:
+RMITwoClientReadWriteNonAtomic,100.0% complete,20.0,20.0,
+<<
+>>Test Result:
+RMIStaticArguments,100.0% complete,20.0,20.0,
+<<
+>>Test Result:
+RMIOneClientConnection,100.0% complete,20.0,20.0,
+<<
+>>Test Result:
+RMIOneClientReadWriteNonAtomic,100.0% complete,20.0,20.0,
+<<
+>>Test Result:
+A4NoCheckstyleWarnings,100.0% complete,10.0,10.0,
+<<
+>>Test Result:
+A4NamedConstants,0.0% complete,0.0,1.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A4PublicMethodsOverride,0.0% complete,0.0,5.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A4InterfaceAsType,0.0% complete,0.0,10.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A4MnemonicNames,0.0% complete,0.0,10.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A4AccessModifiersMatched,0.0% complete,0.0,5.0,No checkstyle output, check console error messages
+<<
+*END_OUTPUT*
+
+
+
+14,Sun Apr 28 23:23:05 EDT 2024*PRE_OUTPUT*
+>>Running suite A4SpecificStyleSuite
+<<
+>>Running test A4TaggedClassesDefined
+<<
+>>Running test A4ExpectedInterfaces
+<<
+>>Running test A4ExpectedCalls
+<<
+>>Running test A4SpuriousCalls
+<<
+>>Running test A4ExpectedSignatures
+<<
+*OUTPUT*
+*ERROR*
+
+*POST_OUTPUT*
+>>Test Result:
+RMITwoClientConnection,100.0% complete,20.0,20.0,
+<<
+>>Test Result:
+RMITwoClientReadWriteNonAtomic,100.0% complete,20.0,20.0,
+<<
+>>Test Result:
+RMIStaticArguments,100.0% complete,20.0,20.0,
+<<
+>>Test Result:
+RMIOneClientConnection,100.0% complete,20.0,20.0,
+<<
+>>Test Result:
+RMIOneClientReadWriteNonAtomic,100.0% complete,20.0,20.0,
+<<
+>>Test Result:
+A4NoCheckstyleWarnings,100.0% complete,10.0,10.0,
+<<
+>>Test Result:
+A4NamedConstants,0.0% complete,0.0,1.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A4PublicMethodsOverride,0.0% complete,0.0,5.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A4InterfaceAsType,0.0% complete,0.0,10.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A4MnemonicNames,0.0% complete,0.0,10.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A4AccessModifiersMatched,0.0% complete,0.0,5.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A4TaggedClassesDefined,100.0% complete,10.0,10.0,
+<<
+>>Test Result:
+A4ExpectedInterfaces,0.0% complete,0.0,5.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A4ExpectedCalls,0.0% complete,0.0,20.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A4SpuriousCalls,0.0% complete,0.0,20.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A4ExpectedSignatures,0.0% complete,0.0,5.0,No checkstyle output, check console error messages
+<<
+*END_OUTPUT*
+
+

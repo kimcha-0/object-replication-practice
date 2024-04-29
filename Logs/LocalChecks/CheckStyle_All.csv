@@ -1,0 +1,125 @@
+0,Sun Apr 28 14:33:33 EDT 2024,true,comp533/RemoteOutCoupler.java,nameNotInDictionary,serialVersionUID,uid
+0,Sun Apr 28 14:33:33 EDT 2024,true,comp533/RemoteOutCoupler.java,nameNotInDictionary,localSim,sim
+0,Sun Apr 28 14:33:33 EDT 2024,true,comp533/RemoteOutCoupler.java,publicMethodsOverride,[]
+0,Sun Apr 28 14:33:33 EDT 2024,true,comp533/InCoupler.java,nameNotInDictionary,sim,sim
+0,Sun Apr 28 14:33:33 EDT 2024,true,comp533/RemoteClient.java,variableHasInterfaceType,RemoteClient,clientProxy
+0,Sun Apr 28 14:33:33 EDT 2024,true,comp533/RemoteClient.java,variableHasInterfaceType,RemoteClient,client
+0,Sun Apr 28 14:33:33 EDT 2024,true,comp533/RemoteServer.java,variableHasInterfaceType,RemoteClient,client
+0,Sun Apr 28 14:33:33 EDT 2024,true,comp533/Client.java,nameNotInDictionary,localSim,sim
+0,Sun Apr 28 14:33:33 EDT 2024,true,comp533/Client.java,variableHasInterfaceType,RemoteServer,serverProxy
+0,Sun Apr 28 14:33:33 EDT 2024,true,comp533/Client.java,variableHasInterfaceType,InCoupler,in
+0,Sun Apr 28 14:33:33 EDT 2024,true,comp533/Client.java,variableHasClassType,Client,client
+0,Sun Apr 28 14:33:33 EDT 2024,true,comp533/Client.java,variableHasInterfaceType,RemoteClient,clientStub
+0,Sun Apr 28 14:33:33 EDT 2024,true,comp533/Client.java,classDecomposition,[[public  broadcastChange:String->void, public  setId:int->void, public  getId:->int], [default processArgs:String[]->void], [public  receiveChange:String->void]]
+0,Sun Apr 28 14:33:33 EDT 2024,true,comp533/Client.java,publicMethodsDoNotOverride,[public  getId:->int, public  setId:int->void]
+0,Sun Apr 28 14:33:33 EDT 2024,true,comp533/RemoteInCoupler.java,nameNotInDictionary,localSim,sim
+0,Sun Apr 28 14:33:33 EDT 2024,true,comp533/RemoteInCoupler.java,nameNotInDictionary,numCouplers,couplers
+0,Sun Apr 28 14:33:33 EDT 2024,true,comp533/RemoteInCoupler.java,nameNotInDictionary,sim,sim
+0,Sun Apr 28 14:33:33 EDT 2024,true,comp533/RemoteInCoupler.java,publicMethodsOverride,[]
+0,Sun Apr 28 14:33:33 EDT 2024,true,comp533/Server.java,nameNotInDictionary,c,c
+0,Sun Apr 28 14:33:33 EDT 2024,true,comp533/Server.java,minimumLettersInNameCheck,c,c,2
+0,Sun Apr 28 14:33:33 EDT 2024,true,comp533/Server.java,minimumVowelInNameCheck,c,c,1
+0,Sun Apr 28 14:33:33 EDT 2024,true,comp533/Server.java,nameNotInDictionary,msg,msg
+0,Sun Apr 28 14:33:33 EDT 2024,true,comp533/Server.java,minimumVowelInNameCheck,msg,msg,1
+0,Sun Apr 28 14:33:33 EDT 2024,true,comp533/Server.java,variableHasInterfaceType,RemoteClient,client
+0,Sun Apr 28 14:33:33 EDT 2024,true,comp533/Server.java,variableHasClassType,Server,server
+0,Sun Apr 28 14:33:33 EDT 2024,true,comp533/Server.java,variableHasInterfaceType,RemoteServer,serverProxy
+0,Sun Apr 28 14:33:33 EDT 2024,true,comp533/Server.java,variableHasInterfaceType,RemoteClient,c
+0,Sun Apr 28 14:33:33 EDT 2024,true,comp533/Server.java,publicMethodsOverride,[]
+0,Sun Apr 28 14:33:33 EDT 2024,true,comp533/OutCoupler.java,variableHasInterfaceType,OutCoupler,out
+0,Sun Apr 28 14:33:33 EDT 2024,true,comp533/RMIRegistry.java,publicMethodsDoNotOverride,[public  start:String[]->void]
+1,Sun Apr 28 14:37:19 EDT 2024,true,comp533/RemoteOutCoupler.java,variableHasInterfaceType,RemoteClient,clientProxy
+1,Sun Apr 28 14:37:19 EDT 2024,true,comp533/RemoteOutCoupler.java,variableHasInterfaceType,RemoteClient,client
+1,Sun Apr 28 14:37:19 EDT 2024,true,comp533/RemoteServer.java,duplicateShortTypeName,[comp533.RemoteServer, java.rmi.server.RemoteServer]
+1,Sun Apr 28 14:37:19 EDT 2024,true,comp533/Client.java,variableHasInterfaceType,OutCoupler,out
+1,Sun Apr 28 14:37:19 EDT 2024,true,comp533/Client.java,classDecomposition,[[public  setId:int->void, public  getId:->int, public  broadcastChange:String->void], [default processArgs:String[]->void], [public  receiveChange:String->void]]
+2,Sun Apr 28 16:09:50 EDT 2024,false,comp533/RemoteClient.java,variableHasInterfaceType,RemoteClient,clientProxy
+2,Sun Apr 28 16:09:50 EDT 2024,false,comp533/RemoteClient.java,variableHasInterfaceType,RemoteClient,client
+2,Sun Apr 28 16:09:50 EDT 2024,false,comp533/Client.java,classDecomposition,[[public  broadcastChange:String->void, public  setId:int->void, public  getId:->int], [default processArgs:String[]->void], [public  receiveChange:String->void]]
+2,Sun Apr 28 16:09:50 EDT 2024,false,comp533/OutCoupler.java,variableHasInterfaceType,OutCoupler,out
+2,Sun Apr 28 16:09:50 EDT 2024,true,comp533/RemoteOutCoupler.java,nameNotInDictionary,serialVersionUID,uid
+2,Sun Apr 28 16:09:50 EDT 2024,true,comp533/RemoteOutCoupler.java,nameNotInDictionary,localSim,sim
+2,Sun Apr 28 16:09:50 EDT 2024,true,comp533/RemoteOutCoupler.java,variableHasInterfaceType,RemoteClient,clientProxy
+2,Sun Apr 28 16:09:50 EDT 2024,true,comp533/RemoteOutCoupler.java,variableHasInterfaceType,RemoteClient,client
+2,Sun Apr 28 16:09:50 EDT 2024,true,comp533/RemoteOutCoupler.java,publicMethodsOverride,[]
+2,Sun Apr 28 16:09:50 EDT 2024,true,comp533/InCoupler.java,nameNotInDictionary,sim,sim
+2,Sun Apr 28 16:09:50 EDT 2024,true,comp533/RemoteServer.java,duplicateShortTypeName,[comp533.RemoteServer, java.rmi.server.RemoteServer]
+2,Sun Apr 28 16:09:50 EDT 2024,true,comp533/RemoteServer.java,variableHasInterfaceType,RemoteClient,client
+2,Sun Apr 28 16:09:50 EDT 2024,true,comp533/Client.java,nameNotInDictionary,localSim,sim
+2,Sun Apr 28 16:09:50 EDT 2024,true,comp533/Client.java,variableHasInterfaceType,RemoteServer,serverProxy
+2,Sun Apr 28 16:09:50 EDT 2024,true,comp533/Client.java,variableHasInterfaceType,InCoupler,in
+2,Sun Apr 28 16:09:50 EDT 2024,true,comp533/Client.java,variableHasInterfaceType,OutCoupler,out
+2,Sun Apr 28 16:09:50 EDT 2024,true,comp533/Client.java,variableHasClassType,Client,client
+2,Sun Apr 28 16:09:50 EDT 2024,true,comp533/Client.java,variableHasInterfaceType,RemoteClient,clientStub
+2,Sun Apr 28 16:09:50 EDT 2024,true,comp533/Client.java,publicMethodsDoNotOverride,[public  getId:->int, public  setId:int->void]
+2,Sun Apr 28 16:09:50 EDT 2024,true,comp533/Client.java,classDecomposition,[[public  getId:->int, public  setId:int->void, public  broadcastChange:String->void], [default processArgs:String[]->void], [public  receiveChange:String->void]]
+2,Sun Apr 28 16:09:50 EDT 2024,true,comp533/RemoteInCoupler.java,nameNotInDictionary,localSim,sim
+2,Sun Apr 28 16:09:50 EDT 2024,true,comp533/RemoteInCoupler.java,nameNotInDictionary,numCouplers,couplers
+2,Sun Apr 28 16:09:50 EDT 2024,true,comp533/RemoteInCoupler.java,nameNotInDictionary,sim,sim
+2,Sun Apr 28 16:09:50 EDT 2024,true,comp533/RemoteInCoupler.java,publicMethodsOverride,[]
+2,Sun Apr 28 16:09:50 EDT 2024,true,comp533/Server.java,nameNotInDictionary,c,c
+2,Sun Apr 28 16:09:50 EDT 2024,true,comp533/Server.java,minimumLettersInNameCheck,c,c,2
+2,Sun Apr 28 16:09:50 EDT 2024,true,comp533/Server.java,minimumVowelInNameCheck,c,c,1
+2,Sun Apr 28 16:09:50 EDT 2024,true,comp533/Server.java,nameNotInDictionary,msg,msg
+2,Sun Apr 28 16:09:50 EDT 2024,true,comp533/Server.java,minimumVowelInNameCheck,msg,msg,1
+2,Sun Apr 28 16:09:50 EDT 2024,true,comp533/Server.java,variableHasInterfaceType,RemoteClient,client
+2,Sun Apr 28 16:09:50 EDT 2024,true,comp533/Server.java,variableHasClassType,Server,server
+2,Sun Apr 28 16:09:50 EDT 2024,true,comp533/Server.java,variableHasInterfaceType,RemoteServer,serverProxy
+2,Sun Apr 28 16:09:50 EDT 2024,true,comp533/Server.java,variableHasInterfaceType,RemoteClient,c
+2,Sun Apr 28 16:09:50 EDT 2024,true,comp533/Server.java,publicMethodsOverride,[]
+2,Sun Apr 28 16:09:50 EDT 2024,true,comp533/RMIRegistry.java,publicMethodsDoNotOverride,[public  start:String[]->void]
+3,Sun Apr 28 22:29:35 EDT 2024,true,comp533/RemoteOutCoupler.java,nameNotInDictionary,serialVersionUID,uid
+3,Sun Apr 28 22:29:35 EDT 2024,true,comp533/RemoteOutCoupler.java,nameNotInDictionary,localSim,sim
+3,Sun Apr 28 22:29:35 EDT 2024,true,comp533/RemoteOutCoupler.java,publicMethodsOverride,[]
+3,Sun Apr 28 22:29:35 EDT 2024,true,comp533/InCoupler.java,nameNotInDictionary,sim,sim
+3,Sun Apr 28 22:29:35 EDT 2024,true,comp533/RemoteClient.java,variableHasInterfaceType,RemoteClient,clientProxy
+3,Sun Apr 28 22:29:35 EDT 2024,true,comp533/RemoteClient.java,variableHasInterfaceType,RemoteClient,client
+3,Sun Apr 28 22:29:35 EDT 2024,true,comp533/RemoteServer.java,variableHasInterfaceType,RemoteClient,client
+3,Sun Apr 28 22:29:35 EDT 2024,true,comp533/Client.java,nameNotInDictionary,localSim,sim
+3,Sun Apr 28 22:29:35 EDT 2024,true,comp533/Client.java,variableHasInterfaceType,RemoteServer,serverProxy
+3,Sun Apr 28 22:29:35 EDT 2024,true,comp533/Client.java,variableHasInterfaceType,InCoupler,in
+3,Sun Apr 28 22:29:35 EDT 2024,true,comp533/Client.java,variableHasClassType,Client,client
+3,Sun Apr 28 22:29:35 EDT 2024,true,comp533/Client.java,publicMethodsDoNotOverride,[public  getId:->int, public  setId:int->void]
+3,Sun Apr 28 22:29:35 EDT 2024,true,comp533/Client.java,classDecomposition,[[public  getId:->int, private  findServer:String[]->void, private  locateRegistry:String;int->void, private  exportClient:->void, public  start:String[]->void, public  setId:int->void, public  broadcastChange:String->void], [default processArgs:String[]->void], [public  receiveChange:String->void]]
+3,Sun Apr 28 22:29:35 EDT 2024,true,comp533/RemoteInCoupler.java,nameNotInDictionary,localSim,sim
+3,Sun Apr 28 22:29:35 EDT 2024,true,comp533/RemoteInCoupler.java,nameNotInDictionary,numCouplers,couplers
+3,Sun Apr 28 22:29:35 EDT 2024,true,comp533/RemoteInCoupler.java,nameNotInDictionary,sim,sim
+3,Sun Apr 28 22:29:35 EDT 2024,true,comp533/RemoteInCoupler.java,publicMethodsOverride,[]
+3,Sun Apr 28 22:29:35 EDT 2024,true,comp533/Server.java,nameNotInDictionary,c,c
+3,Sun Apr 28 22:29:35 EDT 2024,true,comp533/Server.java,minimumLettersInNameCheck,c,c,2
+3,Sun Apr 28 22:29:35 EDT 2024,true,comp533/Server.java,minimumVowelInNameCheck,c,c,1
+3,Sun Apr 28 22:29:35 EDT 2024,true,comp533/Server.java,nameNotInDictionary,msg,msg
+3,Sun Apr 28 22:29:35 EDT 2024,true,comp533/Server.java,minimumVowelInNameCheck,msg,msg,1
+3,Sun Apr 28 22:29:35 EDT 2024,true,comp533/Server.java,variableHasInterfaceType,RemoteClient,client
+3,Sun Apr 28 22:29:35 EDT 2024,true,comp533/Server.java,variableHasClassType,Server,server
+3,Sun Apr 28 22:29:35 EDT 2024,true,comp533/Server.java,variableHasInterfaceType,RemoteServer,serverProxy
+3,Sun Apr 28 22:29:35 EDT 2024,true,comp533/Server.java,variableHasInterfaceType,RemoteClient,c
+3,Sun Apr 28 22:29:35 EDT 2024,true,comp533/Server.java,publicMethodsOverride,[]
+3,Sun Apr 28 22:29:35 EDT 2024,true,comp533/OutCoupler.java,variableHasInterfaceType,OutCoupler,out
+3,Sun Apr 28 22:29:35 EDT 2024,true,comp533/RMIRegistry.java,publicMethodsDoNotOverride,[public  start:String[]->void]
+4,Sun Apr 28 22:42:50 EDT 2024,false,msg,nameNotInDictionary,msg,msg
+4,Sun Apr 28 22:42:50 EDT 2024,false,msg,minimumVowelInNameCheck,msg,msg,1
+4,Sun Apr 28 22:42:50 EDT 2024,false,Server,variableHasClassType,Server,server
+4,Sun Apr 28 22:42:50 EDT 2024,false,serialVersionUID,nameNotInDictionary,serialVersionUID,uid
+4,Sun Apr 28 22:42:50 EDT 2024,false,[comp533.RemoteServer,duplicateShortTypeName,[comp533.RemoteServer, java.rmi.server.RemoteServer]
+4,Sun Apr 28 22:42:50 EDT 2024,false,sim,nameNotInDictionary,sim,sim
+4,Sun Apr 28 22:42:50 EDT 2024,false,numCouplers,nameNotInDictionary,numCouplers,couplers
+4,Sun Apr 28 22:42:50 EDT 2024,false,Client,variableHasClassType,Client,client
+4,Sun Apr 28 22:42:50 EDT 2024,false,RemoteServer,variableHasInterfaceType,RemoteServer,serverProxy
+4,Sun Apr 28 22:42:50 EDT 2024,false,[],publicMethodsOverride,[]
+4,Sun Apr 28 22:42:50 EDT 2024,false,c,nameNotInDictionary,c,c
+4,Sun Apr 28 22:42:50 EDT 2024,false,c,minimumLettersInNameCheck,c,c,2
+4,Sun Apr 28 22:42:50 EDT 2024,false,c,minimumVowelInNameCheck,c,c,1
+4,Sun Apr 28 22:42:50 EDT 2024,false,localSim,nameNotInDictionary,localSim,sim
+4,Sun Apr 28 22:42:50 EDT 2024,false,[public  start:String[]->void],publicMethodsDoNotOverride,[public  start:String[]->void]
+4,Sun Apr 28 22:42:50 EDT 2024,false,[[public  setId:int->void,classDecomposition,[[public  setId:int->void, public  getId:->int, public  broadcastChange:String->void], [default processArgs:String[]->void], [public  receiveChange:String->void]]
+4,Sun Apr 28 22:42:50 EDT 2024,false,[public  getId:->int,publicMethodsDoNotOverride,[public  getId:->int, public  setId:int->void]
+4,Sun Apr 28 22:42:50 EDT 2024,false,OutCoupler,variableHasInterfaceType,OutCoupler,out
+4,Sun Apr 28 22:42:50 EDT 2024,false,[[public  getId:->int,classDecomposition,[[public  getId:->int, public  setId:int->void, public  broadcastChange:String->void], [default processArgs:String[]->void], [public  receiveChange:String->void]]
+4,Sun Apr 28 22:42:50 EDT 2024,false,InCoupler,variableHasInterfaceType,InCoupler,in
+4,Sun Apr 28 22:42:50 EDT 2024,false,RemoteClient,variableHasInterfaceType,RemoteClient,clientProxy
+4,Sun Apr 28 22:42:50 EDT 2024,false,RemoteClient,variableHasInterfaceType,RemoteClient,client
+4,Sun Apr 28 22:42:50 EDT 2024,false,RemoteClient,variableHasInterfaceType,RemoteClient,clientStub
+4,Sun Apr 28 22:42:50 EDT 2024,false,RemoteClient,variableHasInterfaceType,RemoteClient,c
+4,Sun Apr 28 22:42:50 EDT 2024,true,comp533/Client.java,variableHasInterfaceType,OutCoupler,out
+4,Sun Apr 28 22:42:50 EDT 2024,true,comp533/Client.java,classDecomposition,[[public  start:String[]->void, private  findServer:String[]->void, private  exportClient:->void, public  broadcastChange:String->void, public  setId:int->void, private  locateRegistry:String;int->void, public  getId:->int], [default processArgs:String[]->void], [public  receiveChange:String->void]]

@@ -1,0 +1,868 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- This configuration file was written by the eclipse-cs plugin configuration 
+	editor -->
+<!-- Checkstyle-Configuration: Test Description: none -->
+<!DOCTYPE module PUBLIC "-//Puppy Crawl//DTD Check Configuration 1.3//EN" "http://www.puppycrawl.com/dtds/configuration_1_3.dtd">
+
+
+<module name="unc.tools.checkstyle.AnExtendibleChecker">
+
+
+	<property name="severity" value="warning" />
+
+
+	<module name="unc.tools.checkstyle.AnExtendibleTreeWalker">
+		<property name="severity" value="info" />
+
+		<module name="STBuilder">
+			<property name="configurationFileName"
+				value="ClassRegistry.csv" />
+			<property name="includeTypeTags" value="*" />
+			<property name="severity" value="info" />
+			<property name="logNoMatches" value="false" />
+			<property name="importsAsExistingClasses" value="true" />
+			<property name="logAggregateStatistics" value="false" />
+
+			<property name="logMethodsDeclared" value="false" />
+			<property name="logVariablesDeclared" value="false" />
+			<property name="logPropertiesDeclared" value="false" />
+			<property name="logAccessModifiersUsed" value="false" />
+			<property name="logSuperTypes" value="false" />
+			<property name="logInnerTypes" value="false" />
+			<property name="logInterfaces" value="false" />
+			<property name="trackTokenTypesUsedInMethods" value="true" />
+			<property name="trackJavaDocComments" value="true" />
+			<property name="processCalledMethods" value="true" />			
+						
+
+
+			<property name="excludeClassRegularExpressions"
+				value="
+				checkstyle.*,
+				test.simulation.*
+			" />
+			<property name="externalPackagePrefixes"
+				value="								
+								assignments.util,
+								java.io,
+								gradingTools,
+								port, 
+								inputport, 
+								multiserverport,
+								stringProcessors
+							" />
+			<property name="expectedTypes" value="
+							
+			@DistributedTags.CLIENT+@DistributedTags.RMI,
+			@DistributedTags.SERVER_REMOTE_INTERFACE+@DistributedTags.RMI,
+			@DistributedTags.CLIENT_CONFIGURER+@DistributedTags.RMI,
+			@DistributedTags.CLIENT_REMOTE_INTERFACE+@DistributedTags.RMI,
+			@DistributedTags.REGISTRY+@DistributedTags.RMI,
+			@DistributedTags.CLIENT_REMOTE_OBJECT+@DistributedTags.RMI,
+			@DistributedTags.CLIENT_OUT_COUPLER+@DistributedTags.RMI,
+			@DistributedTags.SERVER+@DistributedTags.RMI,
+			@DistributedTags.SERVER_REMOTE_OBJECT+@DistributedTags.RMI,
+			@DistributedTags.SERVER_CONFIGURER+@DistributedTags.RMI,
+			
+			
+		"/>
+			
+			
+							
+
+			</module>
+			
+
+
+	</module>
+
+
+	<module name="unc.tools.checkstyle.ANonCachingTreeWalker">
+		<property name="severity" value="warning" />
+		
+			
+		<module name="DuplicateShortTypeName">
+			<property name="severity" value="warning" />
+			<property name="includeTypeTags" value="*" />
+		</module>
+
+		<module name="FunctionAssignsGlobal">
+			<property name="severity" value="warning" />
+			<property name="excludeMethodTags"
+				value="
+					next(.*), 
+					pop(.*), 
+					delete(.*), 
+					remove(.*), 
+					read(.*), 					
+					set(.*), 
+					process(.*), 
+					scan(.*), 
+					(.*)create(.*), 					 
+					parse(.*),
+					(.*)actory(.*),
+					fetch(.*),
+					run(.*),
+					update(.*),
+					add(.*),
+					
+					" />
+		</module>
+		
+		<module name="SetterAssignsGlobal">
+			<property name="severity" value="warning" />
+		</module>
+		
+		<module name="BulkierThen">
+			<property name="severity" value="warning" />
+			<property name="minThenElseRatio" value="1" />
+			<property name="maxElsePartSize" value="1" />
+		</module>
+		
+		<module name="ThenBranching">
+			<property name="severity" value="warning" />
+
+		</module>
+
+		<module name="LiberalMagicNumber">
+			<property name="severity" value="warning" />
+			<property name="allowedSiblings" value="Math.(.*)" />
+
+		</module>
+		
+		<module name="MethodAccessModifier">
+			<property name="severity" value="info" />
+		</module>
+		
+		<module name="MethodAccessModifier">
+			<property name="severity" value="warning" />
+		</module>
+		
+		<module name="PublicMethodsOverride">
+			<property name="severity" value="warning" />
+		</module>
+		
+		<module name="PublicMethodsOverride">
+			<property name="severity" value="info" />
+		</module>
+		
+		<module name="ClassHasOneInterface">
+			<property name="severity" value="warning" />
+		</module>
+		
+		<module name="ClassHasOneInterface">
+			<property name="severity" value="info" />
+		</module>
+		
+		<module name="ClassHasAtLeastOneInterface">
+			<property name="severity" value="warning" />
+		</module>
+		
+		<module name="ClassHasAtLeastOneInterface">
+			<property name="severity" value="info" />
+		</module>
+		
+		<module name="VariableHasClassType">
+			<property name="severity" value="warning" />
+		</module>
+		
+		<module name="VariableHasClassType">
+			<property name="severity" value="info" />
+		</module>
+		
+		<module name="PeerCommonProperties">
+			<property name="severity" value="warning" />
+
+		</module>
+		
+		<module name="PeerCommonProperties">
+			<property name="severity" value="info" />
+
+		</module>
+
+		<module name="ConstantDefined">
+			<property name="severity" value="info" />
+		</module>
+
+	
+		<module name="BulkierElse">
+			<property name="severity" value="info" />
+			<property name="minElseThenRatio" value="1" />
+		</module>
+		<module name="ElseBranching">
+			<property name="severity" value="info" />
+		</module>
+		<module name="MnemonicNameCheck">
+			<property name="severity" value="warning" />
+			<property name="processType" value="false" />
+			<property name="processLocals" value="true" />
+			<property name="processParameters" value="true" />
+			<property name="processGlobals" value="true" />
+			<property name="processPublicMethods" value="false" />
+			<property name="processNonPublicMethods" value="true" />
+			<property name="minimumLettersInNameComponent" value="2" />
+			<property name="minimumVowelsInNameComponent" value="1" />
+			<property name="checkNumVowels" value="true" />
+			<property name="checkNumLetters" value="true" />
+			<property name="checkInDictionary" value="true" />
+			<property name="allowedComponents"
+				value="
+					nio,
+					xml,
+					mvc,
+			" />
+
+		</module>
+		
+		<module name="MnemonicNameCheck">
+			<property name="severity" value="info" />
+			<property name="processType" value="false" />
+			<property name="processLocals" value="true" />
+			<property name="processParameters" value="true" />
+			<property name="processGlobals" value="true" />
+			<property name="processPublicMethods" value="false" />
+			<property name="processNonPublicMethods" value="true" />
+			<property name="minimumLettersInNameComponent" value="2" />
+			<property name="minimumVowelsInNameComponent" value="1" />
+			<property name="checkNumVowels" value="true" />
+			<property name="checkNumLetters" value="true" />
+			<property name="checkInDictionary" value="true" />
+			<property name="allowedComponents"
+				value="
+					
+					nio,
+					xml,
+					mvc,
+			" />
+
+		</module>
+		
+		<module name="FinalParameterDefined">
+			<property name="severity" value="info" />
+		</module>
+
+		<module name="MethodBlockLimit">
+			<property name="severity" value="warning" />
+			<property name="max" value="1" />
+		</module>
+		<module name="NestedBlockDepth">
+			<property name="severity" value="warning" />
+			<property name="max" value="1" />
+		</module>
+		<module name="EqualsAvoidedNullCheck">
+			<property name="severity" value="info" />
+		</module>
+		<module name="EqualsAvoidedNullCheck">
+			<property name="severity" value="warning" />
+		</module>
+		<module name="ClassDecomposition">
+			<property name="severity" value="warning" />
+		</module>
+
+	<module name="ExpectedInterfaces">
+		<property name="severity" value="warning"/>
+		<property name="includeTypeTags" value="@DistributedTags.CLIENT_OUT_COUPLER+@DistributedTags.RMI"/>
+		<property name="expectedInterfaces" value="
+			java.beans.PropertyChangeListener,
+		
+		"/>
+	</module>
+	<module name="ExpectedInterfaces">
+		<property name="severity" value="info"/>
+		<property name="includeTypeTags" value="@DistributedTags.CLIENT_OUT_COUPLER+@DistributedTags.RMI"/>
+		<property name="expectedInterfaces" value="
+			java.beans.PropertyChangeListener,
+		
+		"/>
+	</module>
+	
+	<module name="MissingMethodCall">
+		<property name="severity" value="warning"/>
+		<property name="includeTypeTags" value="@DistributedTags.CLIENT_OUT_COUPLER+@DistributedTags.RMI"/>
+		<property name="expectedCalls" value="
+			util.trace.port.consensus.RemoteProposeRequestSent!newCase:Object;String;float;Object->RemoteProposeRequestSent,
+			util.misc.ThreadSupport!sleep:long->void,			
+			assignments.util.inputParameters.AnAbstractSimulationParametersBean!getDelay:->int,
+			java.beans.PropertyChangeEvent!getPropertyName:->String,
+			java.beans.PropertyChangeEvent!getNewValue:->Object,
+			@DistributedTags.SERVER_REMOTE_INTERFACE+@DistributedTags.RMI!.*:*->.*,
+		"/>
+	</module>
+	<module name="MissingMethodCall">
+		<property name="severity" value="info"/>
+		<property name="includeTypeTags" value="@DistributedTags.CLIENT_OUT_COUPLER+@DistributedTags.RMI"/>
+		<property name="expectedCalls" value="
+			util.trace.port.consensus.RemoteProposeRequestSent!newCase:Object;String;float;Object->RemoteProposeRequestSent,
+			util.misc.ThreadSupport!sleep:long->void,			
+			assignments.util.inputParameters.AnAbstractSimulationParametersBean!getDelay:->int,
+			java.beans.PropertyChangeEvent!getPropertyName:->String,
+			java.beans.PropertyChangeEvent!getNewValue:->Object,
+			@DistributedTags.SERVER_REMOTE_INTERFACE+@DistributedTags.RMI!.*:*->.*,		"/>
+	</module>
+	<module name="ExpectedInterfaces">
+		<property name="severity" value="warning"/>
+		<property name="includeTypeTags" value="@DistributedTags.CLIENT_REMOTE_OBJECT+@DistributedTags.RMI"/>
+		<property name="expectedInterfaces" value="
+			java.rmi.Remote,
+		"/>
+	</module>
+	<module name="ExpectedInterfaces">
+		<property name="severity" value="info"/>
+		<property name="includeTypeTags" value="@DistributedTags.CLIENT_REMOTE_OBJECT+@DistributedTags.RMI"/>
+		<property name="expectedInterfaces" value="
+			java.rmi.Remote,
+		"/>
+	</module>
+	<module name="ExpectedSignatures">
+		<property name="severity" value="warning"/>
+		<property name="includeTypeTags" value="@DistributedTags.CLIENT_REMOTE_OBJECT+@DistributedTags.RMI"/>
+		<property name="expectedSignatures" value="
+			.*:String->void,
+		"/>
+	</module>
+	<module name="ExpectedSignatures">
+		<property name="severity" value="info"/>
+		<property name="includeTypeTags" value="@DistributedTags.CLIENT_REMOTE_OBJECT+@DistributedTags.RMI"/>
+		<property name="expectedSignatures" value="
+			.*:String->void,
+		"/>
+	</module>
+	<module name="MissingMethodCall">
+		<property name="severity" value="warning"/>
+		<property name="includeTypeTags" value="@DistributedTags.CLIENT_REMOTE_OBJECT+@DistributedTags.RMI"/>
+		<property name="expectedCalls" value="
+			util.trace.port.consensus.ProposedStateSet!newCase:Object;String;float;Object->ProposedStateSet,
+			stringProcessors.HalloweenCommandProcessor!processCommand:String->void,
+			util.trace.port.consensus.ProposalLearnedNotificationReceived!newCase:Object;String;float;Object->ProposalLearnedNotificationReceived,
+		"/>
+	</module>
+	<module name="MissingMethodCall">
+		<property name="severity" value="info"/>
+		<property name="includeTypeTags" value="@DistributedTags.CLIENT_REMOTE_OBJECT+@DistributedTags.RMI"/>
+		<property name="expectedCalls" value="
+			util.trace.port.consensus.ProposedStateSet!newCase:Object;String;float;Object->ProposedStateSet,
+			stringProcessors.HalloweenCommandProcessor!processCommand:String->void,
+			util.trace.port.consensus.ProposalLearnedNotificationReceived!newCase:Object;String;float;Object->ProposalLearnedNotificationReceived,
+		"/>
+	</module>
+	
+	<module name="ExpectedInterfaces">
+		<property name="severity" value="warning"/>
+		<property name="includeTypeTags" value="@DistributedTags.SERVER_REMOTE_OBJECT+@DistributedTags.RMI"/>
+		<property name="expectedInterfaces" value="
+			java.rmi.Remote,
+		"/>
+	</module>
+	<module name="ExpectedInterfaces">
+		<property name="severity" value="info"/>
+		<property name="includeTypeTags" value="@DistributedTags.SERVER_REMOTE_OBJECT+@DistributedTags.RMI"/>
+		<property name="expectedInterfaces" value="
+			java.rmi.Remote,
+		"/>
+	</module>
+	<module name="ExpectedSignatures">
+		<property name="severity" value="warning"/>
+		<property name="includeTypeTags" value="@DistributedTags.SERVER_REMOTE_OBJECT+@DistributedTags.RMI"/>
+		<property name="expectedSignatures" value="
+			.*:String;String->void,
+			.*:String;@DistributedTags.CLIENT_REMOTE_INTERFACE+@DistributedTags.RMI->void,
+		"/>
+	</module>
+	<module name="ExpectedSignatures">
+		<property name="severity" value="info"/>
+		<property name="includeTypeTags" value="@DistributedTags.SERVER_REMOTE_OBJECT+@DistributedTags.RMI"/>
+		<property name="expectedSignatures" value="
+			.*:String;String->void,
+			.*:String;@DistributedTags.CLIENT_REMOTE_INTERFACE+@DistributedTags.RMI->void,
+		"/>
+	</module>
+	<module name="MissingMethodCall">
+		<property name="severity" value="warning"/>
+		<property name="includeTypeTags" value="@DistributedTags.SERVER_REMOTE_OBJECT+@DistributedTags.RMI"/>
+		<property name="expectedCalls" value="
+			
+			@DistributedTags.CLIENT_REMOTE_INTERFACE+@DistributedTags.RMI!.*:*->.*,
+			util.trace.port.consensus.ProposalLearnedNotificationSent!newCase:Object;String;float;Object->ProposalLearnedNotificationSent,
+			
+			util.trace.port.consensus.RemoteProposeRequestReceived!newCase:Object;String;float;Object->RemoteProposeRequestReceived,
+			@DistributedTags.CLIENT_REMOTE_OBJECT+@DistributedTags.RMI!.*:*->.*,
+		"/>
+	</module>
+	<module name="MissingMethodCall">
+		<property name="severity" value="info"/>
+		<property name="includeTypeTags" value="@DistributedTags.SERVER_REMOTE_OBJECT+@DistributedTags.RMI"/>
+		<property name="expectedCalls" value="
+			
+			@DistributedTags.CLIENT_REMOTE_INTERFACE+@DistributedTags.RMI!.*:*->.*,
+			util.trace.port.consensus.ProposalLearnedNotificationSent!newCase:Object;String;float;Object->ProposalLearnedNotificationSent,
+			
+			util.trace.port.consensus.RemoteProposeRequestReceived!newCase:Object;String;float;Object->RemoteProposeRequestReceived,
+			@DistributedTags.CLIENT_REMOTE_OBJECT+@DistributedTags.RMI!.*:*->.*,
+		"/>
+	</module>
+	
+	<module name="SpuriousMethodCall">
+		<property name="severity" value="warning"/>
+		<property name="includeTypeTags" value="@DistributedTags.SERVER_REMOTE_OBJECT+@DistributedTags.RMI"/>
+		<property name="expectedCalls" value="			
+		java.rmi.registry.Registry!lookup:String->Remote,
+		"/>
+	</module>
+	
+	<module name="SpuriousMethodCall">
+		<property name="severity" value="info"/>
+		<property name="includeTypeTags" value="@DistributedTags.SERVER_REMOTE_OBJECT+@DistributedTags.RMI"/>
+		<property name="expectedCalls" value="			
+		java.rmi.registry.Registry!lookup:String->Remote,
+		"/>
+	</module>
+	
+	<module name="ExpectedSuperTypes">
+		<property name="severity" value="warning"/>
+		<property name="includeTypeTags" value="@DistributedTags.CLIENT_CONFIGURER+@DistributedTags.RMI"/>
+		<property name="expectedSuperTypes" value="
+			assignments.util.inputParameters.AnAbstractSimulationParametersBean,
+		"/>
+	</module>
+	<module name="ExpectedSuperTypes">
+		<property name="severity" value="info"/>
+		<property name="includeTypeTags" value="@DistributedTags.CLIENT_CONFIGURER+@DistributedTags.RMI"/>
+		<property name="expectedSuperTypes" value="
+			assignments.util.inputParameters.AnAbstractSimulationParametersBean,
+		"/>
+	</module>
+	<module name="ExpectedSignatures">
+		<property name="severity" value="warning"/>
+		<property name="includeTypeTags" value="@DistributedTags.CLIENT_CONFIGURER+@DistributedTags.RMI"/>
+		<property name="expectedSignatures" value="
+			.*:String[]->void,
+			delaySends:int->void,
+			quit:int->void,
+			simulationCommand:String->void,
+			trace:boolean->void,
+			experimentInput:->void,
+			localProcessingOnly:boolean->void,
+			atomicBroadcast:boolean->void,
+		"/>
+	</module>
+	<module name="ExpectedSignatures">
+		<property name="severity" value="info"/>
+		<property name="includeTypeTags" value="@DistributedTags.CLIENT_CONFIGURER+@DistributedTags.RMI"/>
+		<property name="expectedSignatures" value="
+			.*:String[]->void,
+			delaySends:int->void,
+			quit:int->void,
+			simulationCommand:String->void,
+			trace:boolean->void,
+			experimentInput:->void,
+			localProcessingOnly:boolean->void,
+			atomicBroadcast:boolean->void,
+		"/>
+	</module>
+	<module name="MissingMethodCall">
+		<property name="severity" value="warning"/>
+		<property name="includeTypeTags" value="@DistributedTags.CLIENT_CONFIGURER+@DistributedTags.RMI"/>
+		<property name="expectedCalls" value="
+			util.trace.port.rpc.rmi.RMIRegistryLocated!newCase:Object;String;int;java.rmi.registry.Registry->RMIRegistryLocated,
+			assignments.util.mainArgs.ClientArgsProcessor!getClientName:String[]->String,
+			util.trace.port.rpc.rmi.RMIObjectLookedUp!newCase:Object;Object;String;java.rmi.registry.Registry->RMIObjectLookedUp,
+			util.interactiveMethodInvocation.SimulationParametersControllerFactory!getSingleton:->SimulationParametersController,
+			assignments.util.inputParameters.AnAbstractSimulationParametersBean!isTrace:->boolean,
+			util.trace.port.consensus.ProposedStateSet!newCase:Object;String;float;Object->ProposedStateSet,
+			util.trace.port.consensus.ProposalMade!newCase:Object;String;float;Object->ProposalMade,
+			util.trace.port.PerformanceExperimentStarted!newCase:Object;long;int->PerformanceExperimentStarted,
+			java.rmi.registry.Registry!lookup:String->Remote,
+			util.trace.misc.ThreadDelayed!enablePrint:->void,
+			assignments.util.mainArgs.ClientArgsProcessor!getRegistryHost:String[]->String,
+			java.lang.System!currentTimeMillis:->long,
+			util.trace.Tracer!showInfo:boolean->void,
+			java.rmi.registry.LocateRegistry!getRegistry:String;int->Registry,
+			stringProcessors.HalloweenCommandProcessor!setConnectedToSimulation:boolean->void,
+			java.lang.System!exit:int->void,
+			java.rmi.server.UnicastRemoteObject!exportObject:*->.*,
+			util.interactiveMethodInvocation.SimulationParametersControllerFactory!processCommands:*->.*,
+			util.trace.port.rpc.rmi.RMITraceUtility!setTracing:->void,
+			util.trace.port.consensus.ConsensusTraceUtility!setTracing:->void,
+			
+			@DistributedTags.SERVER_REMOTE_INTERFACE+@DistributedTags.RMI!.*:String;@DistributedTags.CLIENT_REMOTE_INTERFACE+@DistributedTags.RMI->void,
+			util.trace.port.PerformanceExperimentEnded!newCase:Object;long;long;long;int->PerformanceExperimentEnded,
+			assignments.util.inputParameters.AnAbstractSimulationParametersBean!isAtomicBroadcast:->Boolean,
+			assignments.util.mainArgs.ClientArgsProcessor!getServerHost:String[]->String,
+			util.interactiveMethodInvocation.SimulationParametersControllerFactory!addSimulationParameterListener:*->.*,
+			java.lang.Throwable!printStackTrace:->void,
+			util.trace.factories.FactoryTraceUtility!setTracing:->void,
+			main.BeauAndersonFinalProject!createSimulation:String;int;int;int;int;int;int->HalloweenCommandProcessor,
+			stringProcessors.HalloweenCommandProcessor!setInputString:String->void,
+			assignments.util.inputParameters.AnAbstractSimulationParametersBean!getDelay:->int,
+			java.lang.System!setProperty:String;String->String,
+			assignments.util.mainArgs.ClientArgsProcessor!getRegistryPort:String[]->int,
+			assignments.util.mainArgs.ClientArgsProcessor!getHeadless:String[]->String,
+			util.trace.port.PortTraceUtility!setTracing:->void,
+			stringProcessors.HalloweenCommandProcessor!addPropertyChangeListener:java.beans.PropertyChangeListener->void,
+		
+		"/>
+	</module>
+	<module name="MissingMethodCall">
+		<property name="severity" value="info"/>
+		<property name="includeTypeTags" value="@DistributedTags.CLIENT_CONFIGURER+@DistributedTags.RMI"/>
+		<property name="expectedCalls" value="
+			util.trace.port.rpc.rmi.RMIRegistryLocated!newCase:Object;String;int;java.rmi.registry.Registry->RMIRegistryLocated,
+			assignments.util.mainArgs.ClientArgsProcessor!getClientName:String[]->String,
+			util.trace.port.rpc.rmi.RMIObjectLookedUp!newCase:Object;Object;String;java.rmi.registry.Registry->RMIObjectLookedUp,
+			util.interactiveMethodInvocation.SimulationParametersControllerFactory!getSingleton:->SimulationParametersController,
+			assignments.util.inputParameters.AnAbstractSimulationParametersBean!isTrace:->boolean,
+			util.trace.port.consensus.ProposedStateSet!newCase:Object;String;float;Object->ProposedStateSet,
+			util.trace.port.consensus.ProposalMade!newCase:Object;String;float;Object->ProposalMade,
+			util.trace.port.PerformanceExperimentStarted!newCase:Object;long;int->PerformanceExperimentStarted,
+			java.rmi.registry.Registry!lookup:String->Remote,
+			util.trace.misc.ThreadDelayed!enablePrint:->void,
+			assignments.util.mainArgs.ClientArgsProcessor!getRegistryHost:String[]->String,
+			java.lang.System!currentTimeMillis:->long,
+			util.trace.Tracer!showInfo:boolean->void,
+			java.rmi.registry.LocateRegistry!getRegistry:String;int->Registry,
+			stringProcessors.HalloweenCommandProcessor!setConnectedToSimulation:boolean->void,
+			java.lang.System!exit:int->void,
+			java.rmi.server.UnicastRemoteObject!exportObject:*->.*,
+			util.interactiveMethodInvocation.SimulationParametersControllerFactory!processCommands:*->.*,
+			util.trace.port.rpc.rmi.RMITraceUtility!setTracing:->void,
+			util.trace.port.consensus.ConsensusTraceUtility!setTracing:->void,
+			
+			@DistributedTags.SERVER_REMOTE_INTERFACE+@DistributedTags.RMI!.*:String;@DistributedTags.CLIENT_REMOTE_INTERFACE+@DistributedTags.RMI->void,
+			util.trace.port.PerformanceExperimentEnded!newCase:Object;long;long;long;int->PerformanceExperimentEnded,
+			assignments.util.inputParameters.AnAbstractSimulationParametersBean!isAtomicBroadcast:->Boolean,
+			assignments.util.mainArgs.ClientArgsProcessor!getServerHost:String[]->String,
+			util.interactiveMethodInvocation.SimulationParametersControllerFactory!addSimulationParameterListener:*->.*,
+			java.lang.Throwable!printStackTrace:->void,
+			util.trace.factories.FactoryTraceUtility!setTracing:->void,
+			main.BeauAndersonFinalProject!createSimulation:String;int;int;int;int;int;int->HalloweenCommandProcessor,
+			stringProcessors.HalloweenCommandProcessor!setInputString:String->void,
+			assignments.util.inputParameters.AnAbstractSimulationParametersBean!getDelay:->int,
+			java.lang.System!setProperty:String;String->String,
+			assignments.util.mainArgs.ClientArgsProcessor!getRegistryPort:String[]->int,
+			assignments.util.mainArgs.ClientArgsProcessor!getHeadless:String[]->String,
+			util.trace.port.PortTraceUtility!setTracing:->void,
+			stringProcessors.HalloweenCommandProcessor!addPropertyChangeListener:java.beans.PropertyChangeListener->void,
+			
+		"/>
+	</module>
+	
+	<module name="SpuriousMethodCall">
+		<property name="severity" value="warning"/>
+		<property name="includeTypeTags" value="@DistributedTags.CLIENT_CONFIGURER+@DistributedTags.RMI"/>
+		<property name="expectedCalls" value="
+			java.rmi.registry.Registry!.*bind:String;java.rmi.Remote->void,		
+		"/>
+	</module>
+	<module name="SpuriousMethodCall">
+		<property name="severity" value="info"/>
+		<property name="includeTypeTags" value="@DistributedTags.CLIENT_CONFIGURER+@DistributedTags.RMI"/>
+		<property name="expectedCalls" value="
+			java.rmi.registry.Registry!.*bind:String;java.rmi.Remote->void,		
+		"/>
+	</module>
+	
+	<module name="ExpectedSuperTypes">
+		<property name="severity" value="warning"/>
+		<property name="includeTypeTags" value="@DistributedTags.SERVER_CONFIGURER+@DistributedTags.RMI"/>
+		<property name="expectedSuperTypes" value="
+			assignments.util.inputParameters.AnAbstractSimulationParametersBean,
+		"/>
+	</module>
+	<module name="ExpectedSuperTypes">
+		<property name="severity" value="info"/>
+		<property name="includeTypeTags" value="@DistributedTags.SERVER_CONFIGURER+@DistributedTags.RMI"/>
+		<property name="expectedSuperTypes" value="
+			assignments.util.inputParameters.AnAbstractSimulationParametersBean,
+		"/>
+	</module>
+	<module name="ExpectedSignatures">
+		<property name="severity" value="warning"/>
+		<property name="includeTypeTags" value="@DistributedTags.SERVER_CONFIGURER+@DistributedTags.RMI"/>
+		<property name="expectedSignatures" value="
+			.*:String[]->void,
+			quit:int->void,
+		"/>
+	</module>
+	<module name="ExpectedSignatures">
+		<property name="severity" value="info"/>
+		<property name="includeTypeTags" value="@DistributedTags.SERVER_CONFIGURER+@DistributedTags.RMI"/>
+		<property name="expectedSignatures" value="
+			.*:String[]->void,
+			quit:int->void,
+		"/>
+	</module>
+	<module name="MissingMethodCall">
+		<property name="severity" value="warning"/>
+		<property name="includeTypeTags" value="@DistributedTags.SERVER_CONFIGURER+@DistributedTags.RMI"/>
+		<property name="expectedCalls" value="
+			util.interactiveMethodInvocation.SimulationParametersControllerFactory!addSimulationParameterListener:*->.*,
+			assignments.util.mainArgs.ServerArgsProcessor!getRegistryPort:String[]->int,
+			util.trace.port.rpc.rmi.RMIRegistryLocated!newCase:Object;String;int;java.rmi.registry.Registry->RMIRegistryLocated,
+			assignments.util.inputParameters.AnAbstractSimulationParametersBean!trace:boolean->void,
+			java.lang.Throwable!printStackTrace:->void,
+			assignments.util.mainArgs.ServerArgsProcessor!getRegistryHost:String[]->String,
+			util.trace.factories.FactoryTraceUtility!setTracing:->void,
+			util.interactiveMethodInvocation.SimulationParametersControllerFactory!getSingleton:->SimulationParametersController,
+			util.trace.port.rpc.rmi.RMIObjectRegistered!newCase:Object;String;Object;java.rmi.registry.Registry->RMIObjectRegistered,
+			java.rmi.registry.Registry!.*bind:String;java.rmi.Remote->void,
+			util.trace.misc.ThreadDelayed!enablePrint:->void,
+			util.trace.port.PortTraceUtility!setTracing:->void,
+			java.io.PrintStream!println:*->.*,
+			java.rmi.registry.LocateRegistry!getRegistry:String;int->Registry,
+			java.lang.System!exit:int->void,
+			java.rmi.server.UnicastRemoteObject!exportObject:*->.*,
+			util.interactiveMethodInvocation.SimulationParametersControllerFactory!processCommands:*->.*,
+			util.trace.port.rpc.rmi.RMITraceUtility!setTracing:->void,
+			util.trace.port.consensus.ConsensusTraceUtility!setTracing:->void,
+			
+		"/>
+	</module>
+	<module name="MissingMethodCall">
+		<property name="severity" value="info"/>
+		<property name="includeTypeTags" value="@DistributedTags.SERVER_CONFIGURER+@DistributedTags.RMI"/>
+		<property name="expectedCalls" value="
+			util.interactiveMethodInvocation.SimulationParametersControllerFactory!addSimulationParameterListener:*->.*,
+			assignments.util.mainArgs.ServerArgsProcessor!getRegistryPort:String[]->int,
+			util.trace.port.rpc.rmi.RMIRegistryLocated!newCase:Object;String;int;java.rmi.registry.Registry->RMIRegistryLocated,
+			assignments.util.inputParameters.AnAbstractSimulationParametersBean!trace:boolean->void,
+			java.lang.Throwable!printStackTrace:->void,
+			assignments.util.mainArgs.ServerArgsProcessor!getRegistryHost:String[]->String,
+			util.trace.factories.FactoryTraceUtility!setTracing:->void,
+			util.interactiveMethodInvocation.SimulationParametersControllerFactory!getSingleton:->SimulationParametersController,
+			util.trace.port.rpc.rmi.RMIObjectRegistered!newCase:Object;String;Object;java.rmi.registry.Registry->RMIObjectRegistered,
+			java.rmi.registry.Registry!.*bind:String;java.rmi.Remote->void,
+			util.trace.misc.ThreadDelayed!enablePrint:->void,
+			util.trace.port.PortTraceUtility!setTracing:->void,
+			java.io.PrintStream!println:*->.*,
+			java.rmi.registry.LocateRegistry!getRegistry:String;int->Registry,
+			java.lang.System!exit:int->void,
+			java.rmi.server.UnicastRemoteObject!exportObject:*->.*,
+			util.interactiveMethodInvocation.SimulationParametersControllerFactory!processCommands:*->.*,
+			util.trace.port.rpc.rmi.RMITraceUtility!setTracing:->void,
+			util.trace.port.consensus.ConsensusTraceUtility!setTracing:->void,
+			
+		"/>
+	</module>
+	<module name="ExpectedSignatures">
+		<property name="severity" value="warning"/>
+		<property name="includeTypeTags" value="@DistributedTags.SERVER+@DistributedTags.RMI"/>
+		<property name="expectedSignatures" value="
+			main:String[]->void,
+		"/>
+	</module>
+	<module name="ExpectedSignatures">
+		<property name="severity" value="info"/>
+		<property name="includeTypeTags" value="@DistributedTags.SERVER+@DistributedTags.RMI"/>
+		<property name="expectedSignatures" value="
+			main:String[]->void,
+		"/>
+	</module>
+	<module name="MissingMethodCall">
+		<property name="severity" value="warning"/>
+		<property name="includeTypeTags" value="@DistributedTags.SERVER+@DistributedTags.RMI"/>
+		<property name="expectedCalls" value="
+			@DistributedTags.SERVER_CONFIGURER+@DistributedTags.RMI!.*:String[]->void,
+		"/>
+	</module>
+	<module name="MissingMethodCall">
+		<property name="severity" value="info"/>
+		<property name="includeTypeTags" value="@DistributedTags.SERVER+@DistributedTags.RMI"/>
+		<property name="expectedCalls" value="
+			@DistributedTags.SERVER_CONFIGURER+@DistributedTags.RMI!.*:String[]->void,
+		"/>
+	</module>
+	<module name="ExpectedSignatures">
+		<property name="severity" value="warning"/>
+		<property name="includeTypeTags" value="@DistributedTags.REGISTRY+@DistributedTags.RMI"/>
+		<property name="expectedSignatures" value="
+			main:String[]->void,
+		"/>
+	</module>
+	<module name="ExpectedSignatures">
+		<property name="severity" value="info"/>
+		<property name="includeTypeTags" value="@DistributedTags.REGISTRY+@DistributedTags.RMI"/>
+		<property name="expectedSignatures" value="
+			main:String[]->void,
+		"/>
+	</module>
+	<module name="MissingMethodCall">
+		<property name="severity" value="warning"/>
+		<property name="includeTypeTags" value="@DistributedTags.REGISTRY+@DistributedTags.RMI"/>
+		<property name="expectedCalls" value="
+			java.lang.Throwable!printStackTrace:->void,
+			assignments.util.mainArgs.RegistryArgsProcessor!getRegistryPort:String[]->int,
+			java.rmi.registry.LocateRegistry!createRegistry:int->Registry,
+			java.util.Scanner!nextLine:->String,
+			util.trace.port.rpc.rmi.RMIRegistryCreated!newCase:Object;int->RMIRegistryCreated,
+		"/>
+	</module>
+	<module name="MissingMethodCall">
+		<property name="severity" value="info"/>
+		<property name="includeTypeTags" value="@DistributedTags.REGISTRY+@DistributedTags.RMI"/>
+		<property name="expectedCalls" value="
+			java.lang.Throwable!printStackTrace:->void,
+			assignments.util.mainArgs.RegistryArgsProcessor!getRegistryPort:String[]->int,
+			java.rmi.registry.LocateRegistry!createRegistry:int->Registry,
+			java.util.Scanner!nextLine:->String,
+			util.trace.port.rpc.rmi.RMIRegistryCreated!newCase:Object;int->RMIRegistryCreated,
+		"/>
+	</module>
+	<module name="ExpectedSignatures">
+		<property name="severity" value="warning"/>
+		<property name="includeTypeTags" value="@DistributedTags.CLIENT+@DistributedTags.RMI"/>
+		<property name="expectedSignatures" value="
+			main:String[]->void,
+		"/>
+	</module>
+	<module name="ExpectedSignatures">
+		<property name="severity" value="info"/>
+		<property name="includeTypeTags" value="@DistributedTags.CLIENT+@DistributedTags.RMI"/>
+		<property name="expectedSignatures" value="
+			main:String[]->void,
+		"/>
+	</module>
+	<module name="MissingMethodCall">
+		<property name="severity" value="warning"/>
+		<property name="includeTypeTags" value="@DistributedTags.CLIENT+@DistributedTags.RMI"/>
+		<property name="expectedCalls" value="
+			@DistributedTags.CLIENT_CONFIGURER+@DistributedTags.RMI!.*:String[]->void,
+		"/>
+	</module>
+	<module name="MissingMethodCall">
+		<property name="severity" value="info"/>
+		<property name="includeTypeTags" value="@DistributedTags.CLIENT+@DistributedTags.RMI"/>
+		<property name="expectedCalls" value="
+			@DistributedTags.CLIENT_CONFIGURER+@DistributedTags.RMI!.*:String[]->void,
+		"/>
+	</module>	
+
+	
+	</module>
+	
+	
+	
+	
+	<module name="TreeWalker">
+		<module name="EqualsAvoidNull" />
+		<module name="SimplifyBooleanExpression" />
+		<module name="SimplifyBooleanReturn" />
+		<module name="StringLiteralEquality" />
+		<module name="NestedForDepth">
+			<property name="max" value="1" />
+		</module>
+		<module name="NestedIfDepth">
+			<property name="max" value="1" />
+		</module>
+		<module name="PackageDeclaration" />
+		<module name="HiddenField" />
+
+
+		<module name="VisibilityModifier">
+			<property name="packageAllowed" value="true" />
+			<property name="protectedAllowed" value="true" />
+		</module>
+		<module name="ConstantName" />
+		<module name="TypeName" />
+		<module name="MethodName" />
+		<module name="LocalVariableName" />
+		<module name="MemberName" />
+		<module name="StaticVariableName" />
+		<module name="NeedBraces" />
+		<module name="MultipleStringLiterals" />
+		<module name="OuterTypeFilename" />
+
+
+		<module name="OneTopLevelClass" />
+		<module name="EmptyBlock">
+			<property name="option" value="TEXT" />
+			<property name="tokens"
+				value="LITERAL_TRY, LITERAL_FINALLY, LITERAL_IF, LITERAL_ELSE, LITERAL_SWITCH" />
+		</module>
+		<module name="NeedBraces" />
+		<module name="ArrayTypeStyle" />
+		<module name="MissingSwitchDefault" />
+		<module name="FallThrough" />
+
+		
+		<module name="TypeName">
+
+		</module>
+		<module name="MemberName">
+
+		</module>
+		<module name="ParameterName">
+		</module>
+		<module name="LambdaParameterName"/>
+
+	
+		<module name="LocalVariableName">
+
+		</module>
+		<module name="ClassTypeParameterName">
+
+		</module>
+		<module name="MethodTypeParameterName">
+
+		</module>
+		<module name="InterfaceTypeParameterName"/>
+
+		
+		<module name="AbbreviationAsWordInName">
+			<property name="ignoreFinal" value="false" />
+			<property name="allowedAbbreviationLength" value="1" />
+		</module>
+		<module name="AvoidStarImport" />
+		<module name="RedundantImport" />
+		<module name="UnusedImports" />
+		
+		<module name="MethodName">
+			
+		</module>
+
+		<module name="EmptyCatchBlock">
+			<property name="exceptionVariableName" value="expected" />
+		</module>
+
+		<module name="BooleanExpressionComplexity">
+			<property name="max" value="3" />
+		</module>
+		<module name="ClassDataAbstractionCoupling">
+			<property name="max" value="7" />
+		</module>
+		<module name="ClassFanOutComplexity">
+			<property name="max" value="20" />
+		</module>
+		<module name="CyclomaticComplexity">
+			<property name="max" value="10" />
+		</module>
+		<module name="JavaNCSS">
+			<property name="methodMaximum" value="50" />
+			<property name="classMaximum" value="1500" />
+			<property name="fileMaximum" value="2000" />
+		</module>
+
+		<module name="MissingOverride" />
+		<module name="AvoidNestedBlocks" />
+		
+		<module name="InterfaceIsType" />
+		<module name="ThrowsCount">
+			<property name="max" value="4" />
+		</module>
+		<module name="CovariantEquals" />	
+		<module name="FinalLocalVariable" />
+		<module name="IllegalThrows" />
+		<module name="IllegalType" />
+		<module name="InnerAssignment" />
+		<module name="ModifiedControlVariable" />
+		<module name="NestedTryDepth">
+			<property name="max" value="1" />
+		</module>
+		<module name="ParameterAssignment" />
+		
+		<module name="FinalParameters" />
+
+
+	</module>
+</module>
+
+
