@@ -1,0 +1,2181 @@
+
+0,Mon Apr 29 15:08:29 EDT 2024*PRE_OUTPUT*
+>>Running suite A5SpecificStyleSuite
+<<
+>>Running test A5TaggedClassesDefined
+<<
+>>Running test A5ExpectedInterfaces
+<<
+>>Running test A5ExpectedCalls
+<<
+>>Running test A5SpuriousCalls
+<<
+>>Running test A5ExpectedSignatures
+<<
+*OUTPUT*
+*ERROR*
+
+*POST_OUTPUT*
+>>Test Result:
+A5TaggedClassesDefined,0.0% complete,0.0,10.0,Did not find checkstyle text
+<<
+>>Test Result:
+A5ExpectedInterfaces,0.0% complete,0.0,5.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A5ExpectedCalls,0.0% complete,0.0,20.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A5SpuriousCalls,0.0% complete,0.0,20.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A5ExpectedSignatures,0.0% complete,0.0,5.0,No checkstyle output, check console error messages
+<<
+*END_OUTPUT*
+
+
+
+0,Mon Apr 29 15:08:39 EDT 2024*PRE_OUTPUT*
+>>Running suite Assignment5OneClientSuite
+<<
+>>Running test GIPCRMIStaticArguments
+<<
+>>Running test GIPCRMIOneClientConnection
+<<
+>>Running test GIPCRMIOneClientReadWriteNonAtomic
+<<
+*OUTPUT*
+*ERROR*
+
+*POST_OUTPUT*
+>>Test Result:
+A5TaggedClassesDefined,0.0% complete,0.0,10.0,Did not find checkstyle text
+<<
+>>Test Result:
+A5ExpectedInterfaces,0.0% complete,0.0,5.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A5ExpectedCalls,0.0% complete,0.0,20.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A5SpuriousCalls,0.0% complete,0.0,20.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A5ExpectedSignatures,0.0% complete,0.0,5.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+GIPCRMIStaticArguments,0.0% complete,0.0,20.0,Couldn't run code:Tags:[Server, RMI, GIPC]not found:
+<<
+>>Test Result:
+GIPCRMIOneClientConnection,0.0% complete,0.0,20.0,In Server enabling RMI, no line found matching regex: .*?\{main\}.*?RMIRegistryLocated.*
+<<
+>>Test Result:
+GIPCRMIOneClientReadWriteNonAtomic,0.0% complete,0.0,20.0,In Server enabling RMI, no line found matching regex: .*?\{main\}.*?RMIRegistryLocated.*
+GIPC is not checked because RMI failed
+<<
+*END_OUTPUT*
+
+
+
+1,Mon Apr 29 15:15:43 EDT 2024*PRE_OUTPUT*
+>>Running suite Assignment5OneClientSuite
+<<
+>>Running test GIPCRMIStaticArguments
+<<
+>>Running test GIPCRMIOneClientConnection
+<<
+>>Running test GIPCRMIOneClientReadWriteNonAtomic
+<<
+*OUTPUT*
+*ERROR*
+
+*POST_OUTPUT*
+>>Test Result:
+GIPCRMIStaticArguments,0.0% complete,0.0,20.0,Couldn't run code:Tags:[Client, RMI, GIPC]not found:
+<<
+>>Test Result:
+GIPCRMIOneClientConnection,0.0% complete,0.0,20.0,In Server enabling GIPC, no line found matching regex: .*?\{main\}.*?ListenableAcceptsEnabled.*
+<<
+>>Test Result:
+GIPCRMIOneClientReadWriteNonAtomic,0.0% complete,0.0,20.0,In Server enabling GIPC, no line found matching regex: .*?\{main\}.*?ListenableAcceptsEnabled.*
+GIPC is not checked because RMI failed
+<<
+*END_OUTPUT*
+
+
+
+2,Mon Apr 29 15:54:42 EDT 2024*PRE_OUTPUT*
+>>Running suite A5SpecificStyleSuite
+<<
+>>Running test A5TaggedClassesDefined
+<<
+>>Running test A5ExpectedInterfaces
+<<
+>>Running test A5ExpectedCalls
+<<
+>>Running test A5SpuriousCalls
+<<
+>>Running test A5ExpectedSignatures
+<<
+*OUTPUT*
+*ERROR*
+
+*POST_OUTPUT*
+>>Test Result:
+A5TaggedClassesDefined,0.0% complete,0.0,10.0,Did not find checkstyle text
+<<
+>>Test Result:
+A5ExpectedInterfaces,0.0% complete,0.0,5.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A5ExpectedCalls,0.0% complete,0.0,20.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A5SpuriousCalls,0.0% complete,0.0,20.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A5ExpectedSignatures,0.0% complete,0.0,5.0,No checkstyle output, check console error messages
+<<
+*END_OUTPUT*
+
+
+
+2,Mon Apr 29 15:55:00 EDT 2024*PRE_OUTPUT*
+>>Running suite Assignment5OneClientSuite
+<<
+>>Running test GIPCRMIStaticArguments
+<<
+>>Running test GIPCRMIOneClientConnection
+<<
+>>Running test GIPCRMIOneClientReadWriteNonAtomic
+<<
+*OUTPUT*
+*ERROR*
+
+*POST_OUTPUT*
+>>Test Result:
+A5TaggedClassesDefined,0.0% complete,0.0,10.0,Did not find checkstyle text
+<<
+>>Test Result:
+A5ExpectedInterfaces,0.0% complete,0.0,5.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A5ExpectedCalls,0.0% complete,0.0,20.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A5SpuriousCalls,0.0% complete,0.0,20.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A5ExpectedSignatures,0.0% complete,0.0,5.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+GIPCRMIStaticArguments,0.0% complete,0.0,20.0,Couldn't run code:Tags:[Client, RMI, GIPC]not found:
+<<
+>>Test Result:
+GIPCRMIOneClientConnection,0.0% complete,0.0,20.0,In Server enabling GIPC, no line found matching regex: .*?\{main\}.*?ListenableAcceptsEnabled.*
+<<
+>>Test Result:
+GIPCRMIOneClientReadWriteNonAtomic,0.0% complete,0.0,20.0,In Server enabling GIPC, no line found matching regex: .*?\{main\}.*?ListenableAcceptsEnabled.*
+GIPC is not checked because RMI failed
+<<
+*END_OUTPUT*
+
+
+
+2,Mon Apr 29 15:55:01 EDT 2024*PRE_OUTPUT*
+>>Running suite Assignment5OneClientSuite
+<<
+*OUTPUT*
+*ERROR*
+
+*POST_OUTPUT*
+>>Test Result:
+A5TaggedClassesDefined,0.0% complete,0.0,10.0,Did not find checkstyle text
+<<
+>>Test Result:
+A5ExpectedInterfaces,0.0% complete,0.0,5.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A5ExpectedCalls,0.0% complete,0.0,20.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A5SpuriousCalls,0.0% complete,0.0,20.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A5ExpectedSignatures,0.0% complete,0.0,5.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+GIPCRMIStaticArguments,0.0% complete,0.0,20.0,Couldn't run code:Tags:[Client, RMI, GIPC]not found:
+<<
+>>Test Result:
+GIPCRMIOneClientConnection,0.0% complete,0.0,20.0,In Server enabling GIPC, no line found matching regex: .*?\{main\}.*?ListenableAcceptsEnabled.*
+<<
+>>Test Result:
+GIPCRMIOneClientReadWriteNonAtomic,0.0% complete,0.0,20.0,In Server enabling GIPC, no line found matching regex: .*?\{main\}.*?ListenableAcceptsEnabled.*
+GIPC is not checked because RMI failed
+<<
+*END_OUTPUT*
+
+
+
+2,Mon Apr 29 15:55:21 EDT 2024*PRE_OUTPUT*
+>>Running suite Assignment5TwoClientSuite
+<<
+>>Running test GIPCRMITwoClientConnection
+<<
+>>Running test GIPCRMITwoClientReadWriteNonAtomic
+<<
+>>Running test GIPCRMIClientMetaStateNoBroadcast
+<<
+>>Running test GIPCRMIClientMetaStateBroadcast
+<<
+>>Running test GIPCRMIServerMetaStateNoBroadcast
+<<
+>>Running test GIPCRMIServerMetaStateBroadcast
+<<
+*OUTPUT*
+*ERROR*
+
+*POST_OUTPUT*
+>>Test Result:
+A5TaggedClassesDefined,0.0% complete,0.0,10.0,Did not find checkstyle text
+<<
+>>Test Result:
+A5ExpectedInterfaces,0.0% complete,0.0,5.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A5ExpectedCalls,0.0% complete,0.0,20.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A5SpuriousCalls,0.0% complete,0.0,20.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A5ExpectedSignatures,0.0% complete,0.0,5.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+GIPCRMIStaticArguments,0.0% complete,0.0,20.0,Couldn't run code:Tags:[Client, RMI, GIPC]not found:
+<<
+>>Test Result:
+GIPCRMIOneClientConnection,0.0% complete,0.0,20.0,In Server enabling GIPC, no line found matching regex: .*?\{main\}.*?ListenableAcceptsEnabled.*
+<<
+>>Test Result:
+GIPCRMIOneClientReadWriteNonAtomic,0.0% complete,0.0,20.0,In Server enabling GIPC, no line found matching regex: .*?\{main\}.*?ListenableAcceptsEnabled.*
+GIPC is not checked because RMI failed
+<<
+>>Test Result:
+GIPCRMITwoClientConnection,0.0% complete,0.0,20.0,In Server enabling GIPC, no line found matching regex: .*?\{main\}.*?ListenableAcceptsEnabled.*
+<<
+>>Test Result:
+GIPCRMITwoClientReadWriteNonAtomic,0.0% complete,0.0,20.0,In Server enabling GIPC, no line found matching regex: .*?\{main\}.*?ListenableAcceptsEnabled.*
+GIPC is not checked because RMI failed
+<<
+>>Test Result:
+GIPCRMIClientMetaStateNoBroadcast,0.0% complete,0.0,20.0,In Server enabling GIPC, no line found matching regex: .*?\{main\}.*?ListenableAcceptsEnabled.*
+<<
+>>Test Result:
+GIPCRMIClientMetaStateBroadcast,0.0% complete,0.0,20.0,In Server enabling GIPC, no line found matching regex: .*?\{main\}.*?ListenableAcceptsEnabled.*
+<<
+>>Test Result:
+GIPCRMIServerMetaStateNoBroadcast,0.0% complete,0.0,20.0,In Server enabling GIPC, no line found matching regex: .*?\{main\}.*?ListenableAcceptsEnabled.*
+<<
+>>Test Result:
+GIPCRMIServerMetaStateBroadcast,0.0% complete,0.0,20.0,In Server enabling GIPC, no line found matching regex: .*?\{main\}.*?ListenableAcceptsEnabled.*
+<<
+*END_OUTPUT*
+
+
+
+2,Mon Apr 29 15:55:21 EDT 2024*PRE_OUTPUT*
+*OUTPUT*
+*ERROR*
+
+*POST_OUTPUT*
+>>Test Result:
+A5TaggedClassesDefined,0.0% complete,0.0,10.0,Did not find checkstyle text
+<<
+>>Test Result:
+A5ExpectedInterfaces,0.0% complete,0.0,5.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A5ExpectedCalls,0.0% complete,0.0,20.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A5SpuriousCalls,0.0% complete,0.0,20.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A5ExpectedSignatures,0.0% complete,0.0,5.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+GIPCRMIStaticArguments,0.0% complete,0.0,20.0,Couldn't run code:Tags:[Client, RMI, GIPC]not found:
+<<
+>>Test Result:
+GIPCRMIOneClientConnection,0.0% complete,0.0,20.0,In Server enabling GIPC, no line found matching regex: .*?\{main\}.*?ListenableAcceptsEnabled.*
+<<
+>>Test Result:
+GIPCRMIOneClientReadWriteNonAtomic,0.0% complete,0.0,20.0,In Server enabling GIPC, no line found matching regex: .*?\{main\}.*?ListenableAcceptsEnabled.*
+GIPC is not checked because RMI failed
+<<
+>>Test Result:
+GIPCRMITwoClientConnection,0.0% complete,0.0,20.0,In Server enabling GIPC, no line found matching regex: .*?\{main\}.*?ListenableAcceptsEnabled.*
+<<
+>>Test Result:
+GIPCRMITwoClientReadWriteNonAtomic,0.0% complete,0.0,20.0,In Server enabling GIPC, no line found matching regex: .*?\{main\}.*?ListenableAcceptsEnabled.*
+GIPC is not checked because RMI failed
+<<
+>>Test Result:
+GIPCRMIClientMetaStateNoBroadcast,0.0% complete,0.0,20.0,In Server enabling GIPC, no line found matching regex: .*?\{main\}.*?ListenableAcceptsEnabled.*
+<<
+>>Test Result:
+GIPCRMIClientMetaStateBroadcast,0.0% complete,0.0,20.0,In Server enabling GIPC, no line found matching regex: .*?\{main\}.*?ListenableAcceptsEnabled.*
+<<
+>>Test Result:
+GIPCRMIServerMetaStateNoBroadcast,0.0% complete,0.0,20.0,In Server enabling GIPC, no line found matching regex: .*?\{main\}.*?ListenableAcceptsEnabled.*
+<<
+>>Test Result:
+GIPCRMIServerMetaStateBroadcast,0.0% complete,0.0,20.0,In Server enabling GIPC, no line found matching regex: .*?\{main\}.*?ListenableAcceptsEnabled.*
+<<
+*END_OUTPUT*
+
+
+
+2,Mon Apr 29 15:55:25 EDT 2024*PRE_OUTPUT*
+>>Running suite A5GeneralStyleSuite
+<<
+>>Running test A5NoCheckstyleWarnings
+<<
+>>Running test A5NamedConstants
+<<
+>>Running test A5PublicMethodsOverride
+<<
+>>Running test A5InterfaceAsType
+<<
+>>Running test A5MnemonicNames
+<<
+>>Running test A5AccessModifiersMatched
+<<
+*OUTPUT*
+*ERROR*
+
+*POST_OUTPUT*
+>>Test Result:
+A5TaggedClassesDefined,0.0% complete,0.0,10.0,Did not find checkstyle text
+<<
+>>Test Result:
+A5ExpectedInterfaces,0.0% complete,0.0,5.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A5ExpectedCalls,0.0% complete,0.0,20.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A5SpuriousCalls,0.0% complete,0.0,20.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A5ExpectedSignatures,0.0% complete,0.0,5.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+GIPCRMIStaticArguments,0.0% complete,0.0,20.0,Couldn't run code:Tags:[Client, RMI, GIPC]not found:
+<<
+>>Test Result:
+GIPCRMIOneClientConnection,0.0% complete,0.0,20.0,In Server enabling GIPC, no line found matching regex: .*?\{main\}.*?ListenableAcceptsEnabled.*
+<<
+>>Test Result:
+GIPCRMIOneClientReadWriteNonAtomic,0.0% complete,0.0,20.0,In Server enabling GIPC, no line found matching regex: .*?\{main\}.*?ListenableAcceptsEnabled.*
+GIPC is not checked because RMI failed
+<<
+>>Test Result:
+GIPCRMITwoClientConnection,0.0% complete,0.0,20.0,In Server enabling GIPC, no line found matching regex: .*?\{main\}.*?ListenableAcceptsEnabled.*
+<<
+>>Test Result:
+GIPCRMITwoClientReadWriteNonAtomic,0.0% complete,0.0,20.0,In Server enabling GIPC, no line found matching regex: .*?\{main\}.*?ListenableAcceptsEnabled.*
+GIPC is not checked because RMI failed
+<<
+>>Test Result:
+GIPCRMIClientMetaStateNoBroadcast,0.0% complete,0.0,20.0,In Server enabling GIPC, no line found matching regex: .*?\{main\}.*?ListenableAcceptsEnabled.*
+<<
+>>Test Result:
+GIPCRMIClientMetaStateBroadcast,0.0% complete,0.0,20.0,In Server enabling GIPC, no line found matching regex: .*?\{main\}.*?ListenableAcceptsEnabled.*
+<<
+>>Test Result:
+GIPCRMIServerMetaStateNoBroadcast,0.0% complete,0.0,20.0,In Server enabling GIPC, no line found matching regex: .*?\{main\}.*?ListenableAcceptsEnabled.*
+<<
+>>Test Result:
+GIPCRMIServerMetaStateBroadcast,0.0% complete,0.0,20.0,In Server enabling GIPC, no line found matching regex: .*?\{main\}.*?ListenableAcceptsEnabled.*
+<<
+>>Test Result:
+A5NoCheckstyleWarnings,0.0% complete,0.0,10.0,Could not run checkstyle
+<<
+>>Test Result:
+A5NamedConstants,0.0% complete,0.0,1.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A5PublicMethodsOverride,0.0% complete,0.0,5.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A5InterfaceAsType,0.0% complete,0.0,10.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A5MnemonicNames,0.0% complete,0.0,10.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A5AccessModifiersMatched,0.0% complete,0.0,5.0,No checkstyle output, check console error messages
+<<
+*END_OUTPUT*
+
+
+
+2,Mon Apr 29 15:55:46 EDT 2024*PRE_OUTPUT*
+>>Running suite Assignment5OneClientSuite
+<<
+*OUTPUT*
+*ERROR*
+
+*POST_OUTPUT*
+>>Test Result:
+A5TaggedClassesDefined,0.0% complete,0.0,10.0,Did not find checkstyle text
+<<
+>>Test Result:
+A5ExpectedInterfaces,0.0% complete,0.0,5.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A5ExpectedCalls,0.0% complete,0.0,20.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A5SpuriousCalls,0.0% complete,0.0,20.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A5ExpectedSignatures,0.0% complete,0.0,5.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+GIPCRMIStaticArguments,0.0% complete,0.0,20.0,Couldn't run code:Tags:[Client, RMI, GIPC]not found:
+<<
+>>Test Result:
+GIPCRMIOneClientConnection,0.0% complete,0.0,20.0,In Server enabling GIPC, no line found matching regex: .*?\{main\}.*?ListenableAcceptsEnabled.*
+<<
+>>Test Result:
+GIPCRMIOneClientReadWriteNonAtomic,0.0% complete,0.0,20.0,In Server enabling GIPC, no line found matching regex: .*?\{main\}.*?ListenableAcceptsEnabled.*
+GIPC is not checked because RMI failed
+<<
+>>Test Result:
+GIPCRMITwoClientConnection,0.0% complete,0.0,20.0,In Server enabling GIPC, no line found matching regex: .*?\{main\}.*?ListenableAcceptsEnabled.*
+<<
+>>Test Result:
+GIPCRMITwoClientReadWriteNonAtomic,0.0% complete,0.0,20.0,In Server enabling GIPC, no line found matching regex: .*?\{main\}.*?ListenableAcceptsEnabled.*
+GIPC is not checked because RMI failed
+<<
+>>Test Result:
+GIPCRMIClientMetaStateNoBroadcast,0.0% complete,0.0,20.0,In Server enabling GIPC, no line found matching regex: .*?\{main\}.*?ListenableAcceptsEnabled.*
+<<
+>>Test Result:
+GIPCRMIClientMetaStateBroadcast,0.0% complete,0.0,20.0,In Server enabling GIPC, no line found matching regex: .*?\{main\}.*?ListenableAcceptsEnabled.*
+<<
+>>Test Result:
+GIPCRMIServerMetaStateNoBroadcast,0.0% complete,0.0,20.0,In Server enabling GIPC, no line found matching regex: .*?\{main\}.*?ListenableAcceptsEnabled.*
+<<
+>>Test Result:
+GIPCRMIServerMetaStateBroadcast,0.0% complete,0.0,20.0,In Server enabling GIPC, no line found matching regex: .*?\{main\}.*?ListenableAcceptsEnabled.*
+<<
+>>Test Result:
+A5NoCheckstyleWarnings,0.0% complete,0.0,10.0,Could not run checkstyle
+<<
+>>Test Result:
+A5NamedConstants,0.0% complete,0.0,1.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A5PublicMethodsOverride,0.0% complete,0.0,5.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A5InterfaceAsType,0.0% complete,0.0,10.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A5MnemonicNames,0.0% complete,0.0,10.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A5AccessModifiersMatched,0.0% complete,0.0,5.0,No checkstyle output, check console error messages
+<<
+*END_OUTPUT*
+
+
+
+3,Mon Apr 29 15:56:04 EDT 2024*PRE_OUTPUT*
+>>Running suite A5SpecificStyleSuite
+<<
+>>Running test A5TaggedClassesDefined
+<<
+>>Running test A5ExpectedInterfaces
+<<
+>>Running test A5ExpectedCalls
+<<
+>>Running test A5SpuriousCalls
+<<
+>>Running test A5ExpectedSignatures
+<<
+*OUTPUT*
+*ERROR*
+
+*POST_OUTPUT*
+>>Test Result:
+A5TaggedClassesDefined,100.0% complete,10.0,10.0,
+<<
+>>Test Result:
+A5ExpectedInterfaces,0.0% complete,0.0,5.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A5ExpectedCalls,0.0% complete,0.0,20.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A5SpuriousCalls,0.0% complete,0.0,20.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A5ExpectedSignatures,0.0% complete,0.0,5.0,No checkstyle output, check console error messages
+<<
+*END_OUTPUT*
+
+
+
+3,Mon Apr 29 15:56:14 EDT 2024*PRE_OUTPUT*
+>>Running suite A5SpecificStyleSuite
+<<
+*OUTPUT*
+*ERROR*
+
+*POST_OUTPUT*
+>>Test Result:
+A5TaggedClassesDefined,100.0% complete,10.0,10.0,
+<<
+>>Test Result:
+A5ExpectedInterfaces,0.0% complete,0.0,5.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A5ExpectedCalls,0.0% complete,0.0,20.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A5SpuriousCalls,0.0% complete,0.0,20.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A5ExpectedSignatures,0.0% complete,0.0,5.0,No checkstyle output, check console error messages
+<<
+*END_OUTPUT*
+
+
+
+3,Mon Apr 29 15:56:25 EDT 2024*PRE_OUTPUT*
+>>Running suite Assignment5OneClientSuite
+<<
+>>Running test GIPCRMIStaticArguments
+<<
+>>Running test GIPCRMIOneClientConnection
+<<
+>>Running test GIPCRMIOneClientReadWriteNonAtomic
+<<
+*OUTPUT*
+*ERROR*
+
+*POST_OUTPUT*
+>>Test Result:
+A5TaggedClassesDefined,100.0% complete,10.0,10.0,
+<<
+>>Test Result:
+A5ExpectedInterfaces,0.0% complete,0.0,5.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A5ExpectedCalls,0.0% complete,0.0,20.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A5SpuriousCalls,0.0% complete,0.0,20.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A5ExpectedSignatures,0.0% complete,0.0,5.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+GIPCRMIStaticArguments,0.0% complete,0.0,20.0,Couldn't run code:Tags:[Client, RMI, GIPC]not found:
+<<
+>>Test Result:
+GIPCRMIOneClientConnection,0.0% complete,0.0,20.0,In Server enabling GIPC, no line found matching regex: .*?\{main\}.*?ListenableAcceptsEnabled.*
+<<
+>>Test Result:
+GIPCRMIOneClientReadWriteNonAtomic,0.0% complete,0.0,20.0,In Server enabling GIPC, no line found matching regex: .*?\{main\}.*?ListenableAcceptsEnabled.*
+GIPC is not checked because RMI failed
+<<
+*END_OUTPUT*
+
+
+
+4,Mon Apr 29 15:59:03 EDT 2024*PRE_OUTPUT*
+>>Running suite A5SpecificStyleSuite
+<<
+>>Running test A5TaggedClassesDefined
+<<
+>>Running test A5ExpectedInterfaces
+<<
+>>Running test A5ExpectedCalls
+<<
+>>Running test A5SpuriousCalls
+<<
+>>Running test A5ExpectedSignatures
+<<
+*OUTPUT*
+*ERROR*
+
+*POST_OUTPUT*
+>>Test Result:
+A5TaggedClassesDefined,100.0% complete,10.0,10.0,
+<<
+>>Test Result:
+A5ExpectedInterfaces,0.0% complete,0.0,5.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A5ExpectedCalls,0.0% complete,0.0,20.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A5SpuriousCalls,0.0% complete,0.0,20.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A5ExpectedSignatures,0.0% complete,0.0,5.0,No checkstyle output, check console error messages
+<<
+*END_OUTPUT*
+
+
+
+4,Mon Apr 29 15:59:15 EDT 2024*PRE_OUTPUT*
+>>Running suite Assignment5OneClientSuite
+<<
+>>Running test GIPCRMIStaticArguments
+<<
+>>Running test GIPCRMIOneClientConnection
+<<
+>>Running test GIPCRMIOneClientReadWriteNonAtomic
+<<
+*OUTPUT*
+*ERROR*
+
+*POST_OUTPUT*
+>>Test Result:
+A5TaggedClassesDefined,100.0% complete,10.0,10.0,
+<<
+>>Test Result:
+A5ExpectedInterfaces,0.0% complete,0.0,5.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A5ExpectedCalls,0.0% complete,0.0,20.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A5SpuriousCalls,0.0% complete,0.0,20.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A5ExpectedSignatures,0.0% complete,0.0,5.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+GIPCRMIStaticArguments,0.0% complete,0.0,20.0,Couldn't run code:Tags:[Client, RMI, GIPC]not found:
+<<
+>>Test Result:
+GIPCRMIOneClientConnection,0.0% complete,0.0,20.0,In Server enabling GIPC, no line found matching regex: .*?\{main\}.*?ListenableAcceptsEnabled.*
+<<
+>>Test Result:
+GIPCRMIOneClientReadWriteNonAtomic,0.0% complete,0.0,20.0,In Server enabling GIPC, no line found matching regex: .*?\{main\}.*?ListenableAcceptsEnabled.*
+GIPC is not checked because RMI failed
+<<
+*END_OUTPUT*
+
+
+
+5,Mon Apr 29 16:04:47 EDT 2024*PRE_OUTPUT*
+>>Running suite A5SpecificStyleSuite
+<<
+>>Running test A5TaggedClassesDefined
+<<
+>>Running test A5ExpectedInterfaces
+<<
+>>Running test A5ExpectedCalls
+<<
+>>Running test A5SpuriousCalls
+<<
+>>Running test A5ExpectedSignatures
+<<
+*OUTPUT*
+*ERROR*
+
+*POST_OUTPUT*
+>>Test Result:
+A5TaggedClassesDefined,100.0% complete,10.0,10.0,
+<<
+>>Test Result:
+A5ExpectedInterfaces,0.0% complete,0.0,5.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A5ExpectedCalls,0.0% complete,0.0,20.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A5SpuriousCalls,0.0% complete,0.0,20.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A5ExpectedSignatures,0.0% complete,0.0,5.0,No checkstyle output, check console error messages
+<<
+*END_OUTPUT*
+
+
+
+5,Mon Apr 29 16:04:49 EDT 2024*PRE_OUTPUT*
+>>Running suite A5SpecificStyleSuite
+<<
+*OUTPUT*
+*ERROR*
+
+*POST_OUTPUT*
+>>Test Result:
+A5TaggedClassesDefined,100.0% complete,10.0,10.0,
+<<
+>>Test Result:
+A5ExpectedInterfaces,0.0% complete,0.0,5.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A5ExpectedCalls,0.0% complete,0.0,20.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A5SpuriousCalls,0.0% complete,0.0,20.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A5ExpectedSignatures,0.0% complete,0.0,5.0,No checkstyle output, check console error messages
+<<
+*END_OUTPUT*
+
+
+
+5,Mon Apr 29 16:04:57 EDT 2024*PRE_OUTPUT*
+*OUTPUT*
+*ERROR*
+
+*POST_OUTPUT*
+>>Test Result:
+A5TaggedClassesDefined,100.0% complete,10.0,10.0,
+<<
+>>Test Result:
+A5ExpectedInterfaces,0.0% complete,0.0,5.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A5ExpectedCalls,0.0% complete,0.0,20.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A5SpuriousCalls,0.0% complete,0.0,20.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A5ExpectedSignatures,0.0% complete,0.0,5.0,No checkstyle output, check console error messages
+<<
+*END_OUTPUT*
+
+
+
+5,Mon Apr 29 16:05:10 EDT 2024*PRE_OUTPUT*
+>>Running suite Assignment5OneClientSuite
+<<
+>>Running test GIPCRMIStaticArguments
+<<
+>>Running test GIPCRMIOneClientConnection
+<<
+>>Running test GIPCRMIOneClientReadWriteNonAtomic
+<<
+*OUTPUT*
+*ERROR*
+
+*POST_OUTPUT*
+>>Test Result:
+A5TaggedClassesDefined,100.0% complete,10.0,10.0,
+<<
+>>Test Result:
+A5ExpectedInterfaces,0.0% complete,0.0,5.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A5ExpectedCalls,0.0% complete,0.0,20.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A5SpuriousCalls,0.0% complete,0.0,20.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A5ExpectedSignatures,0.0% complete,0.0,5.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+GIPCRMIStaticArguments,0.0% complete,0.0,20.0,Couldn't run code:Tags:[Client, RMI, GIPC]not found:
+<<
+>>Test Result:
+GIPCRMIOneClientConnection,0.0% complete,0.0,20.0,In Server enabling GIPC, no line found matching regex: .*?\{main\}.*?ListenableAcceptsEnabled.*
+<<
+>>Test Result:
+GIPCRMIOneClientReadWriteNonAtomic,0.0% complete,0.0,20.0,In Server enabling GIPC, no line found matching regex: .*?\{main\}.*?ListenableAcceptsEnabled.*
+GIPC is not checked because RMI failed
+<<
+*END_OUTPUT*
+
+
+
+6,Mon Apr 29 16:28:51 EDT 2024*PRE_OUTPUT*
+>>Running suite A5SpecificStyleSuite
+<<
+>>Running test A5TaggedClassesDefined
+<<
+>>Running test A5ExpectedInterfaces
+<<
+>>Running test A5ExpectedCalls
+<<
+>>Running test A5SpuriousCalls
+<<
+>>Running test A5ExpectedSignatures
+<<
+*OUTPUT*
+*ERROR*
+
+*POST_OUTPUT*
+>>Test Result:
+A5TaggedClassesDefined,100.0% complete,10.0,10.0,
+<<
+>>Test Result:
+A5ExpectedInterfaces,0.0% complete,0.0,5.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A5ExpectedCalls,0.0% complete,0.0,20.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A5SpuriousCalls,0.0% complete,0.0,20.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A5ExpectedSignatures,0.0% complete,0.0,5.0,No checkstyle output, check console error messages
+<<
+*END_OUTPUT*
+
+
+
+6,Mon Apr 29 16:29:03 EDT 2024*PRE_OUTPUT*
+>>Running suite Assignment5OneClientSuite
+<<
+>>Running test GIPCRMIStaticArguments
+<<
+>>Running test GIPCRMIOneClientConnection
+<<
+>>Running test GIPCRMIOneClientReadWriteNonAtomic
+<<
+*OUTPUT*
+*ERROR*
+
+*POST_OUTPUT*
+>>Test Result:
+A5TaggedClassesDefined,100.0% complete,10.0,10.0,
+<<
+>>Test Result:
+A5ExpectedInterfaces,0.0% complete,0.0,5.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A5ExpectedCalls,0.0% complete,0.0,20.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A5SpuriousCalls,0.0% complete,0.0,20.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A5ExpectedSignatures,0.0% complete,0.0,5.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+GIPCRMIStaticArguments,0.0% complete,0.0,20.0,Couldn't run code:Tags:[Client, RMI, GIPC]not found:
+<<
+>>Test Result:
+GIPCRMIOneClientConnection,0.0% complete,0.0,20.0,In Server enabling GIPC, no line found matching regex: .*?\{main\}.*?ListenableAcceptsEnabled.*
+<<
+>>Test Result:
+GIPCRMIOneClientReadWriteNonAtomic,0.0% complete,0.0,20.0,In Server enabling GIPC, no line found matching regex: .*?\{main\}.*?ListenableAcceptsEnabled.*
+GIPC is not checked because RMI failed
+<<
+*END_OUTPUT*
+
+
+
+7,Mon Apr 29 16:30:29 EDT 2024*PRE_OUTPUT*
+>>Running suite Assignment5OneClientSuite
+<<
+>>Running test GIPCRMIStaticArguments
+<<
+>>Running test GIPCRMIOneClientConnection
+<<
+>>Running test GIPCRMIOneClientReadWriteNonAtomic
+<<
+*OUTPUT*
+*ERROR*
+
+*POST_OUTPUT*
+>>Test Result:
+GIPCRMIStaticArguments,0.0% complete,0.0,20.0,Couldn't run code:Tags:[Client, RMI, GIPC]not found:
+<<
+>>Test Result:
+GIPCRMIOneClientConnection,0.0% complete,0.0,20.0,In Server enabling GIPC, no line found matching regex: .*?\{main\}.*?ListenableAcceptsEnabled.*
+<<
+>>Test Result:
+GIPCRMIOneClientReadWriteNonAtomic,0.0% complete,0.0,20.0,In Server enabling GIPC, no line found matching regex: .*?\{main\}.*?ListenableAcceptsEnabled.*
+GIPC is not checked because RMI failed
+<<
+*END_OUTPUT*
+
+
+
+8,Mon Apr 29 16:31:23 EDT 2024*PRE_OUTPUT*
+>>Running suite Assignment5OneClientSuite
+<<
+>>Running test GIPCRMIStaticArguments
+<<
+>>Running test GIPCRMIOneClientConnection
+<<
+>>Running test GIPCRMIOneClientReadWriteNonAtomic
+<<
+*OUTPUT*
+*ERROR*
+
+*POST_OUTPUT*
+>>Test Result:
+GIPCRMIStaticArguments,0.0% complete,0.0,20.0,Couldn't run code:Tags:[Client, RMI, GIPC]not found:
+<<
+>>Test Result:
+GIPCRMIOneClientConnection,0.0% complete,0.0,20.0,In Server enabling RMI, no line found matching regex: .*?\{main\}.*?RMIObjectRegistered.*
+<<
+>>Test Result:
+GIPCRMIOneClientReadWriteNonAtomic,0.0% complete,0.0,20.0,In Server enabling RMI, no line found matching regex: .*?\{main\}.*?RMIObjectRegistered.*
+GIPC is not checked because RMI failed
+<<
+*END_OUTPUT*
+
+
+
+9,Mon Apr 29 16:46:47 EDT 2024*PRE_OUTPUT*
+>>Running suite A5SpecificStyleSuite
+<<
+>>Running test A5TaggedClassesDefined
+<<
+>>Running test A5ExpectedInterfaces
+<<
+>>Running test A5ExpectedCalls
+<<
+>>Running test A5SpuriousCalls
+<<
+>>Running test A5ExpectedSignatures
+<<
+*OUTPUT*
+*ERROR*
+
+*POST_OUTPUT*
+>>Test Result:
+A5TaggedClassesDefined,100.0% complete,10.0,10.0,
+<<
+>>Test Result:
+A5ExpectedInterfaces,0.0% complete,0.0,5.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A5ExpectedCalls,0.0% complete,0.0,20.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A5SpuriousCalls,0.0% complete,0.0,20.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A5ExpectedSignatures,0.0% complete,0.0,5.0,No checkstyle output, check console error messages
+<<
+*END_OUTPUT*
+
+
+
+9,Mon Apr 29 16:49:11 EDT 2024*PRE_OUTPUT*
+>>Running suite Assignment5OneClientSuite
+<<
+>>Running test GIPCRMIStaticArguments
+<<
+>>Running test GIPCRMIOneClientConnection
+<<
+>>Running test GIPCRMIOneClientReadWriteNonAtomic
+<<
+*OUTPUT*
+*ERROR*
+
+*POST_OUTPUT*
+>>Test Result:
+A5TaggedClassesDefined,100.0% complete,10.0,10.0,
+<<
+>>Test Result:
+A5ExpectedInterfaces,0.0% complete,0.0,5.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A5ExpectedCalls,0.0% complete,0.0,20.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A5SpuriousCalls,0.0% complete,0.0,20.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A5ExpectedSignatures,0.0% complete,0.0,5.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+GIPCRMIStaticArguments,87.5% complete,17.5,20.0,Error in client (args as 'nio-host nio-port name headless registry-host registry-port gipc-port'): Client not using provided name.
+<<
+>>Test Result:
+GIPCRMIOneClientConnection,0.0% complete,0.0,20.0,In Server enabling GIPC, no line found matching regex: .*?\{main\}.*?ListenableAcceptsEnabled.*
+<<
+>>Test Result:
+GIPCRMIOneClientReadWriteNonAtomic,0.0% complete,0.0,20.0,In Server enabling GIPC, no line found matching regex: .*?\{main\}.*?ListenableAcceptsEnabled.*
+GIPC is not checked because RMI failed
+<<
+*END_OUTPUT*
+
+
+
+9,Mon Apr 29 16:49:18 EDT 2024*PRE_OUTPUT*
+>>Running suite Assignment5OneClientSuite
+<<
+*OUTPUT*
+*ERROR*
+
+*POST_OUTPUT*
+>>Test Result:
+A5TaggedClassesDefined,100.0% complete,10.0,10.0,
+<<
+>>Test Result:
+A5ExpectedInterfaces,0.0% complete,0.0,5.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A5ExpectedCalls,0.0% complete,0.0,20.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A5SpuriousCalls,0.0% complete,0.0,20.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A5ExpectedSignatures,0.0% complete,0.0,5.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+GIPCRMIStaticArguments,87.5% complete,17.5,20.0,Error in client (args as 'nio-host nio-port name headless registry-host registry-port gipc-port'): Client not using provided name.
+<<
+>>Test Result:
+GIPCRMIOneClientConnection,0.0% complete,0.0,20.0,In Server enabling GIPC, no line found matching regex: .*?\{main\}.*?ListenableAcceptsEnabled.*
+<<
+>>Test Result:
+GIPCRMIOneClientReadWriteNonAtomic,0.0% complete,0.0,20.0,In Server enabling GIPC, no line found matching regex: .*?\{main\}.*?ListenableAcceptsEnabled.*
+GIPC is not checked because RMI failed
+<<
+*END_OUTPUT*
+
+
+
+9,Mon Apr 29 17:00:48 EDT 2024*PRE_OUTPUT*
+>>Running suite Assignment5TwoClientSuite
+<<
+>>Running test GIPCRMITwoClientConnection
+<<
+>>Running test GIPCRMITwoClientReadWriteNonAtomic
+<<
+>>Running test GIPCRMIClientMetaStateNoBroadcast
+<<
+>>Running test GIPCRMIClientMetaStateBroadcast
+<<
+>>Running test GIPCRMIServerMetaStateNoBroadcast
+<<
+>>Running test GIPCRMIServerMetaStateBroadcast
+<<
+*OUTPUT*
+*ERROR*
+
+*POST_OUTPUT*
+>>Test Result:
+A5TaggedClassesDefined,100.0% complete,10.0,10.0,
+<<
+>>Test Result:
+A5ExpectedInterfaces,0.0% complete,0.0,5.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A5ExpectedCalls,0.0% complete,0.0,20.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A5SpuriousCalls,0.0% complete,0.0,20.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A5ExpectedSignatures,0.0% complete,0.0,5.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+GIPCRMIStaticArguments,87.5% complete,17.5,20.0,Error in client (args as 'nio-host nio-port name headless registry-host registry-port gipc-port'): Client not using provided name.
+<<
+>>Test Result:
+GIPCRMIOneClientConnection,0.0% complete,0.0,20.0,In Server enabling GIPC, no line found matching regex: .*?\{main\}.*?ListenableAcceptsEnabled.*
+<<
+>>Test Result:
+GIPCRMIOneClientReadWriteNonAtomic,0.0% complete,0.0,20.0,In Server enabling GIPC, no line found matching regex: .*?\{main\}.*?ListenableAcceptsEnabled.*
+GIPC is not checked because RMI failed
+<<
+>>Test Result:
+GIPCRMITwoClientConnection,0.0% complete,0.0,20.0,In Server enabling GIPC, no line found matching regex: .*?\{main\}.*?ListenableAcceptsEnabled.*
+<<
+>>Test Result:
+GIPCRMITwoClientReadWriteNonAtomic,0.0% complete,0.0,20.0,In Server enabling GIPC, no line found matching regex: .*?\{main\}.*?ListenableAcceptsEnabled.*
+GIPC is not checked because RMI failed
+<<
+>>Test Result:
+GIPCRMIClientMetaStateNoBroadcast,0.0% complete,0.0,20.0,In Server enabling GIPC, no line found matching regex: .*?\{main\}.*?ListenableAcceptsEnabled.*
+<<
+>>Test Result:
+GIPCRMIClientMetaStateBroadcast,0.0% complete,0.0,20.0,In Server enabling GIPC, no line found matching regex: .*?\{main\}.*?ListenableAcceptsEnabled.*
+<<
+>>Test Result:
+GIPCRMIServerMetaStateNoBroadcast,0.0% complete,0.0,20.0,In Server enabling GIPC, no line found matching regex: .*?\{main\}.*?ListenableAcceptsEnabled.*
+<<
+>>Test Result:
+GIPCRMIServerMetaStateBroadcast,0.0% complete,0.0,20.0,In Server enabling GIPC, no line found matching regex: .*?\{main\}.*?ListenableAcceptsEnabled.*
+<<
+*END_OUTPUT*
+
+
+
+10,Mon Apr 29 18:04:45 EDT 2024*PRE_OUTPUT*
+>>Running suite Assignment5OneClientSuite
+<<
+>>Running test GIPCRMIStaticArguments
+<<
+>>Running test GIPCRMIOneClientConnection
+<<
+>>Running test GIPCRMIOneClientReadWriteNonAtomic
+<<
+*OUTPUT*
+*ERROR*
+
+*POST_OUTPUT*
+>>Test Result:
+GIPCRMIStaticArguments,87.5% complete,17.5,20.0,Error in client (args as 'nio-host nio-port name headless registry-host registry-port gipc-port'): Client not using provided name.
+<<
+>>Test Result:
+GIPCRMIOneClientConnection,0.0% complete,0.0,20.0,In Server enabling GIPC, no line found matching regex: .*?\{main\}.*?ListenableAcceptsEnabled.*
+<<
+>>Test Result:
+GIPCRMIOneClientReadWriteNonAtomic,0.0% complete,0.0,20.0,In Server enabling GIPC, no line found matching regex: .*?\{main\}.*?ListenableAcceptsEnabled.*
+GIPC is not checked because RMI failed
+<<
+*END_OUTPUT*
+
+
+
+11,Mon Apr 29 18:19:46 EDT 2024*PRE_OUTPUT*
+>>Running suite Assignment5OneClientSuite
+<<
+>>Running test GIPCRMIStaticArguments
+<<
+>>Running test GIPCRMIOneClientConnection
+<<
+>>Running test GIPCRMIOneClientReadWriteNonAtomic
+<<
+*OUTPUT*
+*ERROR*
+
+*POST_OUTPUT*
+>>Test Result:
+GIPCRMIStaticArguments,87.5% complete,17.5,20.0,Error in client (args as 'nio-host nio-port name headless registry-host registry-port gipc-port'): Client not using provided name.
+<<
+>>Test Result:
+GIPCRMIOneClientConnection,100.0% complete,20.0,20.0,
+<<
+>>Test Result:
+GIPCRMIOneClientReadWriteNonAtomic,75.0% complete,15.0,20.0,In Server reading via GIPC, no line found matching regex: .*?\{Asynchronous Received Call Invoker\}.*?RemoteProposeRequestReceived.*
+<<
+*END_OUTPUT*
+
+
+
+11,Mon Apr 29 18:31:55 EDT 2024*PRE_OUTPUT*
+>>Running suite Assignment5TwoClientSuite
+<<
+>>Running test GIPCRMITwoClientConnection
+<<
+>>Running test GIPCRMITwoClientReadWriteNonAtomic
+<<
+>>Running test GIPCRMIClientMetaStateNoBroadcast
+<<
+>>Running test GIPCRMIClientMetaStateBroadcast
+<<
+>>Running test GIPCRMIServerMetaStateNoBroadcast
+<<
+>>Running test GIPCRMIServerMetaStateBroadcast
+<<
+*OUTPUT*
+*ERROR*
+
+*POST_OUTPUT*
+>>Test Result:
+GIPCRMIStaticArguments,87.5% complete,17.5,20.0,Error in client (args as 'nio-host nio-port name headless registry-host registry-port gipc-port'): Client not using provided name.
+<<
+>>Test Result:
+GIPCRMIOneClientConnection,100.0% complete,20.0,20.0,
+<<
+>>Test Result:
+GIPCRMIOneClientReadWriteNonAtomic,75.0% complete,15.0,20.0,In Server reading via GIPC, no line found matching regex: .*?\{Asynchronous Received Call Invoker\}.*?RemoteProposeRequestReceived.*
+<<
+>>Test Result:
+GIPCRMITwoClientConnection,100.0% complete,20.0,20.0,
+<<
+>>Test Result:
+GIPCRMITwoClientReadWriteNonAtomic,87.5% complete,17.5,20.0,In Server writing to client 1 via GIPC, no line found matching regex: .*?\{Asynchronous Received Call Invoker\}.*?ProposalLearnedNotificationSent.*
+<<
+>>Test Result:
+GIPCRMIClientMetaStateNoBroadcast,0.0% complete,0.0,20.0,When giving 'i rmi' as input to Client 0: Client 1 received unexpected notification;
+When giving 'i gipc' as input to Client 0: Client 1 received unexpected notification
+<<
+>>Test Result:
+GIPCRMIClientMetaStateBroadcast,0.0% complete,0.0,20.0,When giving 'i rmi' as input to Client 0: Client 1 received unexpected notification;
+When giving 'i gipc' as input to Client 0: Client 1 received unexpected notification
+<<
+>>Test Result:
+GIPCRMIServerMetaStateNoBroadcast,0.0% complete,0.0,20.0,When giving 'i rmi' as input to Server: Source server did not print state change;
+When giving 'i gipc' as input to Server: Source server did not print state change
+<<
+>>Test Result:
+GIPCRMIServerMetaStateBroadcast,0.0% complete,0.0,20.0,When giving 'i rmi' as input to Server: Source server did not print state change;
+When giving 'i gipc' as input to Server: Source server did not print state change
+<<
+*END_OUTPUT*
+
+
+
+11,Mon Apr 29 18:33:19 EDT 2024*PRE_OUTPUT*
+>>Running suite Assignment5TwoClientSuite
+<<
+*OUTPUT*
+*ERROR*
+
+*POST_OUTPUT*
+>>Test Result:
+GIPCRMIStaticArguments,87.5% complete,17.5,20.0,Error in client (args as 'nio-host nio-port name headless registry-host registry-port gipc-port'): Client not using provided name.
+<<
+>>Test Result:
+GIPCRMIOneClientConnection,100.0% complete,20.0,20.0,
+<<
+>>Test Result:
+GIPCRMIOneClientReadWriteNonAtomic,75.0% complete,15.0,20.0,In Server reading via GIPC, no line found matching regex: .*?\{Asynchronous Received Call Invoker\}.*?RemoteProposeRequestReceived.*
+<<
+>>Test Result:
+GIPCRMITwoClientConnection,100.0% complete,20.0,20.0,
+<<
+>>Test Result:
+GIPCRMITwoClientReadWriteNonAtomic,87.5% complete,17.5,20.0,In Server writing to client 1 via GIPC, no line found matching regex: .*?\{Asynchronous Received Call Invoker\}.*?ProposalLearnedNotificationSent.*
+<<
+>>Test Result:
+GIPCRMIClientMetaStateNoBroadcast,0.0% complete,0.0,20.0,When giving 'i rmi' as input to Client 0: Client 1 received unexpected notification;
+When giving 'i gipc' as input to Client 0: Client 1 received unexpected notification
+<<
+>>Test Result:
+GIPCRMIClientMetaStateBroadcast,0.0% complete,0.0,20.0,When giving 'i rmi' as input to Client 0: Client 1 received unexpected notification;
+When giving 'i gipc' as input to Client 0: Client 1 received unexpected notification
+<<
+>>Test Result:
+GIPCRMIServerMetaStateNoBroadcast,0.0% complete,0.0,20.0,When giving 'i rmi' as input to Server: Source server did not print state change;
+When giving 'i gipc' as input to Server: Source server did not print state change
+<<
+>>Test Result:
+GIPCRMIServerMetaStateBroadcast,0.0% complete,0.0,20.0,When giving 'i rmi' as input to Server: Source server did not print state change;
+When giving 'i gipc' as input to Server: Source server did not print state change
+<<
+*END_OUTPUT*
+
+
+
+11,Mon Apr 29 18:33:21 EDT 2024*PREVIOUS_OUTPUT*
+
+
+12,Tue Apr 30 01:41:28 EDT 2024*PRE_OUTPUT*
+>>Running suite Assignment5OneClientSuite
+<<
+>>Running test GIPCRMIStaticArguments
+<<
+>>Running test GIPCRMIOneClientConnection
+<<
+>>Running test GIPCRMIOneClientReadWriteNonAtomic
+<<
+*OUTPUT*
+*ERROR*
+
+*POST_OUTPUT*
+>>Test Result:
+GIPCRMIStaticArguments,87.5% complete,17.5,20.0,Error in client (args as 'nio-host nio-port name headless registry-host registry-port gipc-port'): Client not using provided name.
+<<
+>>Test Result:
+GIPCRMIOneClientConnection,0.0% complete,0.0,20.0,In Server enabling GIPC, no line found matching regex: .*?\{main\}.*?ListenableAcceptsEnabled.*
+<<
+>>Test Result:
+GIPCRMIOneClientReadWriteNonAtomic,0.0% complete,0.0,20.0,In Server enabling GIPC, no line found matching regex: .*?\{main\}.*?ListenableAcceptsEnabled.*
+GIPC is not checked because RMI failed
+<<
+*END_OUTPUT*
+
+
+
+13,Tue Apr 30 01:44:51 EDT 2024*PREVIOUS_OUTPUT*
+
+
+14,Tue Apr 30 01:53:58 EDT 2024*PREVIOUS_OUTPUT*
+
+
+15,Tue Apr 30 02:02:43 EDT 2024*PRE_OUTPUT*
+>>Running suite Assignment5OneClientSuite
+<<
+>>Running test GIPCRMIStaticArguments
+<<
+>>Running test GIPCRMIOneClientConnection
+<<
+>>Running test GIPCRMIOneClientReadWriteNonAtomic
+<<
+*OUTPUT*
+*ERROR*
+
+*POST_OUTPUT*
+>>Test Result:
+GIPCRMIStaticArguments,87.5% complete,17.5,20.0,Error in client (args as 'nio-host nio-port name headless registry-host registry-port gipc-port'): Client not using provided name.
+<<
+>>Test Result:
+GIPCRMIOneClientConnection,100.0% complete,20.0,20.0,
+<<
+>>Test Result:
+GIPCRMIOneClientReadWriteNonAtomic,100.0% complete,20.0,20.0,
+<<
+*END_OUTPUT*
+
+
+
+15,Tue Apr 30 02:07:49 EDT 2024*PRE_OUTPUT*
+>>Running suite Assignment5TwoClientSuite
+<<
+>>Running test GIPCRMITwoClientConnection
+<<
+>>Running test GIPCRMITwoClientReadWriteNonAtomic
+<<
+>>Running test GIPCRMIClientMetaStateNoBroadcast
+<<
+>>Running test GIPCRMIClientMetaStateBroadcast
+<<
+>>Running test GIPCRMIServerMetaStateNoBroadcast
+<<
+>>Running test GIPCRMIServerMetaStateBroadcast
+<<
+*OUTPUT*
+*ERROR*
+
+*POST_OUTPUT*
+>>Test Result:
+GIPCRMIStaticArguments,87.5% complete,17.5,20.0,Error in client (args as 'nio-host nio-port name headless registry-host registry-port gipc-port'): Client not using provided name.
+<<
+>>Test Result:
+GIPCRMIOneClientConnection,100.0% complete,20.0,20.0,
+<<
+>>Test Result:
+GIPCRMIOneClientReadWriteNonAtomic,100.0% complete,20.0,20.0,
+<<
+>>Test Result:
+GIPCRMITwoClientConnection,100.0% complete,20.0,20.0,
+<<
+>>Test Result:
+GIPCRMITwoClientReadWriteNonAtomic,100.0% complete,20.0,20.0,
+<<
+>>Test Result:
+GIPCRMIClientMetaStateNoBroadcast,100.0% complete,20.0,20.0,
+<<
+>>Test Result:
+GIPCRMIClientMetaStateBroadcast,100.0% complete,20.0,20.0,
+<<
+>>Test Result:
+GIPCRMIServerMetaStateNoBroadcast,100.0% complete,20.0,20.0,
+<<
+>>Test Result:
+GIPCRMIServerMetaStateBroadcast,100.0% complete,20.0,20.0,
+<<
+*END_OUTPUT*
+
+
+
+15,Tue Apr 30 02:09:24 EDT 2024*PRE_OUTPUT*
+>>Running suite A5SpecificStyleSuite
+<<
+>>Running test A5TaggedClassesDefined
+<<
+>>Running test A5ExpectedInterfaces
+<<
+>>Running test A5ExpectedCalls
+<<
+>>Running test A5SpuriousCalls
+<<
+>>Running test A5ExpectedSignatures
+<<
+*OUTPUT*
+*ERROR*
+
+*POST_OUTPUT*
+>>Test Result:
+GIPCRMIStaticArguments,87.5% complete,17.5,20.0,Error in client (args as 'nio-host nio-port name headless registry-host registry-port gipc-port'): Client not using provided name.
+<<
+>>Test Result:
+GIPCRMIOneClientConnection,100.0% complete,20.0,20.0,
+<<
+>>Test Result:
+GIPCRMIOneClientReadWriteNonAtomic,100.0% complete,20.0,20.0,
+<<
+>>Test Result:
+GIPCRMITwoClientConnection,100.0% complete,20.0,20.0,
+<<
+>>Test Result:
+GIPCRMITwoClientReadWriteNonAtomic,100.0% complete,20.0,20.0,
+<<
+>>Test Result:
+GIPCRMIClientMetaStateNoBroadcast,100.0% complete,20.0,20.0,
+<<
+>>Test Result:
+GIPCRMIClientMetaStateBroadcast,100.0% complete,20.0,20.0,
+<<
+>>Test Result:
+GIPCRMIServerMetaStateNoBroadcast,100.0% complete,20.0,20.0,
+<<
+>>Test Result:
+GIPCRMIServerMetaStateBroadcast,100.0% complete,20.0,20.0,
+<<
+>>Test Result:
+A5TaggedClassesDefined,100.0% complete,10.0,10.0,
+<<
+>>Test Result:
+A5ExpectedInterfaces,0.0% complete,0.0,5.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A5ExpectedCalls,0.0% complete,0.0,20.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A5SpuriousCalls,0.0% complete,0.0,20.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A5ExpectedSignatures,0.0% complete,0.0,5.0,No checkstyle output, check console error messages
+<<
+*END_OUTPUT*
+
+
+
+15,Tue Apr 30 02:09:27 EDT 2024*PRE_OUTPUT*
+>>Running suite A5SpecificStyleSuite
+<<
+*OUTPUT*
+*ERROR*
+
+*POST_OUTPUT*
+>>Test Result:
+GIPCRMIStaticArguments,87.5% complete,17.5,20.0,Error in client (args as 'nio-host nio-port name headless registry-host registry-port gipc-port'): Client not using provided name.
+<<
+>>Test Result:
+GIPCRMIOneClientConnection,100.0% complete,20.0,20.0,
+<<
+>>Test Result:
+GIPCRMIOneClientReadWriteNonAtomic,100.0% complete,20.0,20.0,
+<<
+>>Test Result:
+GIPCRMITwoClientConnection,100.0% complete,20.0,20.0,
+<<
+>>Test Result:
+GIPCRMITwoClientReadWriteNonAtomic,100.0% complete,20.0,20.0,
+<<
+>>Test Result:
+GIPCRMIClientMetaStateNoBroadcast,100.0% complete,20.0,20.0,
+<<
+>>Test Result:
+GIPCRMIClientMetaStateBroadcast,100.0% complete,20.0,20.0,
+<<
+>>Test Result:
+GIPCRMIServerMetaStateNoBroadcast,100.0% complete,20.0,20.0,
+<<
+>>Test Result:
+GIPCRMIServerMetaStateBroadcast,100.0% complete,20.0,20.0,
+<<
+>>Test Result:
+A5TaggedClassesDefined,100.0% complete,10.0,10.0,
+<<
+>>Test Result:
+A5ExpectedInterfaces,0.0% complete,0.0,5.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A5ExpectedCalls,0.0% complete,0.0,20.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A5SpuriousCalls,0.0% complete,0.0,20.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A5ExpectedSignatures,0.0% complete,0.0,5.0,No checkstyle output, check console error messages
+<<
+*END_OUTPUT*
+
+
+
+15,Tue Apr 30 02:09:28 EDT 2024*PRE_OUTPUT*
+>>Running suite A5GeneralStyleSuite
+<<
+>>Running test A5NoCheckstyleWarnings
+<<
+>>Running test A5NamedConstants
+<<
+>>Running test A5PublicMethodsOverride
+<<
+>>Running test A5InterfaceAsType
+<<
+>>Running test A5MnemonicNames
+<<
+>>Running test A5AccessModifiersMatched
+<<
+*OUTPUT*
+*ERROR*
+
+*POST_OUTPUT*
+>>Test Result:
+GIPCRMIStaticArguments,87.5% complete,17.5,20.0,Error in client (args as 'nio-host nio-port name headless registry-host registry-port gipc-port'): Client not using provided name.
+<<
+>>Test Result:
+GIPCRMIOneClientConnection,100.0% complete,20.0,20.0,
+<<
+>>Test Result:
+GIPCRMIOneClientReadWriteNonAtomic,100.0% complete,20.0,20.0,
+<<
+>>Test Result:
+GIPCRMITwoClientConnection,100.0% complete,20.0,20.0,
+<<
+>>Test Result:
+GIPCRMITwoClientReadWriteNonAtomic,100.0% complete,20.0,20.0,
+<<
+>>Test Result:
+GIPCRMIClientMetaStateNoBroadcast,100.0% complete,20.0,20.0,
+<<
+>>Test Result:
+GIPCRMIClientMetaStateBroadcast,100.0% complete,20.0,20.0,
+<<
+>>Test Result:
+GIPCRMIServerMetaStateNoBroadcast,100.0% complete,20.0,20.0,
+<<
+>>Test Result:
+GIPCRMIServerMetaStateBroadcast,100.0% complete,20.0,20.0,
+<<
+>>Test Result:
+A5TaggedClassesDefined,100.0% complete,10.0,10.0,
+<<
+>>Test Result:
+A5ExpectedInterfaces,0.0% complete,0.0,5.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A5ExpectedCalls,0.0% complete,0.0,20.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A5SpuriousCalls,0.0% complete,0.0,20.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A5ExpectedSignatures,0.0% complete,0.0,5.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A5NoCheckstyleWarnings,100.0% complete,10.0,10.0,
+<<
+>>Test Result:
+A5NamedConstants,0.0% complete,0.0,1.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A5PublicMethodsOverride,0.0% complete,0.0,5.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A5InterfaceAsType,0.0% complete,0.0,10.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A5MnemonicNames,0.0% complete,0.0,10.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A5AccessModifiersMatched,0.0% complete,0.0,5.0,No checkstyle output, check console error messages
+<<
+*END_OUTPUT*
+
+
+
+15,Tue Apr 30 02:15:31 EDT 2024*PRE_OUTPUT*
+*OUTPUT*
+*ERROR*
+
+*POST_OUTPUT*
+>>Test Result:
+GIPCRMIStaticArguments,87.5% complete,17.5,20.0,Error in client (args as 'nio-host nio-port name headless registry-host registry-port gipc-port'): Client not using provided name.
+<<
+>>Test Result:
+GIPCRMIOneClientConnection,100.0% complete,20.0,20.0,
+<<
+>>Test Result:
+GIPCRMIOneClientReadWriteNonAtomic,100.0% complete,20.0,20.0,
+<<
+>>Test Result:
+GIPCRMITwoClientConnection,100.0% complete,20.0,20.0,
+<<
+>>Test Result:
+GIPCRMITwoClientReadWriteNonAtomic,100.0% complete,20.0,20.0,
+<<
+>>Test Result:
+GIPCRMIClientMetaStateNoBroadcast,100.0% complete,20.0,20.0,
+<<
+>>Test Result:
+GIPCRMIClientMetaStateBroadcast,100.0% complete,20.0,20.0,
+<<
+>>Test Result:
+GIPCRMIServerMetaStateNoBroadcast,100.0% complete,20.0,20.0,
+<<
+>>Test Result:
+GIPCRMIServerMetaStateBroadcast,100.0% complete,20.0,20.0,
+<<
+>>Test Result:
+A5TaggedClassesDefined,100.0% complete,10.0,10.0,
+<<
+>>Test Result:
+A5ExpectedInterfaces,0.0% complete,0.0,5.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A5ExpectedCalls,0.0% complete,0.0,20.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A5SpuriousCalls,0.0% complete,0.0,20.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A5ExpectedSignatures,0.0% complete,0.0,5.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A5NoCheckstyleWarnings,100.0% complete,10.0,10.0,
+<<
+>>Test Result:
+A5NamedConstants,0.0% complete,0.0,1.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A5PublicMethodsOverride,0.0% complete,0.0,5.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A5InterfaceAsType,0.0% complete,0.0,10.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A5MnemonicNames,0.0% complete,0.0,10.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A5AccessModifiersMatched,0.0% complete,0.0,5.0,No checkstyle output, check console error messages
+<<
+*END_OUTPUT*
+
+
+
+16,Tue Apr 30 02:17:35 EDT 2024*PRE_OUTPUT*
+>>Running suite A5SpecificStyleSuite
+<<
+>>Running test A5TaggedClassesDefined
+<<
+>>Running test A5ExpectedInterfaces
+<<
+>>Running test A5ExpectedCalls
+<<
+>>Running test A5SpuriousCalls
+<<
+>>Running test A5ExpectedSignatures
+<<
+*OUTPUT*
+*ERROR*
+
+*POST_OUTPUT*
+>>Test Result:
+A5TaggedClassesDefined,100.0% complete,10.0,10.0,
+<<
+>>Test Result:
+A5ExpectedInterfaces,0.0% complete,0.0,5.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A5ExpectedCalls,0.0% complete,0.0,20.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A5SpuriousCalls,0.0% complete,0.0,20.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A5ExpectedSignatures,0.0% complete,0.0,5.0,No checkstyle output, check console error messages
+<<
+*END_OUTPUT*
+
+
+
+17,Tue Apr 30 02:19:52 EDT 2024*PRE_OUTPUT*
+>>Running suite A5SpecificStyleSuite
+<<
+>>Running test A5TaggedClassesDefined
+<<
+>>Running test A5ExpectedInterfaces
+<<
+>>Running test A5ExpectedCalls
+<<
+>>Running test A5SpuriousCalls
+<<
+>>Running test A5ExpectedSignatures
+<<
+*OUTPUT*
+*ERROR*
+
+*POST_OUTPUT*
+>>Test Result:
+A5TaggedClassesDefined,33.33333333333333% complete,3.3,10.0,Only 4.0 matched out of 12.0 tags.
+ See console text
+<<
+>>Test Result:
+A5ExpectedInterfaces,100.0% complete,5.0,5.0,
+<<
+>>Test Result:
+A5ExpectedCalls,70.83333333333334% complete,14.2,20.0,See console trace about lines failing  this check
+<<
+>>Test Result:
+A5SpuriousCalls,100.0% complete,20.0,20.0,
+<<
+>>Test Result:
+A5ExpectedSignatures,50.0% complete,2.5,5.0,See console trace about lines failing  this check
+<<
+*END_OUTPUT*
+
+
+
+17,Tue Apr 30 02:19:56 EDT 2024*PRE_OUTPUT*
+>>Running suite A5GeneralStyleSuite
+<<
+>>Running test A5NoCheckstyleWarnings
+<<
+>>Running test A5NamedConstants
+<<
+>>Running test A5PublicMethodsOverride
+<<
+>>Running test A5InterfaceAsType
+<<
+>>Running test A5MnemonicNames
+<<
+>>Running test A5AccessModifiersMatched
+<<
+*OUTPUT*
+*ERROR*
+
+*POST_OUTPUT*
+>>Test Result:
+A5TaggedClassesDefined,33.33333333333333% complete,3.3,10.0,Only 4.0 matched out of 12.0 tags.
+ See console text
+<<
+>>Test Result:
+A5ExpectedInterfaces,100.0% complete,5.0,5.0,
+<<
+>>Test Result:
+A5ExpectedCalls,70.83333333333334% complete,14.2,20.0,See console trace about lines failing  this check
+<<
+>>Test Result:
+A5SpuriousCalls,100.0% complete,20.0,20.0,
+<<
+>>Test Result:
+A5ExpectedSignatures,50.0% complete,2.5,5.0,See console trace about lines failing  this check
+<<
+>>Test Result:
+A5NoCheckstyleWarnings,0.0% complete,0.0,10.0,Warnings found in checkstyle text, see traced console output
+<<
+>>Test Result:
+A5NamedConstants,62.5% complete,0.6,1.0,See console trace about lines failing  this check
+<<
+>>Test Result:
+A5PublicMethodsOverride,28.57142857142857% complete,1.4,5.0,See console trace about lines failing  this check
+<<
+>>Test Result:
+A5InterfaceAsType,86.66666666666667% complete,8.7,10.0,See console trace about lines failing  this check
+<<
+>>Test Result:
+A5MnemonicNames,92.1875% complete,9.2,10.0,See console trace about lines failing  this check
+<<
+>>Test Result:
+A5AccessModifiersMatched,77.77777777777779% complete,3.9,5.0,See console trace about lines failing  this check
+<<
+*END_OUTPUT*
+
+
+
+17,Tue Apr 30 02:21:03 EDT 2024*PRE_OUTPUT*
+>>Running suite Assignment5OneClientSuite
+<<
+>>Running test GIPCRMIStaticArguments
+<<
+>>Running test GIPCRMIOneClientConnection
+<<
+>>Running test GIPCRMIOneClientReadWriteNonAtomic
+<<
+*OUTPUT*
+*ERROR*
+
+*POST_OUTPUT*
+>>Test Result:
+A5TaggedClassesDefined,33.33333333333333% complete,3.3,10.0,Only 4.0 matched out of 12.0 tags.
+ See console text
+<<
+>>Test Result:
+A5ExpectedInterfaces,100.0% complete,5.0,5.0,
+<<
+>>Test Result:
+A5ExpectedCalls,70.83333333333334% complete,14.2,20.0,See console trace about lines failing  this check
+<<
+>>Test Result:
+A5SpuriousCalls,100.0% complete,20.0,20.0,
+<<
+>>Test Result:
+A5ExpectedSignatures,50.0% complete,2.5,5.0,See console trace about lines failing  this check
+<<
+>>Test Result:
+A5NoCheckstyleWarnings,0.0% complete,0.0,10.0,Warnings found in checkstyle text, see traced console output
+<<
+>>Test Result:
+A5NamedConstants,62.5% complete,0.6,1.0,See console trace about lines failing  this check
+<<
+>>Test Result:
+A5PublicMethodsOverride,28.57142857142857% complete,1.4,5.0,See console trace about lines failing  this check
+<<
+>>Test Result:
+A5InterfaceAsType,86.66666666666667% complete,8.7,10.0,See console trace about lines failing  this check
+<<
+>>Test Result:
+A5MnemonicNames,92.1875% complete,9.2,10.0,See console trace about lines failing  this check
+<<
+>>Test Result:
+A5AccessModifiersMatched,77.77777777777779% complete,3.9,5.0,See console trace about lines failing  this check
+<<
+>>Test Result:
+GIPCRMIStaticArguments,87.5% complete,17.5,20.0,Error in client (args as 'nio-host nio-port name headless registry-host registry-port gipc-port'): Client not using provided name.
+<<
+>>Test Result:
+GIPCRMIOneClientConnection,100.0% complete,20.0,20.0,
+<<
+>>Test Result:
+GIPCRMIOneClientReadWriteNonAtomic,100.0% complete,20.0,20.0,
+<<
+*END_OUTPUT*
+
+
+
+17,Tue Apr 30 02:21:03 EDT 2024*PRE_OUTPUT*
+>>Running suite A5GeneralStyleSuite
+<<
+*OUTPUT*
+*ERROR*
+
+*POST_OUTPUT*
+>>Test Result:
+A5TaggedClassesDefined,33.33333333333333% complete,3.3,10.0,Only 4.0 matched out of 12.0 tags.
+ See console text
+<<
+>>Test Result:
+A5ExpectedInterfaces,100.0% complete,5.0,5.0,
+<<
+>>Test Result:
+A5ExpectedCalls,70.83333333333334% complete,14.2,20.0,See console trace about lines failing  this check
+<<
+>>Test Result:
+A5SpuriousCalls,100.0% complete,20.0,20.0,
+<<
+>>Test Result:
+A5ExpectedSignatures,50.0% complete,2.5,5.0,See console trace about lines failing  this check
+<<
+>>Test Result:
+A5NoCheckstyleWarnings,0.0% complete,0.0,10.0,Warnings found in checkstyle text, see traced console output
+<<
+>>Test Result:
+A5NamedConstants,62.5% complete,0.6,1.0,See console trace about lines failing  this check
+<<
+>>Test Result:
+A5PublicMethodsOverride,28.57142857142857% complete,1.4,5.0,See console trace about lines failing  this check
+<<
+>>Test Result:
+A5InterfaceAsType,86.66666666666667% complete,8.7,10.0,See console trace about lines failing  this check
+<<
+>>Test Result:
+A5MnemonicNames,92.1875% complete,9.2,10.0,See console trace about lines failing  this check
+<<
+>>Test Result:
+A5AccessModifiersMatched,77.77777777777779% complete,3.9,5.0,See console trace about lines failing  this check
+<<
+>>Test Result:
+GIPCRMIStaticArguments,87.5% complete,17.5,20.0,Error in client (args as 'nio-host nio-port name headless registry-host registry-port gipc-port'): Client not using provided name.
+<<
+>>Test Result:
+GIPCRMIOneClientConnection,100.0% complete,20.0,20.0,
+<<
+>>Test Result:
+GIPCRMIOneClientReadWriteNonAtomic,100.0% complete,20.0,20.0,
+<<
+*END_OUTPUT*
+
+
+
+18,Tue Apr 30 02:27:37 EDT 2024*PRE_OUTPUT*
+>>Running suite A5SpecificStyleSuite
+<<
+>>Running test A5TaggedClassesDefined
+<<
+>>Running test A5ExpectedInterfaces
+<<
+>>Running test A5ExpectedCalls
+<<
+>>Running test A5SpuriousCalls
+<<
+>>Running test A5ExpectedSignatures
+<<
+*OUTPUT*
+*ERROR*
+
+*POST_OUTPUT*
+>>Test Result:
+A5TaggedClassesDefined,33.33333333333333% complete,3.3,10.0,Only 4.0 matched out of 12.0 tags.
+ See console text
+<<
+>>Test Result:
+A5ExpectedInterfaces,100.0% complete,5.0,5.0,
+<<
+>>Test Result:
+A5ExpectedCalls,70.83333333333334% complete,14.2,20.0,See console trace about lines failing  this check
+<<
+>>Test Result:
+A5SpuriousCalls,100.0% complete,20.0,20.0,
+<<
+>>Test Result:
+A5ExpectedSignatures,50.0% complete,2.5,5.0,See console trace about lines failing  this check
+<<
+*END_OUTPUT*
+
+
+
+19,Tue Apr 30 02:30:09 EDT 2024*PRE_OUTPUT*
+>>Running suite A5SpecificStyleSuite
+<<
+>>Running test A5TaggedClassesDefined
+<<
+>>Running test A5ExpectedInterfaces
+<<
+>>Running test A5ExpectedCalls
+<<
+>>Running test A5SpuriousCalls
+<<
+>>Running test A5ExpectedSignatures
+<<
+*OUTPUT*
+*ERROR*
+
+*POST_OUTPUT*
+>>Test Result:
+A5TaggedClassesDefined,50.0% complete,5.0,10.0,Only 6.0 matched out of 12.0 tags.
+ See console text
+<<
+>>Test Result:
+A5ExpectedInterfaces,100.0% complete,5.0,5.0,
+<<
+>>Test Result:
+A5ExpectedCalls,70.83333333333334% complete,14.2,20.0,See console trace about lines failing  this check
+<<
+>>Test Result:
+A5SpuriousCalls,100.0% complete,20.0,20.0,
+<<
+>>Test Result:
+A5ExpectedSignatures,50.0% complete,2.5,5.0,See console trace about lines failing  this check
+<<
+*END_OUTPUT*
+
+
+
+20,Tue Apr 30 02:30:57 EDT 2024*PREVIOUS_OUTPUT*
+
+
+20,Tue Apr 30 02:38:02 EDT 2024*PRE_OUTPUT*
+>>Running suite A5GeneralStyleSuite
+<<
+>>Running test A5NoCheckstyleWarnings
+<<
+>>Running test A5NamedConstants
+<<
+>>Running test A5PublicMethodsOverride
+<<
+>>Running test A5InterfaceAsType
+<<
+>>Running test A5MnemonicNames
+<<
+>>Running test A5AccessModifiersMatched
+<<
+*OUTPUT*
+*ERROR*
+
+*POST_OUTPUT*
+>>Test Result:
+A5TaggedClassesDefined,50.0% complete,5.0,10.0,Only 6.0 matched out of 12.0 tags.
+ See console text
+<<
+>>Test Result:
+A5ExpectedInterfaces,100.0% complete,5.0,5.0,
+<<
+>>Test Result:
+A5ExpectedCalls,70.83333333333334% complete,14.2,20.0,See console trace about lines failing  this check
+<<
+>>Test Result:
+A5SpuriousCalls,100.0% complete,20.0,20.0,
+<<
+>>Test Result:
+A5ExpectedSignatures,50.0% complete,2.5,5.0,See console trace about lines failing  this check
+<<
+>>Test Result:
+A5NoCheckstyleWarnings,0.0% complete,0.0,10.0,Warnings found in checkstyle text, see traced console output
+<<
+>>Test Result:
+A5NamedConstants,62.5% complete,0.6,1.0,See console trace about lines failing  this check
+<<
+>>Test Result:
+A5PublicMethodsOverride,28.57142857142857% complete,1.4,5.0,See console trace about lines failing  this check
+<<
+>>Test Result:
+A5InterfaceAsType,86.66666666666667% complete,8.7,10.0,See console trace about lines failing  this check
+<<
+>>Test Result:
+A5MnemonicNames,92.1875% complete,9.2,10.0,See console trace about lines failing  this check
+<<
+>>Test Result:
+A5AccessModifiersMatched,77.77777777777779% complete,3.9,5.0,See console trace about lines failing  this check
+<<
+*END_OUTPUT*
+
+
+
+20,Tue Apr 30 02:39:24 EDT 2024*PRE_OUTPUT*
+>>Running suite Assignment5OneClientSuite
+<<
+>>Running test GIPCRMIStaticArguments
+<<
+>>Running test GIPCRMIOneClientConnection
+<<
+>>Running test GIPCRMIOneClientReadWriteNonAtomic
+<<
+*OUTPUT*
+*ERROR*
+
+*POST_OUTPUT*
+>>Test Result:
+A5TaggedClassesDefined,50.0% complete,5.0,10.0,Only 6.0 matched out of 12.0 tags.
+ See console text
+<<
+>>Test Result:
+A5ExpectedInterfaces,100.0% complete,5.0,5.0,
+<<
+>>Test Result:
+A5ExpectedCalls,70.83333333333334% complete,14.2,20.0,See console trace about lines failing  this check
+<<
+>>Test Result:
+A5SpuriousCalls,100.0% complete,20.0,20.0,
+<<
+>>Test Result:
+A5ExpectedSignatures,50.0% complete,2.5,5.0,See console trace about lines failing  this check
+<<
+>>Test Result:
+A5NoCheckstyleWarnings,0.0% complete,0.0,10.0,Warnings found in checkstyle text, see traced console output
+<<
+>>Test Result:
+A5NamedConstants,62.5% complete,0.6,1.0,See console trace about lines failing  this check
+<<
+>>Test Result:
+A5PublicMethodsOverride,28.57142857142857% complete,1.4,5.0,See console trace about lines failing  this check
+<<
+>>Test Result:
+A5InterfaceAsType,86.66666666666667% complete,8.7,10.0,See console trace about lines failing  this check
+<<
+>>Test Result:
+A5MnemonicNames,92.1875% complete,9.2,10.0,See console trace about lines failing  this check
+<<
+>>Test Result:
+A5AccessModifiersMatched,77.77777777777779% complete,3.9,5.0,See console trace about lines failing  this check
+<<
+>>Test Result:
+GIPCRMIStaticArguments,87.5% complete,17.5,20.0,Error in client (args as 'nio-host nio-port name headless registry-host registry-port gipc-port'): Client not using provided name.
+<<
+>>Test Result:
+GIPCRMIOneClientConnection,100.0% complete,20.0,20.0,
+<<
+>>Test Result:
+GIPCRMIOneClientReadWriteNonAtomic,100.0% complete,20.0,20.0,
+<<
+*END_OUTPUT*
+
+
+
+21,Tue Apr 30 02:50:30 EDT 2024*PRE_OUTPUT*
+>>Running suite A5SpecificStyleSuite
+<<
+>>Running test A5TaggedClassesDefined
+<<
+>>Running test A5ExpectedInterfaces
+<<
+>>Running test A5ExpectedCalls
+<<
+>>Running test A5SpuriousCalls
+<<
+>>Running test A5ExpectedSignatures
+<<
+*OUTPUT*
+*ERROR*
+
+*POST_OUTPUT*
+>>Test Result:
+A5TaggedClassesDefined,50.0% complete,5.0,10.0,Only 6.0 matched out of 12.0 tags.
+ See console text
+<<
+>>Test Result:
+A5ExpectedInterfaces,100.0% complete,5.0,5.0,
+<<
+>>Test Result:
+A5ExpectedCalls,100.0% complete,20.0,20.0,
+<<
+>>Test Result:
+A5SpuriousCalls,100.0% complete,20.0,20.0,
+<<
+>>Test Result:
+A5ExpectedSignatures,50.0% complete,2.5,5.0,See console trace about lines failing  this check
+<<
+*END_OUTPUT*
+
+
+
+21,Tue Apr 30 02:55:32 EDT 2024*PRE_OUTPUT*
+>>Running suite Assignment5TwoClientSuite
+<<
+>>Running test GIPCRMITwoClientConnection
+<<
+>>Running test GIPCRMITwoClientReadWriteNonAtomic
+<<
+>>Running test GIPCRMIClientMetaStateNoBroadcast
+<<
+>>Running test GIPCRMIClientMetaStateBroadcast
+<<
+>>Running test GIPCRMIServerMetaStateNoBroadcast
+<<
+>>Running test GIPCRMIServerMetaStateBroadcast
+<<
+*OUTPUT*
+*ERROR*
+
+*POST_OUTPUT*
+>>Test Result:
+A5TaggedClassesDefined,50.0% complete,5.0,10.0,Only 6.0 matched out of 12.0 tags.
+ See console text
+<<
+>>Test Result:
+A5ExpectedInterfaces,100.0% complete,5.0,5.0,
+<<
+>>Test Result:
+A5ExpectedCalls,100.0% complete,20.0,20.0,
+<<
+>>Test Result:
+A5SpuriousCalls,100.0% complete,20.0,20.0,
+<<
+>>Test Result:
+A5ExpectedSignatures,50.0% complete,2.5,5.0,See console trace about lines failing  this check
+<<
+>>Test Result:
+GIPCRMITwoClientConnection,100.0% complete,20.0,20.0,
+<<
+>>Test Result:
+GIPCRMITwoClientReadWriteNonAtomic,100.0% complete,20.0,20.0,
+<<
+>>Test Result:
+GIPCRMIClientMetaStateNoBroadcast,100.0% complete,20.0,20.0,
+<<
+>>Test Result:
+GIPCRMIClientMetaStateBroadcast,100.0% complete,20.0,20.0,
+<<
+>>Test Result:
+GIPCRMIServerMetaStateNoBroadcast,100.0% complete,20.0,20.0,
+<<
+>>Test Result:
+GIPCRMIServerMetaStateBroadcast,100.0% complete,20.0,20.0,
+<<
+*END_OUTPUT*
+
+

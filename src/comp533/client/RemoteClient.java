@@ -8,7 +8,7 @@ import util.annotations.Tags;
 import util.interactiveMethodInvocation.IPCMechanism;
 import util.tags.DistributedTags;
 
-@Tags({DistributedTags.CLIENT_REMOTE_INTERFACE})
+@Tags({DistributedTags.CLIENT_REMOTE_INTERFACE, DistributedTags.RMI})
 public interface RemoteClient extends Remote, Serializable {
 	public static final String CLIENT = "CLIENT";
 	int getId() throws RemoteException;

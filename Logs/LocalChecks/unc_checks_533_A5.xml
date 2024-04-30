@@ -1,0 +1,708 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- This configuration file was written by the eclipse-cs plugin configuration 
+	editor -->
+<!-- Checkstyle-Configuration: Test Description: none -->
+<!DOCTYPE module PUBLIC "-//Puppy Crawl//DTD Check Configuration 1.3//EN" "http://www.puppycrawl.com/dtds/configuration_1_3.dtd">
+
+
+<module name="unc.tools.checkstyle.AnExtendibleChecker">
+
+
+	<property name="severity" value="warning" />
+
+
+	<module name="unc.tools.checkstyle.AnExtendibleTreeWalker">
+		<property name="severity" value="info" />
+
+		<module name="STBuilder">
+			<property name="configurationFileName"
+				value="ClassRegistry.csv" />
+			<property name="includeTypeTags" value="*" />
+			<property name="severity" value="info" />
+			<property name="logNoMatches" value="false" />
+			<property name="importsAsExistingClasses" value="true" />
+			<property name="logAggregateStatistics" value="false" />
+
+			<property name="logMethodsDeclared" value="false" />
+			<property name="logVariablesDeclared" value="false" />
+			<property name="logPropertiesDeclared" value="false" />
+			<property name="logAccessModifiersUsed" value="false" />
+			<property name="logSuperTypes" value="false" />
+			<property name="logInnerTypes" value="false" />
+			<property name="logInterfaces" value="false" />
+			<property name="trackTokenTypesUsedInMethods" value="true" />
+			<property name="trackJavaDocComments" value="true" />
+			<property name="processCalledMethods" value="true" />			
+						
+
+
+			<property name="excludeClassRegularExpressions"
+				value="
+				checkstyle.*,
+				test.simulation.*
+			" />
+			<property name="externalPackagePrefixes"
+				value="								
+								assignments.util,
+								java.io,
+								gradingTools,
+								port, 
+								inputport, 
+								multiserverport,
+								stringProcessors
+							" />
+			<property name="expectedTypes" value="
+			
+					
+			@DistributedTags.SERVER_REMOTE_INTERFACE+@DistributedTags.RMI,
+			@DistributedTags.CLIENT_OUT_COUPLER+@DistributedTags.RMI+@DistributedTags.GIPC,
+			@DistributedTags.SERVER_REMOTE_INTERFACE+@DistributedTags.GIPC,
+			@DistributedTags.SERVER_CONFIGURER+@DistributedTags.RMI+@DistributedTags.GIPC,
+			@DistributedTags.REGISTRY+@DistributedTags.RMI,
+			@DistributedTags.CLIENT_REMOTE_INTERFACE+@DistributedTags.RMI,
+			@DistributedTags.CLIENT_REMOTE_INTERFACE+@DistributedTags.GIPC,
+			@DistributedTags.CLIENT_CONFIGURER+@DistributedTags.RMI+@DistributedTags.GIPC,
+			@DistributedTags.SERVER+@DistributedTags.RMI+@DistributedTags.GIPC,
+			@DistributedTags.CLIENT+@DistributedTags.RMI+@DistributedTags.GIPC,
+			@DistributedTags.CLIENT_REMOTE_OBJECT+@DistributedTags.RMI+@DistributedTags.GIPC,
+			@DistributedTags.SERVER_REMOTE_OBJECT+@DistributedTags.RMI+@DistributedTags.GIPC,
+			
+			
+		"/>
+			
+			
+							
+
+			</module>
+			
+
+
+	</module>
+
+
+	<module name="unc.tools.checkstyle.ANonCachingTreeWalker">
+		<property name="severity" value="warning" />
+		
+			
+		<module name="DuplicateShortTypeName">
+			<property name="severity" value="warning" />
+			<property name="includeTypeTags" value="*" />
+		</module>
+
+		<module name="FunctionAssignsGlobal">
+			<property name="severity" value="warning" />
+			<property name="excludeMethodTags"
+				value="
+					next(.*), 
+					pop(.*), 
+					delete(.*), 
+					remove(.*), 
+					read(.*), 					
+					set(.*), 
+					process(.*), 
+					scan(.*), 
+					(.*)create(.*), 					 
+					parse(.*),
+					(.*)actory(.*),
+					fetch(.*),
+					run(.*),
+					update(.*),
+					add(.*),
+					
+					" />
+		</module>
+		
+		<module name="SetterAssignsGlobal">
+			<property name="severity" value="warning" />
+		</module>
+		
+		<module name="BulkierThen">
+			<property name="severity" value="warning" />
+			<property name="minThenElseRatio" value="1" />
+			<property name="maxElsePartSize" value="1" />
+		</module>
+		
+		<module name="ThenBranching">
+			<property name="severity" value="warning" />
+
+		</module>
+
+		<module name="LiberalMagicNumber">
+			<property name="severity" value="warning" />
+			<property name="allowedSiblings" value="Math.(.*)" />
+
+		</module>
+		
+		<module name="MethodAccessModifier">
+			<property name="severity" value="info" />
+		</module>
+		
+		<module name="MethodAccessModifier">
+			<property name="severity" value="warning" />
+		</module>
+		
+		<module name="PublicMethodsOverride">
+			<property name="severity" value="warning" />
+		</module>
+		
+		<module name="PublicMethodsOverride">
+			<property name="severity" value="info" />
+		</module>
+		
+		<module name="ClassHasOneInterface">
+			<property name="severity" value="warning" />
+		</module>
+		
+		<module name="ClassHasOneInterface">
+			<property name="severity" value="info" />
+		</module>
+		
+		<module name="ClassHasAtLeastOneInterface">
+			<property name="severity" value="warning" />
+		</module>
+		
+		<module name="ClassHasAtLeastOneInterface">
+			<property name="severity" value="info" />
+		</module>
+		
+		<module name="VariableHasClassType">
+			<property name="severity" value="warning" />
+		</module>
+		
+		<module name="VariableHasClassType">
+			<property name="severity" value="info" />
+		</module>
+		
+		<module name="PeerCommonProperties">
+			<property name="severity" value="warning" />
+
+		</module>
+		
+		<module name="PeerCommonProperties">
+			<property name="severity" value="info" />
+
+		</module>
+
+		<module name="ConstantDefined">
+			<property name="severity" value="info" />
+		</module>
+
+	
+		<module name="BulkierElse">
+			<property name="severity" value="info" />
+			<property name="minElseThenRatio" value="1" />
+		</module>
+		<module name="ElseBranching">
+			<property name="severity" value="info" />
+		</module>
+		<module name="MnemonicNameCheck">
+			<property name="severity" value="warning" />
+			<property name="processType" value="false" />
+			<property name="processLocals" value="true" />
+			<property name="processParameters" value="true" />
+			<property name="processGlobals" value="true" />
+			<property name="processPublicMethods" value="false" />
+			<property name="processNonPublicMethods" value="true" />
+			<property name="minimumLettersInNameComponent" value="2" />
+			<property name="minimumVowelsInNameComponent" value="1" />
+			<property name="checkNumVowels" value="true" />
+			<property name="checkNumLetters" value="true" />
+			<property name="checkInDictionary" value="true" />
+			<property name="allowedComponents"
+				value="
+					nio,
+					xml,
+					mvc,
+					ipc,
+					gipc,
+			" />
+
+		</module>
+		
+		<module name="MnemonicNameCheck">
+			<property name="severity" value="info" />
+			<property name="processType" value="false" />
+			<property name="processLocals" value="true" />
+			<property name="processParameters" value="true" />
+			<property name="processGlobals" value="true" />
+			<property name="processPublicMethods" value="false" />
+			<property name="processNonPublicMethods" value="true" />
+			<property name="minimumLettersInNameComponent" value="2" />
+			<property name="minimumVowelsInNameComponent" value="1" />
+			<property name="checkNumVowels" value="true" />
+			<property name="checkNumLetters" value="true" />
+			<property name="checkInDictionary" value="true" />
+			<property name="allowedComponents"
+				value="
+					
+					nio,
+					xml,
+					mvc,
+					ipc,
+					gipc,
+			" />
+
+		</module>
+		
+		<module name="FinalParameterDefined">
+			<property name="severity" value="info" />
+		</module>
+
+		<module name="MethodBlockLimit">
+			<property name="severity" value="warning" />
+			<property name="max" value="1" />
+		</module>
+		<module name="NestedBlockDepth">
+			<property name="severity" value="warning" />
+			<property name="max" value="1" />
+		</module>
+		<module name="EqualsAvoidedNullCheck">
+			<property name="severity" value="info" />
+		</module>
+		<module name="EqualsAvoidedNullCheck">
+			<property name="severity" value="warning" />
+		</module>
+		<module name="ClassDecomposition">
+			<property name="severity" value="warning" />
+		</module>
+
+	<module name="ExpectedInterfaces">
+		<property name="severity" value="warning"/>
+		<property name="includeTypeTags" value="@DistributedTags.CLIENT_REMOTE_OBJECT+@DistributedTags.RMI+@DistributedTags.GIPC"/>
+		<property name="expectedInterfaces" value="
+			java.rmi.Remote,
+		"/>
+	</module>
+	<module name="ExpectedInterfaces">
+		<property name="severity" value="info"/>
+		<property name="includeTypeTags" value="@DistributedTags.CLIENT_REMOTE_OBJECT+@DistributedTags.RMI+@DistributedTags.GIPC"/>
+		<property name="expectedInterfaces" value="
+			java.rmi.Remote,
+		"/>
+	</module>
+	
+	<module name="ExpectedSignatures">
+		<property name="severity" value="warning"/>
+		<property name="includeTypeTags" value="@DistributedTags.CLIENT_REMOTE_OBJECT+@DistributedTags.RMI+@DistributedTags.GIPC"/>
+		<property name="expectedSignatures" value="
+			.*:String->void,
+		"/>
+	</module>
+	<module name="ExpectedSignatures">
+		<property name="severity" value="info"/>
+		<property name="includeTypeTags" value="@DistributedTags.CLIENT_REMOTE_OBJECT+@DistributedTags.RMI+@DistributedTags.GIPC"/>
+		<property name="expectedSignatures" value="
+			.*:String->void,
+		"/>
+	</module>
+	<module name="MissingMethodCall">
+		<property name="severity" value="warning"/>
+		<property name="includeTypeTags" value="@DistributedTags.CLIENT_REMOTE_OBJECT+@DistributedTags.RMI+@DistributedTags.GIPC"/>
+		<property name="expectedCalls" value="
+			assignments.util.inputParameters.AnAbstractSimulationParametersBean!setBroadcastMetaState:*->.*,
+			assignments.util.inputParameters.AnAbstractSimulationParametersBean!setIPCMechanism:*->.*,			
+		"/>
+	</module>
+	<module name="MissingMethodCall">
+		<property name="severity" value="info"/>
+		<property name="includeTypeTags" value="@DistributedTags.CLIENT_REMOTE_OBJECT+@DistributedTags.RMI+@DistributedTags.GIPC"/>
+		<property name="expectedCalls" value="
+				assignments.util.inputParameters.AnAbstractSimulationParametersBean!setBroadcastMetaState:*->.*,
+			assignments.util.inputParameters.AnAbstractSimulationParametersBean!setIPCMechanism:*->.*,
+		"/>
+	</module>	
+	<module name="ExpectedInterfaces">
+		<property name="severity" value="warning"/>
+		<property name="includeTypeTags" value="@DistributedTags.SERVER_REMOTE_OBJECT+@DistributedTags.RMI+@DistributedTags.GIPC"/>
+		<property name="expectedInterfaces" value="
+			java.rmi.Remote,
+		"/>
+	</module>
+	<module name="ExpectedInterfaces">
+		<property name="severity" value="info"/>
+		<property name="includeTypeTags" value="@DistributedTags.SERVER_REMOTE_OBJECT+@DistributedTags.RMI+@DistributedTags.GIPC"/>
+		<property name="expectedInterfaces" value="
+			java.rmi.Remote,
+		"/>
+	</module>
+	<module name="ExpectedSignatures">
+		<property name="severity" value="warning"/>
+		<property name="includeTypeTags" value="@DistributedTags.SERVER_REMOTE_OBJECT+@DistributedTags.RMI+@DistributedTags.GIPC"/>
+		<property name="expectedSignatures" value="
+			.*:String;util.interactiveMethodInvocation.IPCMechanism->void,		
+			.*:String;boolean->void,
+			.*:String;@DistributedTags.CLIENT_REMOTE_INTERFACE+@DistributedTags.GIPC->void,
+		"/>
+	</module>
+	<module name="ExpectedSignatures">
+		<property name="severity" value="info"/>
+		<property name="includeTypeTags" value="@DistributedTags.SERVER_REMOTE_OBJECT+@DistributedTags.RMI+@DistributedTags.GIPC"/>
+		<property name="expectedSignatures" value="
+			.*:String;util.interactiveMethodInvocation.IPCMechanism->void,		
+			.*:String;boolean->void,
+			.*:String;@DistributedTags.CLIENT_REMOTE_INTERFACE+@DistributedTags.GIPC->void,
+		"/>
+	</module>
+	<module name="MissingMethodCall">
+		<property name="severity" value="warning"/>
+		<property name="includeTypeTags" value="@DistributedTags.SERVER_REMOTE_OBJECT+@DistributedTags.RMI+@DistributedTags.GIPC"/>
+		<property name="expectedCalls" value="		
+			assignments.util.inputParameters.AnAbstractSimulationParametersBean!setIPCMechanism:*->.*,
+			@DistributedTags.CLIENT_REMOTE_INTERFACE+@DistributedTags.RMI!.*:*->.*,
+			assignments.util.inputParameters.AnAbstractSimulationParametersBean!setBroadcastMetaState:*->.*,
+		"/>
+	</module>
+	<module name="MissingMethodCall">
+		<property name="severity" value="info"/>
+		<property name="includeTypeTags" value="@DistributedTags.SERVER_REMOTE_OBJECT+@DistributedTags.RMI+@DistributedTags.GIPC"/>
+		<property name="expectedCalls" value="
+			assignments.util.inputParameters.AnAbstractSimulationParametersBean!setIPCMechanism:*->.*,
+			@DistributedTags.CLIENT_REMOTE_INTERFACE+@DistributedTags.RMI!.*:*->.*,
+			assignments.util.inputParameters.AnAbstractSimulationParametersBean!setBroadcastMetaState:*->.*,
+		"/>
+	</module>
+	<module name="SpuriousMethodCall">
+		<property name="severity" value="warning"/>
+		<property name="includeTypeTags" value="@DistributedTags.SERVER_REMOTE_OBJECT+@DistributedTags.RMI+@DistributedTags.GIPC"/>
+		<property name="expectedCalls" value="			
+		inputport.rpc.GIPCRegistry!lookup:Class;String->Object,
+		"/>
+	</module>
+	<module name="SpuriousMethodCall">
+		<property name="severity" value="info"/>
+		<property name="includeTypeTags" value="@DistributedTags.SERVER_REMOTE_OBJECT+@DistributedTags.RMI+@DistributedTags.GIPC"/>
+		<property name="expectedCalls" value="			
+		inputport.rpc.GIPCRegistry!lookup:Class;String->Object,
+		"/>
+	</module>
+	
+	
+	<module name="ExpectedSignatures">
+		<property name="severity" value="warning"/>
+		<property name="includeTypeTags" value="@DistributedTags.SERVER+@DistributedTags.RMI+@DistributedTags.GIPC"/>
+		<property name="expectedSignatures" value="
+			main:String[]->void,
+		"/>
+	</module>
+	<module name="ExpectedSignatures">
+		<property name="severity" value="info"/>
+		<property name="includeTypeTags" value="@DistributedTags.SERVER+@DistributedTags.RMI+@DistributedTags.GIPC"/>
+		<property name="expectedSignatures" value="
+			main:String[]->void,
+		"/>
+	</module>
+	<module name="MissingMethodCall">
+		<property name="severity" value="warning"/>
+		<property name="includeTypeTags" value="@DistributedTags.SERVER+@DistributedTags.RMI+@DistributedTags.GIPC"/>
+		<property name="expectedCalls" value="
+			@DistributedTags.SERVER_CONFIGURER+@DistributedTags.RMI+@DistributedTags.GIPC!start:String[]->void,
+		"/>
+	</module>
+	<module name="MissingMethodCall">
+		<property name="severity" value="info"/>
+		<property name="includeTypeTags" value="@DistributedTags.SERVER+@DistributedTags.RMI+@DistributedTags.GIPC"/>
+		<property name="expectedCalls" value="
+			@DistributedTags.SERVER_CONFIGURER+@DistributedTags.RMI+@DistributedTags.GIPC!start:String[]->void,
+		"/>
+	</module>
+	<module name="ExpectedSuperTypes">
+		<property name="severity" value="warning"/>
+		<property name="includeTypeTags" value="@DistributedTags.SERVER_CONFIGURER+@DistributedTags.RMI+@DistributedTags.GIPC"/>
+		<property name="expectedSuperTypes" value="
+			assignments.util.inputParameters.AnAbstractSimulationParametersBean,
+		"/>
+	</module>
+	<module name="ExpectedSuperTypes">
+		<property name="severity" value="info"/>
+		<property name="includeTypeTags" value="@DistributedTags.SERVER_CONFIGURER+@DistributedTags.RMI+@DistributedTags.GIPC"/>
+		<property name="expectedSuperTypes" value="
+			assignments.util.inputParameters.AnAbstractSimulationParametersBean,
+		"/>
+	</module>
+	
+	<module name="MissingMethodCall">
+		<property name="severity" value="warning"/>
+		<property name="includeTypeTags" value="@DistributedTags.SERVER_CONFIGURER+@DistributedTags.RMI+@DistributedTags.GIPC"/>
+		<property name="expectedCalls" value="
+			util.trace.port.rpc.gipc.GIPCObjectRegistered!newCase:Object;String;Object;inputport.rpc.GIPCRegistry->GIPCObjectRegistered,
+			inputport.rpc.GIPCLocateRegistry!createRegistry:int->GIPCRegistry,
+			util.trace.port.rpc.gipc.GIPCRPCTraceUtility!setTracing:->void,
+			util.trace.port.nio.NIOTraceUtility!setTracing:->void,
+						
+			assignments.util.mainArgs.ServerArgsProcessor!getGIPCServerPort:String[]->int,
+			inputport.rpc.GIPCRegistry!rebind:String;Object->void,
+			util.trace.port.rpc.gipc.GIPCRegistryCreated!newCase:Object;int->GIPCRegistryCreated,
+		"/>
+	</module>
+	<module name="MissingMethodCall">
+		<property name="severity" value="info"/>
+		<property name="includeTypeTags" value="@DistributedTags.SERVER_CONFIGURER+@DistributedTags.RMI+@DistributedTags.GIPC"/>
+		<property name="expectedCalls" value="
+			util.trace.port.rpc.gipc.GIPCObjectRegistered!newCase:Object;String;Object;inputport.rpc.GIPCRegistry->GIPCObjectRegistered,
+			inputport.rpc.GIPCLocateRegistry!createRegistry:int->GIPCRegistry,
+			util.trace.port.rpc.gipc.GIPCRPCTraceUtility!setTracing:->void,	
+			util.trace.port.nio.NIOTraceUtility!setTracing:->void,
+					
+			assignments.util.mainArgs.ServerArgsProcessor!getGIPCServerPort:String[]->int,
+			inputport.rpc.GIPCRegistry!rebind:String;Object->void,
+			util.trace.port.rpc.gipc.GIPCRegistryCreated!newCase:Object;int->GIPCRegistryCreated,
+		"/>
+	</module>
+	
+	
+	<module name="ExpectedSignatures">
+		<property name="severity" value="warning"/>
+		<property name="includeTypeTags" value="@DistributedTags.CLIENT+@DistributedTags.RMI+@DistributedTags.GIPC"/>
+		<property name="expectedSignatures" value="
+			main:String[]->void,
+		"/>
+	</module>
+	<module name="ExpectedSignatures">
+		<property name="severity" value="info"/>
+		<property name="includeTypeTags" value="@DistributedTags.CLIENT+@DistributedTags.RMI+@DistributedTags.GIPC"/>
+		<property name="expectedSignatures" value="
+			main:String[]->void,
+		"/>
+	</module>
+	
+	
+	<module name="MissingMethodCall">
+		<property name="severity" value="warning"/>
+		<property name="includeTypeTags" value="@DistributedTags.CLIENT_OUT_COUPLER+@DistributedTags.RMI+@DistributedTags.GIPC"/>
+		<property name="expectedCalls" value="
+		
+			assignments.util.inputParameters.AnAbstractSimulationParametersBean!getIPCMechanism:->IPCMechanism,
+		
+		"/>
+	</module>
+	<module name="MissingMethodCall">
+		<property name="severity" value="info"/>
+		<property name="includeTypeTags" value="@DistributedTags.CLIENT_OUT_COUPLER+@DistributedTags.RMI+@DistributedTags.GIPC"/>
+		<property name="expectedCalls" value="
+			assignments.util.inputParameters.AnAbstractSimulationParametersBean!getIPCMechanism:->IPCMechanism,
+
+		"/>
+	</module>
+	
+	<module name="ExpectedSuperTypes">
+		<property name="severity" value="warning"/>
+		<property name="includeTypeTags" value="@DistributedTags.CLIENT_CONFIGURER+@DistributedTags.GIPC"/>
+		<property name="expectedSuperTypes" value="
+			assignments.util.inputParameters.AnAbstractSimulationParametersBean,
+		"/>
+	</module>
+	<module name="ExpectedSuperTypes">
+		<property name="severity" value="info"/>
+		<property name="includeTypeTags" value="@DistributedTags.CLIENT_CONFIGURER+@DistributedTags.GIPC"/>
+		<property name="expectedSuperTypes" value="
+			assignments.util.inputParameters.AnAbstractSimulationParametersBean,
+		"/>
+	</module>
+	<module name="ExpectedSignatures">
+		<property name="severity" value="warning"/>
+		<property name="includeTypeTags" value="@DistributedTags.CLIENT_CONFIGURER+@DistributedTags.GIPC"/>
+		<property name="expectedSignatures" value="
+			
+			broadcastMetaState:boolean->void,
+			atomicBroadcast:boolean->void,
+		"/>
+	</module>
+	<module name="ExpectedSignatures">
+		<property name="severity" value="info"/>
+		<property name="includeTypeTags" value="@DistributedTags.CLIENT_CONFIGURER+@DistributedTags.GIPC"/>
+		<property name="expectedSignatures" value="
+		
+			broadcastMetaState:boolean->void,
+			atomicBroadcast:boolean->void,
+		"/>
+	</module>
+	<module name="MissingMethodCall">
+		<property name="severity" value="warning"/>
+		<property name="includeTypeTags" value="@DistributedTags.CLIENT_CONFIGURER+@DistributedTags.GIPC"/>
+		<property name="expectedCalls" value="
+			
+			util.trace.port.rpc.gipc.GIPCObjectLookedUp!newCase:Object;Object;Class;String;inputport.rpc.GIPCRegistry->GIPCObjectLookedUp,
+			
+			inputport.rpc.GIPCRegistry!lookup:Class;String->Object,
+			
+			assignments.util.mainArgs.ClientArgsProcessor!getGIPCPort:String[]->int,
+			
+			util.trace.port.rpc.gipc.GIPCRPCTraceUtility!setTracing:->void,
+			util.trace.port.nio.NIOTraceUtility!setTracing:->void,
+			
+			assignments.util.mainArgs.ClientArgsProcessor!getClientName:String[]->String,
+			util.trace.port.rpc.gipc.GIPCRegistryLocated!newCase:Object;String;int;String->GIPCRegistryLocated,
+			
+			inputport.rpc.GIPCLocateRegistry!getRegistry:String;int;String->GIPCRegistry,
+			assignments.util.inputParameters.AnAbstractSimulationParametersBean!setBroadcastMetaState:*->.*,
+			assignments.util.inputParameters.AnAbstractSimulationParametersBean!setIPCMechanism:*->.*,
+			
+		"/>
+	</module>
+	<module name="MissingMethodCall">
+		<property name="severity" value="info"/>
+		<property name="includeTypeTags" value="@DistributedTags.CLIENT_CONFIGURER+@DistributedTags.GIPC"/>
+		<property name="expectedCalls" value="
+			
+			util.trace.port.rpc.gipc.GIPCObjectLookedUp!newCase:Object;Object;Class;String;inputport.rpc.GIPCRegistry->GIPCObjectLookedUp,
+			
+			inputport.rpc.GIPCRegistry!lookup:Class;String->Object,
+			
+			assignments.util.mainArgs.ClientArgsProcessor!getGIPCPort:String[]->int,
+			
+			util.trace.port.rpc.gipc.GIPCRPCTraceUtility!setTracing:->void,
+			util.trace.port.nio.NIOTraceUtility!setTracing:->void,
+			
+			assignments.util.mainArgs.ClientArgsProcessor!getClientName:String[]->String,
+			util.trace.port.rpc.gipc.GIPCRegistryLocated!newCase:Object;String;int;String->GIPCRegistryLocated,
+			
+			inputport.rpc.GIPCLocateRegistry!getRegistry:String;int;String->GIPCRegistry,
+			assignments.util.inputParameters.AnAbstractSimulationParametersBean!setBroadcastMetaState:*->.*,
+			assignments.util.inputParameters.AnAbstractSimulationParametersBean!setIPCMechanism:*->.*,
+		"/>
+	</module>
+	<module name="SpuriousMethodCall">
+		<property name="severity" value="warning"/>
+		<property name="includeTypeTags" value="@DistributedTags.CLIENT_CONFIGURER+@DistributedTags.GIPC"/>
+		<property name="expectedCalls" value="
+			inputport.rpc.GIPCRegistry!rebind:String;Object->void,		
+		"/>
+	</module>
+	<module name="SpuriousMethodCall">
+		<property name="severity" value="info"/>
+		<property name="includeTypeTags" value="@DistributedTags.CLIENT_CONFIGURER+@DistributedTags.GIPC"/>
+		<property name="expectedCalls" value="
+			inputport.rpc.GIPCRegistry!rebind:String;Object->void,		
+		"/>
+	</module>
+	
+	
+	</module>
+	
+	
+	
+	
+	<module name="TreeWalker">
+		<module name="EqualsAvoidNull" />
+		<module name="SimplifyBooleanExpression" />
+		<module name="SimplifyBooleanReturn" />
+		<module name="StringLiteralEquality" />
+		<module name="NestedForDepth">
+			<property name="max" value="1" />
+		</module>
+		<module name="NestedIfDepth">
+			<property name="max" value="1" />
+		</module>
+		<module name="PackageDeclaration" />
+		<module name="HiddenField" />
+
+
+		<module name="VisibilityModifier">
+			<property name="packageAllowed" value="true" />
+			<property name="protectedAllowed" value="true" />
+		</module>
+		<module name="ConstantName" />
+		<module name="TypeName" />
+		<module name="MethodName" />
+		<module name="LocalVariableName" />
+		<module name="MemberName" />
+		<module name="StaticVariableName" />
+		<module name="NeedBraces" />
+		<module name="MultipleStringLiterals" />
+		<module name="OuterTypeFilename" />
+
+
+		<module name="OneTopLevelClass" />
+		<module name="EmptyBlock">
+			<property name="option" value="TEXT" />
+			<property name="tokens"
+				value="LITERAL_TRY, LITERAL_FINALLY, LITERAL_IF, LITERAL_ELSE, LITERAL_SWITCH" />
+		</module>
+		<module name="NeedBraces" />
+		<module name="ArrayTypeStyle" />
+		<module name="MissingSwitchDefault" />
+		<module name="FallThrough" />
+
+		
+		<module name="TypeName">
+
+		</module>
+		<module name="MemberName">
+
+		</module>
+		<module name="ParameterName">
+		</module>
+		<module name="LambdaParameterName"/>
+
+	
+		<module name="LocalVariableName">
+
+		</module>
+		<module name="ClassTypeParameterName">
+
+		</module>
+		<module name="MethodTypeParameterName">
+
+		</module>
+		<module name="InterfaceTypeParameterName"/>
+
+		
+		<module name="AbbreviationAsWordInName">
+			<property name="ignoreFinal" value="false" />
+			<property name="allowedAbbreviationLength" value="1" />
+		</module>
+		<module name="AvoidStarImport" />
+		<module name="RedundantImport" />
+		<module name="UnusedImports" />
+		
+		<module name="MethodName">
+			
+		</module>
+
+		<module name="EmptyCatchBlock">
+			<property name="exceptionVariableName" value="expected" />
+		</module>
+
+		<module name="BooleanExpressionComplexity">
+			<property name="max" value="3" />
+		</module>
+		<module name="ClassDataAbstractionCoupling">
+			<property name="max" value="7" />
+		</module>
+		<module name="ClassFanOutComplexity">
+			<property name="max" value="20" />
+		</module>
+		<module name="CyclomaticComplexity">
+			<property name="max" value="10" />
+		</module>
+		<module name="JavaNCSS">
+			<property name="methodMaximum" value="50" />
+			<property name="classMaximum" value="1500" />
+			<property name="fileMaximum" value="2000" />
+		</module>
+
+		<module name="MissingOverride" />
+		<module name="AvoidNestedBlocks" />
+		
+		<module name="InterfaceIsType" />
+		<module name="ThrowsCount">
+			<property name="max" value="4" />
+		</module>
+		<module name="CovariantEquals" />	
+		<module name="FinalLocalVariable" />
+		<module name="IllegalThrows" />
+		<module name="IllegalType" />
+		<module name="InnerAssignment" />
+		<module name="ModifiedControlVariable" />
+		<module name="NestedTryDepth">
+			<property name="max" value="1" />
+		</module>
+		<module name="ParameterAssignment" />
+		
+		<module name="FinalParameters" />
+
+
+	</module>
+</module>
+
+

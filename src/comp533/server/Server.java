@@ -24,7 +24,7 @@ import util.trace.port.consensus.communication.CommunicationStateNames;
 import util.trace.port.rpc.rmi.RMIObjectRegistered;
 import util.trace.port.rpc.rmi.RMIRegistryLocated;
 
-@Tags({DistributedTags.SERVER, DistributedTags.SERVER_REMOTE_OBJECT, DistributedTags.SERVER_CONFIGURER, DistributedTags.RMI})
+@Tags({DistributedTags.SERVER_REMOTE_OBJECT, DistributedTags.SERVER_CONFIGURER, DistributedTags.RMI})
 public class Server extends AStandAloneTwoCoupledHalloweenSimulations implements RemoteServer {
 	private static final String SERVER = "SERVER";
 	// register server proxy with RMIRegisty
@@ -83,7 +83,7 @@ public class Server extends AStandAloneTwoCoupledHalloweenSimulations implements
 	public void ipcMechanism(IPCMechanism newValue) {
 		ProposalMade.newCase(this, CommunicationStateNames.IPC_MECHANISM, -1, newValue);
 		ProposedStateSet.newCase(this, CommunicationStateNames.IPC_MECHANISM, -1, newValue);
-		this.ipcMechanism = newValue;
+		setIPCMechanism(newValue);
 		if (this.broadcastMetaState) {
 			// callback in server
 			try {
@@ -99,7 +99,7 @@ public class Server extends AStandAloneTwoCoupledHalloweenSimulations implements
 	@Override
 	public void broadcastMetaState(boolean newValue) {
 		ProposalMade.newCase(this, CommunicationStateNames.BROADCAST_MODE, -1, newValue);
-		this.broadcastMetaState = newValue;
+		setBroadcastMetaState(newValue);
 		ProposedStateSet.newCase(this, CommunicationStateNames.BROADCAST_MODE, -1, newValue);
 		try {
 			RemoteProposeRequestSent.newCase(this, CommunicationStateNames.BROADCAST_MODE, -1, newValue);
@@ -122,12 +122,13 @@ public class Server extends AStandAloneTwoCoupledHalloweenSimulations implements
 
 	@Override
 	public void receiveMetaState(boolean newValue) {
-		this.broadcastMetaState = newValue;
+		setBroadcastMetaState(newValue);
 	}
 
 	
 	@Override
 	public void receiveIPCMechanism(IPCMechanism newValue) {
+		setIPCMechanism(newValue);
 		this.ipcMechanism = newValue;
 	}
 

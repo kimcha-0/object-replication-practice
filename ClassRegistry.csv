@@ -1,0 +1,6 @@
+comp533.server.RemoteServer,@DistributedTags.SERVER_REMOTE_INTERFACE+@DistributedTags.RMI
+comp533.client.RemoteOutCoupler,@DistributedTags.CLIENT_OUT_COUPLER+@DistributedTags.RMI+@DistributedTags.GIPC
+comp533.server.GIPCServer,@DistributedTags.SERVER_REMOTE_INTERFACE+@DistributedTags.GIPC
+comp533.registry.RMIRegistry,@DistributedTags.REGISTRY+@DistributedTags.RMI
+comp533.client.RemoteClient,@DistributedTags.CLIENT_REMOTE_INTERFACE+@DistributedTags.RMI
+comp533.client.GIPCClient,@DistributedTags.CLIENT_REMOTE_INTERFACE+@DistributedTags.GIPC

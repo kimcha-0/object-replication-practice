@@ -1,0 +1,54 @@
+*PRE_OUTPUT*
+>>Running suite Assignment5TwoClientSuite
+<<
+>>Running test GIPCRMITwoClientConnection
+<<
+>>Running test GIPCRMITwoClientReadWriteNonAtomic
+<<
+>>Running test GIPCRMIClientMetaStateNoBroadcast
+<<
+>>Running test GIPCRMIClientMetaStateBroadcast
+<<
+>>Running test GIPCRMIServerMetaStateNoBroadcast
+<<
+>>Running test GIPCRMIServerMetaStateBroadcast
+<<
+*OUTPUT*
+*ERROR*
+
+*POST_OUTPUT*
+>>Test Result:
+A5TaggedClassesDefined,50.0% complete,5.0,10.0,Only 6.0 matched out of 12.0 tags.
+ See console text
+<<
+>>Test Result:
+A5ExpectedInterfaces,100.0% complete,5.0,5.0,
+<<
+>>Test Result:
+A5ExpectedCalls,100.0% complete,20.0,20.0,
+<<
+>>Test Result:
+A5SpuriousCalls,100.0% complete,20.0,20.0,
+<<
+>>Test Result:
+A5ExpectedSignatures,50.0% complete,2.5,5.0,See console trace about lines failing  this check
+<<
+>>Test Result:
+GIPCRMITwoClientConnection,100.0% complete,20.0,20.0,
+<<
+>>Test Result:
+GIPCRMITwoClientReadWriteNonAtomic,100.0% complete,20.0,20.0,
+<<
+>>Test Result:
+GIPCRMIClientMetaStateNoBroadcast,100.0% complete,20.0,20.0,
+<<
+>>Test Result:
+GIPCRMIClientMetaStateBroadcast,100.0% complete,20.0,20.0,
+<<
+>>Test Result:
+GIPCRMIServerMetaStateNoBroadcast,100.0% complete,20.0,20.0,
+<<
+>>Test Result:
+GIPCRMIServerMetaStateBroadcast,100.0% complete,20.0,20.0,
+<<
+*END_OUTPUT*

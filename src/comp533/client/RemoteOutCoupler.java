@@ -13,7 +13,7 @@ import util.trace.port.consensus.communication.CommunicationStateNames;
 import util.trace.trickOrTreat.LocalCommandObserved;
 
 @Tags({DistributedTags.CLIENT_OUT_COUPLER, DistributedTags.RMI, DistributedTags.GIPC})
-public class RemoteOutCoupler implements OutCoupler {
+public class RemoteOutCoupler extends AnAbstractSimulationParametersBean implements OutCoupler {
 	private static final long serialVersionUID = 1L;
 	// sends message to Server that change has occurred
 	// observes client
@@ -32,6 +32,7 @@ public class RemoteOutCoupler implements OutCoupler {
 		if (!evt.getPropertyName().equals("InputString")) return;
 		String newCommand = (String)evt.getNewValue();
 		LocalCommandObserved.newCase(this, newCommand);
+		if (getIPCMechanism().equals(IPCMechanism.RMI))
 		localSim.processCommand(newCommand);
 	}
 

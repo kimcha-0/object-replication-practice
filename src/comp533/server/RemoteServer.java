@@ -10,7 +10,7 @@ import java.rmi.RemoteException;
 import comp533.client.RemoteClient;
 import util.tags.DistributedTags;
 
-@Tags({DistributedTags.SERVER_REMOTE_INTERFACE})
+@Tags({DistributedTags.SERVER_REMOTE_INTERFACE, DistributedTags.RMI})
 public interface RemoteServer extends Remote, Serializable {
 	public static final String SERVER = "SERVER";
 	void registerClient(RemoteClient client) throws RemoteException;

@@ -1,0 +1,4402 @@
+
+//SESSION START
+0,Mon Apr 29 15:08:29 EDT 2024,28052
+//START OF FILE: comp533/client/RemoteClient.java
+package comp533.client;
+
+import java.io.Serializable;
+import java.rmi.Remote;
+import java.rmi.RemoteException;
+
+import util.annotations.Tags;
+import util.interactiveMethodInvocation.IPCMechanism;
+import util.tags.DistributedTags;
+
+@Tags({DistributedTags.CLIENT_REMOTE_INTERFACE})
+public interface RemoteClient extends Remote, Serializable {
+	public static final String CLIENT = "CLIENT";
+	int getId() throws RemoteException;
+	void setId(int id) throws RemoteException;
+	void broadcastChangeRMI(String command) throws RemoteException;
+	void receiveChangeRMI(String command) throws RemoteException;
+	void receiveIPCChange(IPCMechanism ipc) throws RemoteException;
+	void receiveMetaStateChange(boolean newValue) throws RemoteException;
+	void ipcMechanism(IPCMechanism newValue) throws RemoteException;
+}
+
+//END OF FILE
+//START OF FILE: comp533/client/GIPCClient.java
+package comp533.client;
+
+import java.rmi.RemoteException;
+
+import util.interactiveMethodInvocation.IPCMechanism;
+
+public interface GIPCClient {
+	void receiveChangeGIPC(String command) throws RemoteException;
+	void broadcastChangeGIPC(String command) throws RemoteException;
+	void locateRegistry(String[] args);
+	void findGIPCServerProxy();
+	int getId() throws RemoteException;
+	void setId(int val) throws RemoteException;
+	void start(String[] args);
+}
+
+//END OF FILE
+//START OF FILE: comp533/client/RemoteOutCoupler.java
+package comp533.client;
+import java.beans.PropertyChangeEvent;
+import java.rmi.RemoteException;
+
+import assignments.util.inputParameters.AnAbstractSimulationParametersBean;
+import stringProcessors.HalloweenCommandProcessor;
+import util.annotations.Tags;
+import util.interactiveMethodInvocation.IPCMechanism;
+import util.tags.DistributedTags;
+import util.trace.port.consensus.ProposalMade;
+import util.trace.port.consensus.RemoteProposeRequestSent;
+import util.trace.port.consensus.communication.CommunicationStateNames;
+import util.trace.trickOrTreat.LocalCommandObserved;
+
+@Tags({DistributedTags.CLIENT_OUT_COUPLER, DistributedTags.RMI})
+public class RemoteOutCoupler implements OutCoupler {
+	private static final long serialVersionUID = 1L;
+	// sends message to Server that change has occurred
+	// observes client
+	HalloweenCommandProcessor localSim;
+	IPCMechanism mode;
+
+	public RemoteOutCoupler(HalloweenCommandProcessor observable, IPCMechanism mode) {
+		this.localSim = observable;
+		this.mode = mode;
+	}
+	
+
+	@Override
+	public void propertyChange(PropertyChangeEvent evt) {
+		// new command is received, update local sim and notify server to broadcast changes to in couplers
+		if (!evt.getPropertyName().equals("InputString")) return;
+		String newCommand = (String)evt.getNewValue();
+		LocalCommandObserved.newCase(this, newCommand);
+		localSim.processCommand(newCommand);
+	}
+
+
+	@Override
+	public void broadcastToServer(String command) throws RemoteException {
+		// TODO Auto-generated method stub
+		
+	}
+}
+
+//END OF FILE
+//START OF FILE: comp533/A4Grader.java
+package comp533;
+import grader.basics.execution.BasicProjectExecution;
+import gradingTools.comp533s24.assignment4.S24Assignment4Suite;
+import trace.grader.basics.GraderBasicsTraceUtility;
+
+public class A4Grader {
+	// if you set this to false, grader steps will not be traced
+	public static void main(String args[]) {
+			GraderBasicsTraceUtility.setTracerShowInfo(true);	
+			// if you set this to false, all grader steps will be traced,
+			// not just the ones that failed		
+			GraderBasicsTraceUtility.setBufferTracedMessages(true);
+			// Change this number if a test trace gets longer than 600 and is clipped
+			int maxPrintedTraces = 100;
+			GraderBasicsTraceUtility.setMaxPrintedTraces(maxPrintedTraces);
+			// Change this number if all traces together are longer than 2000
+			int maxTraces = 2000;
+			GraderBasicsTraceUtility.setMaxTraces(maxTraces);
+			// Change this number if your process times out prematurely
+			int processTimeOut = 45;
+			BasicProjectExecution.setProcessTimeOut(processTimeOut);
+			// You need to always call such a method
+			S24Assignment4Suite.main(args);
+		}
+}
+
+//END OF FILE
+//START OF FILE: comp533/client/RemoteInCoupler.java
+package comp533.client;
+
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+import java.rmi.RemoteException;
+import java.util.ArrayList;
+import java.util.List;
+
+import assignments.util.inputParameters.AnAbstractSimulationParametersBean;
+import stringProcessors.HalloweenCommandProcessor;
+import util.interactiveMethodInvocation.IPCMechanism;
+
+public class RemoteInCoupler extends AnAbstractSimulationParametersBean implements InCoupler {
+	private HalloweenCommandProcessor localSim;
+	static int numCouplers;
+	private int inCouplerId;
+	private IPCMechanism mode;
+	
+	public RemoteInCoupler(HalloweenCommandProcessor localSim, IPCMechanism ipc) {
+		this.inCouplerId = numCouplers;
+		this.localSim = localSim;
+		numCouplers++;
+		this.mode = ipc;
+	}
+
+	@Override
+	public void updateState(String command) {
+		localSim.processCommand(command);
+	}
+	
+	@Override
+	public void setLocalSim(HalloweenCommandProcessor sim) {
+		this.localSim = sim;
+	}
+
+	@Override
+	public int getId() throws RemoteException {
+		// TODO Auto-generated method stub
+		return this.inCouplerId;
+	}
+}
+//END OF FILE
+//START OF FILE: comp533/client/Client.java
+package comp533.client;
+
+public interface Client {
+
+}
+
+//END OF FILE
+//START OF FILE: comp533/registry/RMIRegistry.java
+package comp533.registry;
+
+import java.rmi.registry.LocateRegistry;
+import util.trace.port.rpc.rmi.RMIRegistryCreated;
+import util.trace.port.rpc.rmi.RMITraceUtility;
+
+import java.rmi.registry.Registry;
+import java.util.Scanner;
+
+import assignments.util.mainArgs.RegistryArgsProcessor;
+import coupledsims.AStandAloneTwoCoupledHalloweenSimulations;
+import util.annotations.Tags;
+import util.tags.DistributedTags;
+			
+@Tags({DistributedTags.REGISTRY, DistributedTags.RMI})
+public class RMIRegistry {
+	public static final String REGISTRY = "REGISTRY";
+	public RMIRegistry() {}
+	
+
+	public static void main(String args[]) {
+		RMIRegistry registry = new RMIRegistry();
+		registry.start(args);
+
+
+	}
+	
+	public void start(String[] args) {
+		try {
+			RMITraceUtility.setTracing();
+			System.out.println("Registry Port:" + RegistryArgsProcessor.getRegistryPort(args));
+			Registry registry = LocateRegistry.createRegistry(RegistryArgsProcessor.getRegistryPort(args));
+			RMIRegistryCreated.newCase(registry, RegistryArgsProcessor.getRegistryPort(args));
+			Scanner scanner = new Scanner(System.in);
+			scanner.nextLine();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
+
+}
+
+//END OF FILE
+//START OF FILE: comp533/client/OutCoupler.java
+package comp533.client;
+
+import java.beans.PropertyChangeListener;
+import java.io.Serializable;
+import java.rmi.Remote;
+import java.rmi.RemoteException;
+
+
+public interface OutCoupler extends PropertyChangeListener, Remote, Serializable {
+	void broadcastToServer(String command) throws RemoteException;
+}
+
+//END OF FILE
+//START OF FILE: comp533/server/Server.java
+package comp533.server;
+
+import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
+import java.rmi.server.UnicastRemoteObject;
+import java.util.ArrayList;
+import java.util.List;
+
+import assignments.util.mainArgs.RegistryArgsProcessor;
+import assignments.util.mainArgs.ServerArgsProcessor;
+import comp533.client.RemoteClient;
+import coupledsims.AStandAloneTwoCoupledHalloweenSimulations;
+import util.interactiveMethodInvocation.IPCMechanism;
+import util.interactiveMethodInvocation.SimulationParametersControllerFactory;
+import util.annotations.Tags;
+import util.tags.DistributedTags;
+import util.trace.port.consensus.ProposalLearnedNotificationSent;
+import util.trace.port.consensus.RemoteProposeRequestReceived;
+import util.trace.port.consensus.communication.CommunicationStateNames;
+import util.trace.port.rpc.rmi.RMIObjectRegistered;
+import util.trace.port.rpc.rmi.RMIRegistryLocated;
+
+@Tags({DistributedTags.SERVER, DistributedTags.SERVER_REMOTE_OBJECT, DistributedTags.SERVER_CONFIGURER, DistributedTags.RMI})
+public class Server extends AStandAloneTwoCoupledHalloweenSimulations implements RemoteServer {
+	private static final String SERVER = "SERVER";
+	// register server proxy with RMIRegisty
+	// provide method to register client in coupler proxies with server
+	// provide method to notify all
+	// when a client proxy forwards an input to the server, the server sends this message to
+	// all other in-couplers
+
+	List<RemoteClient> clientProxies;
+	Registry rmiRegistry;
+
+	public Server() {
+
+		this.clientProxies = new ArrayList<>();
+	}
+	
+	@Override
+	public void registerClient(RemoteClient client) {
+		clientProxies.add(client);
+		try {
+			client.setId(clientProxies.size());
+			 System.out.println("rmi id init: " + client.getId());
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	void processArgs(String[] args) {
+		System.out.println("Registry host:" + ServerArgsProcessor.getRegistryHost(args));
+		System.out.println("Registry port:" + ServerArgsProcessor.getRegistryPort(args));
+		
+	}
+	
+	protected void init(String args[]) {
+		this.processArgs(args);
+		this.setTracing();
+		try {
+			this.rmiRegistry = LocateRegistry.getRegistry(ServerArgsProcessor.getRegistryPort(args));
+			RMIRegistryLocated.newCase(Server.class, 
+					ServerArgsProcessor.getRegistryHost(args), 
+					ServerArgsProcessor.getRegistryPort(args),
+					this.rmiRegistry);
+			RemoteServer serverProxy = (RemoteServer)UnicastRemoteObject.exportObject(this, 0);
+			RMIObjectRegistered.newCase(Server.class, SERVER, serverProxy, this.rmiRegistry);
+			this.rmiRegistry.rebind(SERVER, this);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+
+
+	public static void main(String args[]) {
+		Server server = new Server();
+		server.init(args);
+	
+		// blocking server start
+		server.start();
+			
+	}
+	
+	public static void start() {
+		
+	}
+
+	@Override
+	public void broadcastChanges(Object msg, int id) throws RemoteException {
+		RemoteProposeRequestReceived.newCase(this, CommunicationStateNames.COMMAND, -1, msg);
+		// broadcasts messages to incouplers of clients except for the original sender
+		System.out.println("originating rmi id: " + id);
+		for (RemoteClient c : clientProxies) {
+			try {
+				System.out.println("rmi id from server: " + c.getId());
+				if (c.getId() != id) {
+					System.out.println("broadcasting to rmi id from server: " + c.getId());
+					if (msg instanceof IPCMechanism)
+						c.receiveIPCChange((IPCMechanism)msg);
+					else if (msg instanceof String)
+						c.receiveChangeRMI((String)msg);
+					else
+						c.receiveMetaStateChange((boolean)msg);	
+					ProposalLearnedNotificationSent.newCase(this, CommunicationStateNames.BROADCAST_MODE, -1, msg);
+					}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+
+}
+//END OF FILE
+//START OF FILE: comp533/client/GIPCClientImpl.java
+package comp533.client;
+
+import java.rmi.RemoteException;
+
+import assignments.util.mainArgs.ClientArgsProcessor;
+import comp533.server.GIPCServer;
+import comp533.server.ServerGIPC;
+import coupledsims.AStandAloneTwoCoupledHalloweenSimulations;
+import inputport.rpc.GIPCLocateRegistry;
+import inputport.rpc.GIPCRegistry;
+import util.annotations.Tags;
+import util.interactiveMethodInvocation.IPCMechanism;
+import util.interactiveMethodInvocation.SimulationParametersControllerFactory;
+import util.tags.DistributedTags;
+import util.trace.bean.BeanTraceUtility;
+import util.trace.port.consensus.ProposalLearnedNotificationReceived;
+import util.trace.port.consensus.ProposalMade;
+import util.trace.port.consensus.ProposedStateSet;
+import util.trace.port.consensus.RemoteProposeRequestSent;
+import util.trace.port.consensus.communication.CommunicationStateNames;
+import util.trace.port.rpc.gipc.GIPCObjectLookedUp;
+import util.trace.port.rpc.gipc.GIPCRPCTraceUtility;
+import util.trace.port.rpc.gipc.GIPCRegistryLocated;
+
+@Tags({DistributedTags.CLIENT_CONFIGURER, DistributedTags.CLIENT_REMOTE_OBJECT})
+public class GIPCClientImpl extends ClientRMIImpl implements GIPCClient, RemoteClient {
+	private GIPCServer serverProxy;
+	private int gipcId;
+	private GIPCRegistry gipcRegistry;
+	private static int id = 0;
+	
+	public GIPCClientImpl() {
+		id++;
+	}
+	
+	public void broadcastChangeGIPC(String command) {
+		// notify GIPC server of local change in order to keep replicated objects consistent
+		try {
+			ProposalMade.newCase(this, CommunicationStateNames.COMMAND, -1, command);
+			this.localSim.setInputString(command);
+			RemoteProposeRequestSent.newCase(this, CommunicationStateNames.COMMAND, -1, command);
+			System.out.println("broadcasting from client: " + this.getId());
+			this.serverProxy.broadcastChangesGIPC(command, this.getId());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@Override
+	public int getId() {
+		return this.gipcId;
+	}
+	
+	@Override
+	public void setId(int newVal) {
+		this.gipcId = newVal;
+		System.out.println("setting gipc id: " + this.getId());
+	}
+	
+	public void locateRegistry(String[] args) {
+		System.out.println(id);
+		try {
+			GIPCRegistryLocated.newCase(
+					this, 
+					ClientArgsProcessor.getRegistryHost(args), 
+					ClientArgsProcessor.getGIPCPort(args), 
+					String.valueOf(id));
+			this.gipcRegistry = GIPCLocateRegistry.getRegistry(ClientArgsProcessor.getRegistryHost(args), 
+					ClientArgsProcessor.getGIPCPort(args), 
+					CLIENT+Math.random()*1000000);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@Override
+	protected void init(String[] args) {
+		this.setTracing();
+		super.init(args);
+		this.locateRegistry(args);
+		this.findGIPCServerProxy();
+		try {
+			this.serverProxy.registerClientGIPC(this);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	@Override
+	public void simulationCommand(String command) {
+		if (this.ipcMechanism.equals(IPCMechanism.RMI)) {
+			super.simulationCommand(command);
+		} else {
+			this.broadcastChangeGIPC(command);
+		}
+	}
+
+	@Override
+	public void receiveChangeGIPC(String command) {
+		// receiving message from GIPC server
+		ProposalLearnedNotificationReceived.newCase(this, CommunicationStateNames.BROADCAST_MODE, -1, command);
+		ProposedStateSet.newCase(this, CommunicationStateNames.COMMAND, -1, command);
+		this.localSim.setInputString(command);
+	}
+	
+	public void findGIPCServerProxy() {
+		try {
+			this.serverProxy = (GIPCServer) gipcRegistry.lookup(GIPCServer.class, GIPCServer.SERVER);
+//			GIPCObjectLookedUp.newCase(this, serverProxy, GIPCServer.class, GIPCServer.SERVER, gipcRegistry);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	
+	@Override
+	public void setTracing() {
+		super.setTracing();
+		BeanTraceUtility.setTracing();
+		GIPCRPCTraceUtility.setTracing();
+	}
+	
+	@Override
+	public void start(String[] args) {
+		try {
+			this.init(args);
+			SimulationParametersControllerFactory.getSingleton().addSimulationParameterListener(this);
+			SimulationParametersControllerFactory.getSingleton().processCommands();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static void main(String[] args) {
+		GIPCClient client = new GIPCClientImpl();
+		// init client
+		client.start(args);
+	}
+}
+//END OF FILE
+//START OF FILE: comp533/client/ClientRMIImpl.java
+package comp533.client;
+
+import java.rmi.RemoteException;
+import java.rmi.registry.Registry;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.server.UnicastRemoteObject;
+
+import assignments.util.mainArgs.ClientArgsProcessor;
+import comp533.server.RemoteServer;
+import coupledsims.AStandAloneTwoCoupledHalloweenSimulations;
+import coupledsims.Simulation;
+import coupledsims.Simulation1;
+import main.BeauAndersonFinalProject;
+import stringProcessors.HalloweenCommandProcessor;
+import util.interactiveMethodInvocation.IPCMechanism;
+import util.interactiveMethodInvocation.SimulationParametersControllerFactory;
+import util.misc.ThreadSupport;
+import util.annotations.Tags;
+import util.tags.DistributedTags;
+import util.trace.bean.BeanTraceUtility;
+import util.trace.port.consensus.ProposalLearnedNotificationReceived;
+import util.trace.port.consensus.ProposalMade;
+import util.trace.port.consensus.ProposedStateSet;
+import util.trace.port.consensus.RemoteProposeRequestSent;
+import util.trace.port.consensus.communication.CommunicationStateNames;
+import util.trace.port.rpc.gipc.GIPCRPCTraceUtility;
+import util.trace.port.rpc.rmi.RMIObjectLookedUp;
+import util.trace.port.rpc.rmi.RMIObjectRegistered;
+import util.trace.port.rpc.rmi.RMIRegistryLocated;
+
+@Tags({DistributedTags.CLIENT, DistributedTags.CLIENT_CONFIGURER, DistributedTags.CLIENT_REMOTE_OBJECT, DistributedTags.RMI})
+public class ClientRMIImpl extends AStandAloneTwoCoupledHalloweenSimulations implements RemoteClient {
+	RemoteServer serverProxy;
+	InCoupler in;
+	OutCoupler out;
+	HalloweenCommandProcessor localSim;
+	public static int numClients = 0;
+	private int clientId;
+	private Registry rmiRegistry;
+	
+	public ClientRMIImpl() {
+		this.localSim = createSimulation(numClients + ":");
+//		this.out = new RemoteOutCoupler(this.localSim, this.ipcMechanism);
+//		this.localSim.addPropertyChangeListener(out);
+	}
+	
+	private HalloweenCommandProcessor createSimulation(String prefix) {
+		return 	BeauAndersonFinalProject.createSimulation(
+                prefix,
+                0,
+                Simulation.SIMULATION_Y_OFFSET,
+                Simulation.SIMULATION_WIDTH,
+                Simulation.SIMULATION_HEIGHT,
+                0,
+                Simulation.SIMULATION_Y_OFFSET);
+	}
+	
+	@Override
+	public void broadcastMetaState(boolean newValue) {
+		this.broadcastIPCMechanism = true;
+		try {
+			this.serverProxy.broadcastChanges(newValue, this.getId());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@Override
+	public void ipcMechanism(IPCMechanism newValue) {
+		// called when an IPC changing command is executed by the user
+		// change an internal local copy of a replicable object/variable whose logical, traced name, is “ipc_mechanism”. 
+		// choose the IPC mechanism used to communicate simulation commands based on this object/variable.
+		// use the ProposalMade trace class to trace the execution of the interactive command.
+		// use the ProposalSet trace class to trace the setting of the internal object/variable
+		ProposalMade.newCase(this, CommunicationStateNames.IPC_MECHANISM, -1, newValue);
+		ProposedStateSet.newCase(this, CommunicationStateNames.IPC_MECHANISM, -1, newValue);
+		this.ipcMechanism = newValue;
+		if (this.broadcastIPCMechanism) {
+			// callback in server
+			try {
+				ProposalMade.newCase(this, CommunicationStateNames.COMMAND, -1, newValue);
+				this.serverProxy.broadcastChanges(newValue, this.getId());
+				RemoteProposeRequestSent.newCase(this, CommunicationStateNames.COMMAND, -1, newValue);
+			} catch (RemoteException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	private void exportClient() throws RemoteException {
+		try {
+			UnicastRemoteObject.exportObject(this, 0);
+			this.rmiRegistry.rebind(CLIENT, this);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static void main(String args[]) {
+		try {
+			ClientRMIImpl client = new ClientRMIImpl();
+			client.start(args);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	protected void init(String[] args) {
+		try {
+			this.setTracing();
+			this.locateRegistry(ClientArgsProcessor.getRegistryHost(args), ClientArgsProcessor.getRegistryPort(args));
+			this.findServer(args);
+			this.exportClient();
+			RMIObjectRegistered.newCase(this, CLIENT, this, rmiRegistry);
+			this.serverProxy.registerClient(this);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	private void findServer(String[] args) {
+		// TODO Auto-generated method stub
+		try {
+			this.serverProxy = (RemoteServer)this.rmiRegistry.lookup(RemoteServer.SERVER);
+			RMIObjectLookedUp.newCase(this, this.serverProxy, CLIENT, this.rmiRegistry);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
+
+	private void locateRegistry(String host, int port) {
+		try {
+			this.rmiRegistry = LocateRegistry.getRegistry(port);
+			RMIRegistryLocated.newCase(
+					this, 
+					host,
+					port,
+					rmiRegistry
+					);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
+
+	@Override
+	public void broadcastChangeRMI(String cmd) {
+		// invoke server callback to update all other proxies
+		try {
+			ProposalMade.newCase(this, CommunicationStateNames.COMMAND, -1, cmd);
+			this.localSim.setInputString(cmd);
+			RemoteProposeRequestSent.newCase(this, CommunicationStateNames.COMMAND, -1, cmd);
+			System.out.println("broadcasting from client: " + this.getId());
+			this.serverProxy.broadcastChanges(cmd, this.getId());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
+	 @Override
+	 public void simulationCommand(String aCommand) {
+	     long aDelay = this.getDelay();
+	     if (aDelay > 0) {
+	         ThreadSupport.sleep(aDelay);
+	     }
+	     this.broadcastChangeRMI(aCommand);
+	 }
+	
+	
+	@Override
+	public void start(String args[]) {
+		// register client with server
+		try {
+			this.init(args);
+			SimulationParametersControllerFactory.getSingleton().addSimulationParameterListener(this);
+			SimulationParametersControllerFactory.getSingleton().processCommands();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public int getId() {
+		return this.clientId;
+	}
+	
+	public void setId(int id) {
+		this.clientId = id;
+		System.out.println("setting rmi id: " + this.clientId);
+	}
+	
+	
+
+	void processArgs(String args[]) {
+		System.out.println("Client name:" + ClientArgsProcessor.getClientName(args));
+		System.out.println("Registry host:" + ClientArgsProcessor.getRegistryHost(args));
+		System.out.println("Registry port:" + ClientArgsProcessor.getRegistryPort(args));
+
+		System.out.println("Headless:" + ClientArgsProcessor.getHeadless(args));
+		System.setProperty("java.awt.headless", ClientArgsProcessor.getHeadless(args));
+	}
+	
+	@Override
+	public void receiveIPCChange(IPCMechanism ipc) {
+		ProposalLearnedNotificationReceived.newCase(this, CommunicationStateNames.IPC_MECHANISM, -1, ipc);
+		ProposedStateSet.newCase(this, CommunicationStateNames.IPC_MECHANISM, -1, ipc);
+		this.ipcMechanism = ipc;
+	}
+	
+	@Override
+	public void receiveMetaStateChange(boolean newValue) {
+		this.broadcastIPCMechanism = true;
+	}
+
+	@Override
+	public void receiveChangeRMI(String command) throws RemoteException {
+		// TODO Auto-generated method stu
+		ProposalLearnedNotificationReceived.newCase(this, CommunicationStateNames.BROADCAST_MODE, -1, command);
+		ProposedStateSet.newCase(this, CommunicationStateNames.COMMAND, -1, command);
+		this.localSim.setInputString(command);
+	}
+
+}
+
+//END OF FILE
+//START OF FILE: comp533/server/GIPCServer.java
+package comp533.server;
+
+import java.rmi.RemoteException;
+
+import comp533.client.GIPCClient;
+import comp533.client.RemoteClient;
+
+public interface GIPCServer {
+	public static final String SERVER = "GIPCSERVER";
+	void registerClientGIPC(GIPCClient client) throws RemoteException;
+	void broadcastChangesGIPC(String cmd, int id) throws RemoteException;
+	void createRegistry(String[] args);
+	void start(String[] args);
+}
+
+//END OF FILE
+//START OF FILE: comp533/A5Grader.java
+package comp533;
+import grader.basics.execution.BasicProjectExecution;
+import gradingTools.comp533s24.assignment5.S24Assignment5Suite;
+import trace.grader.basics.GraderBasicsTraceUtility;
+
+public class A5Grader {
+	// if you set this to false, grader steps will not be traced
+	public static void main(String args[]) {
+			GraderBasicsTraceUtility.setTracerShowInfo(true);	
+			// if you set this to false, all grader steps will be traced,
+			// not just the ones that failed		
+			GraderBasicsTraceUtility.setBufferTracedMessages(true);
+			// Change this number if a test trace gets longer than 600 and is clipped
+			int maxPrintedTraces = 100;
+			GraderBasicsTraceUtility.setMaxPrintedTraces(maxPrintedTraces);
+			// Change this number if all traces together are longer than 2000
+			int maxTraces = 2000;
+			GraderBasicsTraceUtility.setMaxTraces(maxTraces);
+			// Change this number if your process times out prematurely
+			int processTimeOut = 45;
+			BasicProjectExecution.setProcessTimeOut(processTimeOut);
+			// You need to always call such a method
+			S24Assignment5Suite.main(args);
+		}
+}
+
+//END OF FILE
+//START OF FILE: comp533/client/InCoupler.java
+package comp533.client;
+
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+import java.io.Serializable;
+import java.rmi.Remote;
+import java.rmi.RemoteException;
+
+import stringProcessors.HalloweenCommandProcessor;
+
+public interface InCoupler extends Remote, Serializable {
+	// notifyClient 
+	// holds reference to client and calls a remote method in the remote client object
+	// observes server and calls processCommand(event.getgetNewValue() in client that references this coupler
+	void updateState(String command) throws RemoteException;
+	void setLocalSim(HalloweenCommandProcessor sim);
+	int getId() throws RemoteException;
+}
+
+//END OF FILE
+//START OF FILE: comp533/server/RemoteServer.java
+package comp533.server;
+
+import java.io.Serializable;
+import util.annotations.Tags;
+import java.rmi.Remote;
+import java.rmi.RemoteException;
+
+import comp533.client.RemoteClient;
+import util.tags.DistributedTags;
+
+@Tags({DistributedTags.SERVER_REMOTE_INTERFACE})
+public interface RemoteServer extends Remote, Serializable {
+	public static final String SERVER = "SERVER";
+	void registerClient(RemoteClient client) throws RemoteException;
+	void broadcastChanges(Object cmd, int id) throws RemoteException;
+}
+
+//END OF FILE
+//START OF FILE: comp533/client/RMIClient.java
+package comp533.client;
+
+public interface RMIClient {
+
+}
+
+//END OF FILE
+//START OF FILE: comp533/Tags.java
+package comp533;
+
+public @interface Tags {
+
+}
+
+//END OF FILE
+//START OF FILE: comp533/server/ServerGIPC.java
+package comp533.server;
+
+import java.rmi.RemoteException;
+import port.ATracingConnectionListener;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+import assignments.util.mainArgs.ServerArgsProcessor;
+import comp533.client.Client;
+import comp533.client.GIPCClient;
+import comp533.client.RemoteClient;
+import inputport.InputPort;
+import inputport.rpc.GIPCLocateRegistry;
+import inputport.rpc.GIPCRegistry;
+import util.trace.bean.BeanTraceUtility;
+import util.trace.factories.FactoryTraceUtility;
+import util.trace.misc.ThreadDelayed;
+import util.trace.port.consensus.ConsensusTraceUtility;
+import util.trace.port.nio.NIOTraceUtility;
+import util.trace.port.rpc.gipc.GIPCObjectRegistered;
+import util.trace.port.rpc.gipc.GIPCRPCTraceUtility;
+import util.trace.port.rpc.gipc.GIPCRegistryCreated;
+import util.trace.port.rpc.rmi.RMITraceUtility;
+
+public class ServerGIPC extends Server implements GIPCServer {
+	List<GIPCClient> clientProxies;
+	GIPCRegistry gipcRegistry;
+	
+	public ServerGIPC() {
+		this.clientProxies = new ArrayList<>();
+	}
+	
+	@Override
+	public void setTracing() {
+		FactoryTraceUtility.setTracing();
+		BeanTraceUtility.setTracing();
+		RMITraceUtility.setTracing();
+		ConsensusTraceUtility.setTracing();
+        ThreadDelayed.enablePrint();
+        GIPCRPCTraceUtility.setTracing();
+        NIOTraceUtility.setTracing();
+        super.trace(true);
+	}
+	
+	
+	@Override
+	protected void init(String args[]) {
+		this.setTracing();
+		super.init(args);
+		this.createRegistry(args);
+		this.registerServer();
+		InputPort gipcPort = this.gipcRegistry.getInputPort();
+		ATracingConnectionListener listener = new ATracingConnectionListener(gipcPort);
+        gipcPort.addConnectionListener(listener);
+
+	}
+
+	@Override
+	public void registerClientGIPC(GIPCClient client) {
+		// TODO Auto-generated method stub
+		this.clientProxies.add(client);
+		 try {
+			 client.setId(this.clientProxies.size());
+			 System.out.println("gipc id init: " + client.getId());
+		 } catch (Exception e) {
+			 e.printStackTrace();
+		 }
+		
+	}
+
+	@Override
+	public void broadcastChangesGIPC(String cmd, int id) throws RemoteException {
+		// out coupler calls this method. If the IPCMechanism is GIPC, coupler will call this method
+		System.out.println("originating client gipc id: " + id);
+		for (GIPCClient c : clientProxies) {
+			System.out.println("gipc id from server: " + c.getId());
+			if (c.getId() != id) {
+				System.out.println("broadcasting to gipc id from server: " + c.getId());
+				((GIPCClient)c).receiveChangeGIPC(cmd);
+			}
+		}
+		
+	}
+	
+	@Override
+	public void start(String[] args) {
+		this.init(args);
+	}
+	
+	public void registerServer() {
+		try {
+			GIPCObjectRegistered.newCase(this, GIPCServer.SERVER, this.gipcRegistry, this.gipcRegistry);
+			this.gipcRegistry.rebind(GIPCServer.SERVER, this);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void createRegistry(String[] args) {
+		try {
+			GIPCRegistryCreated.newCase(this, ServerArgsProcessor.getGIPCServerPort(args));
+			this.gipcRegistry = GIPCLocateRegistry.createRegistry(ServerArgsProcessor.getGIPCServerPort(args));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
+	public static void main(String[] args) {
+			GIPCServer gipcServer = new ServerGIPC();
+			gipcServer.start(args);
+	}
+
+}
+
+//END OF FILE
+
+//SESSION END
+
+//SESSION START
+1,Mon Apr 29 15:15:43 EDT 2024,392
+//START OF FILE: comp533/client/GIPCClientImpl.java
+package comp533.client;
+
+import java.rmi.RemoteException;
+
+import assignments.util.mainArgs.ClientArgsProcessor;
+import comp533.server.GIPCServer;
+import comp533.server.ServerGIPC;
+import coupledsims.AStandAloneTwoCoupledHalloweenSimulations;
+import inputport.rpc.GIPCLocateRegistry;
+import inputport.rpc.GIPCRegistry;
+import util.annotations.Tags;
+import util.interactiveMethodInvocation.IPCMechanism;
+import util.interactiveMethodInvocation.SimulationParametersControllerFactory;
+import util.tags.DistributedTags;
+import util.trace.bean.BeanTraceUtility;
+import util.trace.port.consensus.ProposalLearnedNotificationReceived;
+import util.trace.port.consensus.ProposalMade;
+import util.trace.port.consensus.ProposedStateSet;
+import util.trace.port.consensus.RemoteProposeRequestSent;
+import util.trace.port.consensus.communication.CommunicationStateNames;
+import util.trace.port.rpc.gipc.GIPCObjectLookedUp;
+import util.trace.port.rpc.gipc.GIPCRPCTraceUtility;
+import util.trace.port.rpc.gipc.GIPCRegistryLocated;
+
+@Tags({DistributedTags.CLIENT_CONFIGURER, DistributedTags.CLIENT_REMOTE_OBJECT, DistributedTags.GIPC})
+public class GIPCClientImpl extends ClientRMIImpl implements GIPCClient, RemoteClient {
+	private GIPCServer serverProxy;
+	private int gipcId;
+	private GIPCRegistry gipcRegistry;
+	private static int id = 0;
+	
+	public GIPCClientImpl() {
+		id++;
+	}
+	
+	public void broadcastChangeGIPC(String command) {
+		// notify GIPC server of local change in order to keep replicated objects consistent
+		try {
+			ProposalMade.newCase(this, CommunicationStateNames.COMMAND, -1, command);
+			this.localSim.setInputString(command);
+			RemoteProposeRequestSent.newCase(this, CommunicationStateNames.COMMAND, -1, command);
+			System.out.println("broadcasting from client: " + this.getId());
+			this.serverProxy.broadcastChangesGIPC(command, this.getId());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@Override
+	public int getId() {
+		return this.gipcId;
+	}
+	
+	@Override
+	public void setId(int newVal) {
+		this.gipcId = newVal;
+		System.out.println("setting gipc id: " + this.getId());
+	}
+	
+	public void locateRegistry(String[] args) {
+		System.out.println(id);
+		try {
+			GIPCRegistryLocated.newCase(
+					this, 
+					ClientArgsProcessor.getRegistryHost(args), 
+					ClientArgsProcessor.getGIPCPort(args), 
+					String.valueOf(id));
+			this.gipcRegistry = GIPCLocateRegistry.getRegistry(ClientArgsProcessor.getRegistryHost(args), 
+					ClientArgsProcessor.getGIPCPort(args), 
+					CLIENT+Math.random()*1000000);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@Override
+	protected void init(String[] args) {
+		this.setTracing();
+		super.init(args);
+		this.locateRegistry(args);
+		this.findGIPCServerProxy();
+		try {
+			this.serverProxy.registerClientGIPC(this);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	@Override
+	public void simulationCommand(String command) {
+		if (this.ipcMechanism.equals(IPCMechanism.RMI)) {
+			super.simulationCommand(command);
+		} else {
+			this.broadcastChangeGIPC(command);
+		}
+	}
+
+	@Override
+	public void receiveChangeGIPC(String command) {
+		// receiving message from GIPC server
+		ProposalLearnedNotificationReceived.newCase(this, CommunicationStateNames.BROADCAST_MODE, -1, command);
+		ProposedStateSet.newCase(this, CommunicationStateNames.COMMAND, -1, command);
+		this.localSim.setInputString(command);
+	}
+	
+	public void findGIPCServerProxy() {
+		try {
+			this.serverProxy = (GIPCServer) gipcRegistry.lookup(GIPCServer.class, GIPCServer.SERVER);
+//			GIPCObjectLookedUp.newCase(this, serverProxy, GIPCServer.class, GIPCServer.SERVER, gipcRegistry);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	
+	@Override
+	public void setTracing() {
+		super.setTracing();
+		BeanTraceUtility.setTracing();
+		GIPCRPCTraceUtility.setTracing();
+	}
+	
+	@Override
+	public void start(String[] args) {
+		try {
+			this.init(args);
+			SimulationParametersControllerFactory.getSingleton().addSimulationParameterListener(this);
+			SimulationParametersControllerFactory.getSingleton().processCommands();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static void main(String[] args) {
+		GIPCClient client = new GIPCClientImpl();
+		// init client
+		client.start(args);
+	}
+}
+(DIFF_FROM_PREVIOUS_FILE)
+=1093	+, DistributedTags.GIPC	=3137
+//END OF FILE
+//START OF FILE: comp533/client/GIPCClient.java
+package comp533.client;
+
+import java.rmi.RemoteException;
+
+import util.annotations.Tags;
+import util.interactiveMethodInvocation.IPCMechanism;
+import util.tags.DistributedTags;
+
+@Tags({DistributedTags.GIPC, DistributedTags.CLIENT_REMOTE_INTERFACE})
+public interface GIPCClient {
+	void receiveChangeGIPC(String command) throws RemoteException;
+	void broadcastChangeGIPC(String command) throws RemoteException;
+	void locateRegistry(String[] args);
+	void findGIPCServerProxy();
+	int getId() throws RemoteException;
+	void setId(int val) throws RemoteException;
+	void start(String[] args);
+}
+
+(DIFF_FROM_PREVIOUS_FILE)
+=71	+annotations.Tags;%0Aimport util.	=42	+import util.tags.DistributedTags;%0A%0A@Tags(%7BDistributedTags.GIPC, DistributedTags.CLIENT_REMOTE_INTERFACE%7D)	=339
+//END OF FILE
+//START OF FILE: comp533/client/RemoteOutCoupler.java
+package comp533.client;
+import java.beans.PropertyChangeEvent;
+import java.rmi.RemoteException;
+
+import assignments.util.inputParameters.AnAbstractSimulationParametersBean;
+import stringProcessors.HalloweenCommandProcessor;
+import util.annotations.Tags;
+import util.interactiveMethodInvocation.IPCMechanism;
+import util.tags.DistributedTags;
+import util.trace.port.consensus.ProposalMade;
+import util.trace.port.consensus.RemoteProposeRequestSent;
+import util.trace.port.consensus.communication.CommunicationStateNames;
+import util.trace.trickOrTreat.LocalCommandObserved;
+
+@Tags({DistributedTags.CLIENT_OUT_COUPLER, DistributedTags.RMI, DistributedTags.GIPC})
+public class RemoteOutCoupler implements OutCoupler {
+	private static final long serialVersionUID = 1L;
+	// sends message to Server that change has occurred
+	// observes client
+	HalloweenCommandProcessor localSim;
+	IPCMechanism mode;
+
+	public RemoteOutCoupler(HalloweenCommandProcessor observable, IPCMechanism mode) {
+		this.localSim = observable;
+		this.mode = mode;
+	}
+	
+
+	@Override
+	public void propertyChange(PropertyChangeEvent evt) {
+		// new command is received, update local sim and notify server to broadcast changes to in couplers
+		if (!evt.getPropertyName().equals("InputString")) return;
+		String newCommand = (String)evt.getNewValue();
+		LocalCommandObserved.newCase(this, newCommand);
+		localSim.processCommand(newCommand);
+	}
+
+
+	@Override
+	public void broadcastToServer(String command) throws RemoteException {
+		// TODO Auto-generated method stub
+		
+	}
+}
+
+(DIFF_FROM_PREVIOUS_FILE)
+=636	+, DistributedTags.GIPC	=876
+//END OF FILE
+//START OF FILE: comp533/client/RMIClient.java
+package comp533.client;
+
+
+public interface RMIClient {
+
+}
+
+(DIFF_FROM_PREVIOUS_FILE)
+=25	+%0A	=32
+//END OF FILE
+//START OF FILE: comp533/server/ServerGIPC.java
+package comp533.server;
+
+import java.rmi.RemoteException;
+import port.ATracingConnectionListener;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+import assignments.util.mainArgs.ServerArgsProcessor;
+import comp533.client.Client;
+import comp533.client.GIPCClient;
+import comp533.client.RemoteClient;
+import inputport.InputPort;
+import inputport.rpc.GIPCLocateRegistry;
+import inputport.rpc.GIPCRegistry;
+import util.annotations.Tags;
+import util.trace.bean.BeanTraceUtility;
+import util.trace.factories.FactoryTraceUtility;
+import util.trace.misc.ThreadDelayed;
+import util.trace.port.consensus.ConsensusTraceUtility;
+import util.trace.port.nio.NIOTraceUtility;
+import util.trace.port.rpc.gipc.GIPCObjectRegistered;
+import util.trace.port.rpc.gipc.GIPCRPCTraceUtility;
+import util.trace.port.rpc.gipc.GIPCRegistryCreated;
+import util.trace.port.rpc.rmi.RMITraceUtility;
+import util.tags.DistributedTags;
+
+@Tags({DistributedTags.SERVER, DistributedTags.SERVER_REMOTE_OBJECT, DistributedTags.SERVER_CONFIGURER, DistributedTags.RMI, DistributedTags.GIPC})
+public class ServerGIPC extends Server implements GIPCServer {
+	List<GIPCClient> clientProxies;
+	GIPCRegistry gipcRegistry;
+	
+	public ServerGIPC() {
+		this.clientProxies = new ArrayList<>();
+	}
+	
+	@Override
+	public void setTracing() {
+		FactoryTraceUtility.setTracing();
+		BeanTraceUtility.setTracing();
+		RMITraceUtility.setTracing();
+		ConsensusTraceUtility.setTracing();
+        ThreadDelayed.enablePrint();
+        GIPCRPCTraceUtility.setTracing();
+        NIOTraceUtility.setTracing();
+        super.trace(true);
+	}
+	
+	
+	@Override
+	protected void init(String args[]) {
+		this.setTracing();
+		super.init(args);
+		this.createRegistry(args);
+		this.registerServer();
+		InputPort gipcPort = this.gipcRegistry.getInputPort();
+		ATracingConnectionListener listener = new ATracingConnectionListener(gipcPort);
+        gipcPort.addConnectionListener(listener);
+
+	}
+
+	@Override
+	public void registerClientGIPC(GIPCClient client) {
+		// TODO Auto-generated method stub
+		this.clientProxies.add(client);
+		 try {
+			 client.setId(this.clientProxies.size());
+			 System.out.println("gipc id init: " + client.getId());
+		 } catch (Exception e) {
+			 e.printStackTrace();
+		 }
+		
+	}
+
+	@Override
+	public void broadcastChangesGIPC(String cmd, int id) throws RemoteException {
+		// out coupler calls this method. If the IPCMechanism is GIPC, coupler will call this method
+		System.out.println("originating client gipc id: " + id);
+		for (GIPCClient c : clientProxies) {
+			System.out.println("gipc id from server: " + c.getId());
+			if (c.getId() != id) {
+				System.out.println("broadcasting to gipc id from server: " + c.getId());
+				((GIPCClient)c).receiveChangeGIPC(cmd);
+			}
+		}
+		
+	}
+	
+	@Override
+	public void start(String[] args) {
+		this.init(args);
+	}
+	
+	public void registerServer() {
+		try {
+			GIPCObjectRegistered.newCase(this, GIPCServer.SERVER, this.gipcRegistry, this.gipcRegistry);
+			this.gipcRegistry.rebind(GIPCServer.SERVER, this);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void createRegistry(String[] args) {
+		try {
+			GIPCRegistryCreated.newCase(this, ServerArgsProcessor.getGIPCServerPort(args));
+			this.gipcRegistry = GIPCLocateRegistry.createRegistry(ServerArgsProcessor.getGIPCServerPort(args));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
+	public static void main(String[] args) {
+			GIPCServer gipcServer = new ServerGIPC();
+			gipcServer.start(args);
+	}
+
+}
+
+(DIFF_FROM_PREVIOUS_FILE)
+=446	+annotations.Tags;%0Aimport util.	=424	+import util.tags.DistributedTags;%0A%0A@Tags(%7BDistributedTags.SERVER, DistributedTags.SERVER_REMOTE_OBJECT, DistributedTags.SERVER_CONFIGURER, DistributedTags.RMI, DistributedTags.GIPC%7D)	=2424
+//END OF FILE
+
+//SESSION END
+
+//SESSION START
+2,Mon Apr 29 15:54:42 EDT 2024,156
+//START OF FILE: comp533/client/GIPCClientImpl.java
+package comp533.client;
+
+import java.rmi.RemoteException;
+
+import assignments.util.mainArgs.ClientArgsProcessor;
+import comp533.server.GIPCServer;
+import comp533.server.ServerGIPC;
+import coupledsims.AStandAloneTwoCoupledHalloweenSimulations;
+import inputport.rpc.GIPCLocateRegistry;
+import inputport.rpc.GIPCRegistry;
+import util.annotations.Tags;
+import util.interactiveMethodInvocation.IPCMechanism;
+import util.interactiveMethodInvocation.SimulationParametersControllerFactory;
+import util.tags.DistributedTags;
+import util.trace.bean.BeanTraceUtility;
+import util.trace.port.consensus.ProposalLearnedNotificationReceived;
+import util.trace.port.consensus.ProposalMade;
+import util.trace.port.consensus.ProposedStateSet;
+import util.trace.port.consensus.RemoteProposeRequestSent;
+import util.trace.port.consensus.communication.CommunicationStateNames;
+import util.trace.port.rpc.gipc.GIPCObjectLookedUp;
+import util.trace.port.rpc.gipc.GIPCRPCTraceUtility;
+import util.trace.port.rpc.gipc.GIPCRegistryLocated;
+
+@Tags({DistributedTags.CLIENT_CONFIGURER, DistributedTags.CLIENT_REMOTE_OBJECT, DistributedTags.RMI, DistributedTags.GIPC})
+public class GIPCClientImpl extends ClientRMIImpl implements GIPCClient, RemoteClient {
+	private GIPCServer serverProxy;
+	private int gipcId;
+	private GIPCRegistry gipcRegistry;
+	private static int id = 0;
+	
+	public GIPCClientImpl() {
+		id++;
+	}
+	
+	public void broadcastChangeGIPC(String command) {
+		// notify GIPC server of local change in order to keep replicated objects consistent
+		try {
+			ProposalMade.newCase(this, CommunicationStateNames.COMMAND, -1, command);
+			this.localSim.setInputString(command);
+			RemoteProposeRequestSent.newCase(this, CommunicationStateNames.COMMAND, -1, command);
+			System.out.println("broadcasting from client: " + this.getId());
+			this.serverProxy.broadcastChangesGIPC(command, this.getId());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@Override
+	public int getId() {
+		return this.gipcId;
+	}
+	
+	@Override
+	public void setId(int newVal) {
+		this.gipcId = newVal;
+		System.out.println("setting gipc id: " + this.getId());
+	}
+	
+	public void locateRegistry(String[] args) {
+		System.out.println(id);
+		try {
+			GIPCRegistryLocated.newCase(
+					this, 
+					ClientArgsProcessor.getRegistryHost(args), 
+					ClientArgsProcessor.getGIPCPort(args), 
+					String.valueOf(id));
+			this.gipcRegistry = GIPCLocateRegistry.getRegistry(ClientArgsProcessor.getRegistryHost(args), 
+					ClientArgsProcessor.getGIPCPort(args), 
+					CLIENT+Math.random()*1000000);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@Override
+	protected void init(String[] args) {
+		this.setTracing();
+		super.init(args);
+		this.locateRegistry(args);
+		this.findGIPCServerProxy();
+		try {
+			this.serverProxy.registerClientGIPC(this);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	@Override
+	public void simulationCommand(String command) {
+		if (this.ipcMechanism.equals(IPCMechanism.RMI)) {
+			super.simulationCommand(command);
+		} else {
+			this.broadcastChangeGIPC(command);
+		}
+	}
+
+	@Override
+	public void receiveChangeGIPC(String command) {
+		// receiving message from GIPC server
+		ProposalLearnedNotificationReceived.newCase(this, CommunicationStateNames.BROADCAST_MODE, -1, command);
+		ProposedStateSet.newCase(this, CommunicationStateNames.COMMAND, -1, command);
+		this.localSim.setInputString(command);
+	}
+	
+	public void findGIPCServerProxy() {
+		try {
+			this.serverProxy = (GIPCServer) gipcRegistry.lookup(GIPCServer.class, GIPCServer.SERVER);
+//			GIPCObjectLookedUp.newCase(this, serverProxy, GIPCServer.class, GIPCServer.SERVER, gipcRegistry);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	
+	@Override
+	public void setTracing() {
+		super.setTracing();
+		BeanTraceUtility.setTracing();
+		GIPCRPCTraceUtility.setTracing();
+	}
+	
+	@Override
+	public void start(String[] args) {
+		try {
+			this.init(args);
+			SimulationParametersControllerFactory.getSingleton().addSimulationParameterListener(this);
+			SimulationParametersControllerFactory.getSingleton().processCommands();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static void main(String[] args) {
+		GIPCClient client = new GIPCClientImpl();
+		// init client
+		client.start(args);
+	}
+}
+(DIFF_FROM_PREVIOUS_FILE)
+=1111	+RMI, DistributedTags.	=3141
+//END OF FILE
+//START OF FILE: comp533/server/GIPCServer.java
+package comp533.server;
+
+import java.rmi.RemoteException;
+
+import comp533.client.GIPCClient;
+import comp533.client.RemoteClient;
+import util.annotations.Tags;
+import util.tags.DistributedTags;
+
+@Tags({DistributedTags.SERVER_REMOTE_INTERFACE, DistributedTags.GIPC})
+public interface GIPCServer {
+	public static final String SERVER = "GIPCSERVER";
+	void registerClientGIPC(GIPCClient client) throws RemoteException;
+	void broadcastChangesGIPC(String cmd, int id) throws RemoteException;
+	void createRegistry(String[] args);
+	void start(String[] args);
+}
+
+(DIFF_FROM_PREVIOUS_FILE)
+=129	+import util.annotations.Tags;%0Aimport util.tags.DistributedTags;%0A%0A@Tags(%7BDistributedTags.SERVER_REMOTE_INTERFACE, DistributedTags.GIPC%7D)	=288
+//END OF FILE
+
+//SESSION END
+
+//SESSION START
+5,Mon Apr 29 16:04:47 EDT 2024,10
+//START OF FILE: comp533/server/Server.java
+package comp533.server;
+
+import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
+import java.rmi.server.UnicastRemoteObject;
+import java.util.ArrayList;
+import java.util.List;
+
+import assignments.util.mainArgs.RegistryArgsProcessor;
+import assignments.util.mainArgs.ServerArgsProcessor;
+import comp533.client.RemoteClient;
+import coupledsims.AStandAloneTwoCoupledHalloweenSimulations;
+import util.interactiveMethodInvocation.IPCMechanism;
+import util.interactiveMethodInvocation.SimulationParametersControllerFactory;
+import util.annotations.Tags;
+import util.tags.DistributedTags;
+import util.trace.port.consensus.ProposalLearnedNotificationSent;
+import util.trace.port.consensus.RemoteProposeRequestReceived;
+import util.trace.port.consensus.communication.CommunicationStateNames;
+import util.trace.port.rpc.rmi.RMIObjectRegistered;
+import util.trace.port.rpc.rmi.RMIRegistryLocated;
+
+@Tags({DistributedTags.SERVER, DistributedTags.SERVER_REMOTE_OBJECT, DistributedTags.SERVER_CONFIGURER, DistributedTags.RMI})
+public class Server extends AStandAloneTwoCoupledHalloweenSimulations implements RemoteServer {
+	private static final String SERVER = "SERVER";
+	// register server proxy with RMIRegisty
+	// provide method to register client in coupler proxies with server
+	// provide method to notify all
+	// when a client proxy forwards an input to the server, the server sends this message to
+	// all other in-couplers
+
+	List<RemoteClient> clientProxies;
+	Registry rmiRegistry;
+
+	public Server() {
+
+		this.clientProxies = new ArrayList<>();
+	}
+	
+	@Override
+	public void registerClient(RemoteClient client) {
+		clientProxies.add(client);
+		try {
+			client.setId(clientProxies.size());
+			 System.out.println("rmi id init: " + client.getId());
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	void processArgs(String[] args) {
+		System.out.println("Registry host:" + ServerArgsProcessor.getRegistryHost(args));
+		System.out.println("Registry port:" + ServerArgsProcessor.getRegistryPort(args));
+		
+	}
+	
+	
+	@Override
+	protected void init(String args[]) {
+		this.processArgs(args);
+		this.setTracing();
+		try {
+			this.rmiRegistry = LocateRegistry.getRegistry(ServerArgsProcessor.getRegistryPort(args));
+			RMIRegistryLocated.newCase(Server.class, 
+					ServerArgsProcessor.getRegistryHost(args), 
+					ServerArgsProcessor.getRegistryPort(args),
+					this.rmiRegistry);
+			RemoteServer serverProxy = (RemoteServer)UnicastRemoteObject.exportObject(this, 0);
+			RMIObjectRegistered.newCase(Server.class, SERVER, serverProxy, this.rmiRegistry);
+			this.rmiRegistry.rebind(SERVER, this);
+		} catch (RemoteException e) { // TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+
+
+	public static void main(String args[]) {
+		Server server = new Server();
+		server.init(args);
+	
+		// blocking server start
+		server.start();
+			
+	}
+	
+	public static void start() {
+		
+	}
+
+	@Override
+	public void broadcastChanges(Object msg, int id) throws RemoteException {
+		RemoteProposeRequestReceived.newCase(this, CommunicationStateNames.COMMAND, -1, msg);
+		// broadcasts messages to incouplers of clients except for the original sender
+		System.out.println("originating rmi id: " + id);
+		for (RemoteClient c : clientProxies) {
+			try {
+				System.out.println("rmi id from server: " + c.getId());
+				if (c.getId() != id) {
+					System.out.println("broadcasting to rmi id from server: " + c.getId());
+					if (msg instanceof IPCMechanism)
+						c.receiveIPCChange((IPCMechanism)msg);
+					else if (msg instanceof String)
+						c.receiveChangeRMI((String)msg);
+					else
+						c.receiveMetaStateChange((boolean)msg);	
+					ProposalLearnedNotificationSent.newCase(this, CommunicationStateNames.BROADCAST_MODE, -1, msg);
+					}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+
+}
+(DIFF_FROM_PREVIOUS_FILE)
+=2108	+%0A%09@Override%0A%09	=596	-4	+ 	=1170
+//END OF FILE
+
+//SESSION END
+
+//SESSION START
+6,Mon Apr 29 16:28:51 EDT 2024,7
+//START OF FILE: comp533/server/Server.java
+package comp533.server;
+
+import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
+import java.rmi.server.UnicastRemoteObject;
+import java.util.ArrayList;
+import java.util.List;
+
+import assignments.util.mainArgs.RegistryArgsProcessor;
+import assignments.util.mainArgs.ServerArgsProcessor;
+import comp533.client.RemoteClient;
+import coupledsims.AStandAloneTwoCoupledHalloweenSimulations;
+import util.interactiveMethodInvocation.IPCMechanism;
+import util.interactiveMethodInvocation.SimulationParametersControllerFactory;
+import util.annotations.Tags;
+import util.tags.DistributedTags;
+import util.trace.port.consensus.ProposalLearnedNotificationSent;
+import util.trace.port.consensus.RemoteProposeRequestReceived;
+import util.trace.port.consensus.communication.CommunicationStateNames;
+import util.trace.port.rpc.rmi.RMIObjectRegistered;
+import util.trace.port.rpc.rmi.RMIRegistryLocated;
+
+@Tags({DistributedTags.SERVER, DistributedTags.SERVER_REMOTE_OBJECT, DistributedTags.SERVER_CONFIGURER, DistributedTags.RMI})
+public class Server extends AStandAloneTwoCoupledHalloweenSimulations implements RemoteServer {
+	private static final String SERVER = "SERVER";
+	// register server proxy with RMIRegisty
+	// provide method to register client in coupler proxies with server
+	// provide method to notify all
+	// when a client proxy forwards an input to the server, the server sends this message to
+	// all other in-couplers
+
+	List<RemoteClient> clientProxies;
+	Registry rmiRegistry;
+
+	public Server() {
+
+		this.clientProxies = new ArrayList<>();
+	}
+	
+	@Override
+	public void registerClient(RemoteClient client) {
+		clientProxies.add(client);
+		try {
+			client.setId(clientProxies.size());
+			 System.out.println("rmi id init: " + client.getId());
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	void processArgs(String[] args) {
+		System.out.println("Registry host:" + ServerArgsProcessor.getRegistryHost(args));
+		System.out.println("Registry port:" + ServerArgsProcessor.getRegistryPort(args));
+		
+	}
+	
+	
+	@Override
+	protected void init(String args[]) {
+		this.processArgs(args);
+		this.setTracing();
+		try {
+			this.rmiRegistry = LocateRegistry.getRegistry(ServerArgsProcessor.getRegistryPort(args));
+			RMIRegistryLocated.newCase(Server.class, 
+					ServerArgsProcessor.getRegistryHost(args), 
+					ServerArgsProcessor.getRegistryPort(args),
+					this.rmiRegistry);
+			RemoteServer serverProxy = (RemoteServer)UnicastRemoteObject.exportObject(this, 0);
+			RMIObjectRegistered.newCase(Server.class, SERVER, serverProxy, this.rmiRegistry);
+			this.rmiRegistry.rebind(Server.SERVER, this);
+		} catch (RemoteException e) { // TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+
+
+	public static void main(String args[]) {
+		Server server = new Server();
+		server.init(args);
+	
+		// blocking server start
+		server.start();
+			
+	}
+	
+	public static void start() {
+		
+	}
+
+	@Override
+	public void broadcastChanges(Object msg, int id) throws RemoteException {
+		RemoteProposeRequestReceived.newCase(this, CommunicationStateNames.COMMAND, -1, msg);
+		// broadcasts messages to incouplers of clients except for the original sender
+		System.out.println("originating rmi id: " + id);
+		for (RemoteClient c : clientProxies) {
+			try {
+				System.out.println("rmi id from server: " + c.getId());
+				if (c.getId() != id) {
+					System.out.println("broadcasting to rmi id from server: " + c.getId());
+					if (msg instanceof IPCMechanism)
+						c.receiveIPCChange((IPCMechanism)msg);
+					else if (msg instanceof String)
+						c.receiveChangeRMI((String)msg);
+					else
+						c.receiveMetaStateChange((boolean)msg);	
+					ProposalLearnedNotificationSent.newCase(this, CommunicationStateNames.BROADCAST_MODE, -1, msg);
+					}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+
+}
+(DIFF_FROM_PREVIOUS_FILE)
+=2672	+erver.S	=1216
+//END OF FILE
+
+//SESSION END
+
+//SESSION START
+8,Mon Apr 29 16:31:23 EDT 2024,40
+//START OF FILE: comp533/server/Server.java
+package comp533.server;
+
+import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
+import java.rmi.server.UnicastRemoteObject;
+import java.util.ArrayList;
+import java.util.List;
+
+import assignments.util.mainArgs.RegistryArgsProcessor;
+import assignments.util.mainArgs.ServerArgsProcessor;
+import comp533.client.RemoteClient;
+import coupledsims.AStandAloneTwoCoupledHalloweenSimulations;
+import util.interactiveMethodInvocation.IPCMechanism;
+import util.interactiveMethodInvocation.SimulationParametersControllerFactory;
+import util.annotations.Tags;
+import util.tags.DistributedTags;
+import util.trace.port.consensus.ProposalLearnedNotificationSent;
+import util.trace.port.consensus.RemoteProposeRequestReceived;
+import util.trace.port.consensus.communication.CommunicationStateNames;
+import util.trace.port.rpc.rmi.RMIObjectRegistered;
+import util.trace.port.rpc.rmi.RMIRegistryLocated;
+
+@Tags({DistributedTags.SERVER, DistributedTags.SERVER_REMOTE_OBJECT, DistributedTags.SERVER_CONFIGURER, DistributedTags.RMI})
+public class Server extends AStandAloneTwoCoupledHalloweenSimulations implements RemoteServer {
+	private static final String SERVER = "SERVER";
+	// register server proxy with RMIRegisty
+	// provide method to register client in coupler proxies with server
+	// provide method to notify all
+	// when a client proxy forwards an input to the server, the server sends this message to
+	// all other in-couplers
+
+	List<RemoteClient> clientProxies;
+	Registry rmiRegistry;
+
+	public Server() {
+
+		this.clientProxies = new ArrayList<>();
+	}
+	
+	@Override
+	public void registerClient(RemoteClient client) {
+		clientProxies.add(client);
+		try {
+			client.setId(clientProxies.size());
+			 System.out.println("rmi id init: " + client.getId());
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	void processArgs(String[] args) {
+		System.out.println("Registry host:" + ServerArgsProcessor.getRegistryHost(args));
+		System.out.println("Registry port:" + ServerArgsProcessor.getRegistryPort(args));
+		
+	}
+	
+	
+	@Override
+	protected void init(String args[]) {
+		this.processArgs(args);
+		this.setTracing();
+		try {
+			this.rmiRegistry = LocateRegistry.getRegistry(ServerArgsProcessor.getRegistryPort(args));
+			RMIRegistryLocated.newCase(Server.class, 
+					ServerArgsProcessor.getRegistryHost(args), 
+					ServerArgsProcessor.getRegistryPort(args),
+					this.rmiRegistry);
+			RemoteServer serverProxy = (RemoteServer)UnicastRemoteObject.exportObject(this, ServerArgsProcessor.getRegistryPort(args));
+			RMIObjectRegistered.newCase(Server.class, SERVER, serverProxy, this.rmiRegistry);
+			this.rmiRegistry.rebind(Server.SERVER, this);
+		} catch (RemoteException e) { // TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+
+
+	public static void main(String args[]) {
+		Server server = new Server();
+		server.init(args);
+	
+		// blocking server start
+		server.start();
+			
+	}
+	
+	public static void start() {
+		
+	}
+
+	@Override
+	public void broadcastChanges(Object msg, int id) throws RemoteException {
+		RemoteProposeRequestReceived.newCase(this, CommunicationStateNames.COMMAND, -1, msg);
+		// broadcasts messages to incouplers of clients except for the original sender
+		System.out.println("originating rmi id: " + id);
+		for (RemoteClient c : clientProxies) {
+			try {
+				System.out.println("rmi id from server: " + c.getId());
+				if (c.getId() != id) {
+					System.out.println("broadcasting to rmi id from server: " + c.getId());
+					if (msg instanceof IPCMechanism)
+						c.receiveIPCChange((IPCMechanism)msg);
+					else if (msg instanceof String)
+						c.receiveChangeRMI((String)msg);
+					else
+						c.receiveMetaStateChange((boolean)msg);	
+					ProposalLearnedNotificationSent.newCase(this, CommunicationStateNames.BROADCAST_MODE, -1, msg);
+					}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+
+}
+(DIFF_FROM_PREVIOUS_FILE)
+=2555	-1	+ServerArgsProcessor.getRegistryPort(args)	=1339
+//END OF FILE
+
+//SESSION END
+
+//SESSION START
+9,Mon Apr 29 16:46:47 EDT 2024,243
+//START OF FILE: comp533/server/Server.java
+package comp533.server;
+
+import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
+import java.rmi.server.UnicastRemoteObject;
+import java.util.ArrayList;
+import java.util.List;
+
+import assignments.util.mainArgs.RegistryArgsProcessor;
+import assignments.util.mainArgs.ServerArgsProcessor;
+import comp533.client.RemoteClient;
+import coupledsims.AStandAloneTwoCoupledHalloweenSimulations;
+import util.interactiveMethodInvocation.IPCMechanism;
+import util.interactiveMethodInvocation.SimulationParametersControllerFactory;
+import util.annotations.Tags;
+import util.tags.DistributedTags;
+import util.trace.port.consensus.ProposalLearnedNotificationSent;
+import util.trace.port.consensus.RemoteProposeRequestReceived;
+import util.trace.port.consensus.communication.CommunicationStateNames;
+import util.trace.port.rpc.rmi.RMIObjectRegistered;
+import util.trace.port.rpc.rmi.RMIRegistryLocated;
+
+@Tags({DistributedTags.SERVER, DistributedTags.SERVER_REMOTE_OBJECT, DistributedTags.SERVER_CONFIGURER, DistributedTags.RMI})
+public class Server extends AStandAloneTwoCoupledHalloweenSimulations implements RemoteServer {
+	private static final String SERVER = "SERVER";
+	// register server proxy with RMIRegisty
+	// provide method to register client in coupler proxies with server
+	// provide method to notify all
+	// when a client proxy forwards an input to the server, the server sends this message to
+	// all other in-couplers
+
+	List<RemoteClient> clientProxies;
+	Registry rmiRegistry;
+
+	public Server() {
+
+		this.clientProxies = new ArrayList<>();
+	}
+	
+	@Override
+	public void registerClient(RemoteClient client) {
+		clientProxies.add(client);
+		try {
+			client.setId(clientProxies.size());
+			 System.out.println("rmi id init: " + client.getId());
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	void processArgs(String[] args) {
+		System.out.println("Registry host:" + ServerArgsProcessor.getRegistryHost(args));
+		System.out.println("Registry port:" + ServerArgsProcessor.getRegistryPort(args));
+		
+	}
+	
+	
+	@Override
+	protected void init(String args[]) {
+		this.processArgs(args);
+		this.setTracing();
+		try {
+			this.rmiRegistry = LocateRegistry.getRegistry(ServerArgsProcessor.getRegistryPort(args));
+			RMIRegistryLocated.newCase(Server.class, 
+					ServerArgsProcessor.getRegistryHost(args), 
+					ServerArgsProcessor.getRegistryPort(args),
+					this.rmiRegistry);
+			RemoteServer serverProxy = (RemoteServer)UnicastRemoteObject.exportObject(this, 0);
+			RMIObjectRegistered.newCase(Server.class, SERVER, serverProxy, this.rmiRegistry);
+			this.rmiRegistry.rebind(SERVER, this);
+		} catch (RemoteException e) { // TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+
+
+	public static void main(String args[]) {
+		Server server = new Server();
+		server.init(args);
+	
+		// blocking server start
+		server.start();
+			
+	}
+	
+	public static void start() {
+		
+	}
+
+	@Override
+	public void broadcastChanges(Object msg, int id) throws RemoteException {
+		RemoteProposeRequestReceived.newCase(this, CommunicationStateNames.COMMAND, -1, msg);
+		// broadcasts messages to incouplers of clients except for the original sender
+		System.out.println("originating rmi id: " + id);
+		for (RemoteClient c : clientProxies) {
+			try {
+				System.out.println("rmi id from server: " + c.getId());
+				if (c.getId() != id) {
+					System.out.println("broadcasting to rmi id from server: " + c.getId());
+					if (msg instanceof IPCMechanism)
+						c.receiveIPCChange((IPCMechanism)msg);
+					else if (msg instanceof String)
+						c.receiveChangeRMI((String)msg);
+					else
+						c.receiveMetaStateChange((boolean)msg);	
+					ProposalLearnedNotificationSent.newCase(this, CommunicationStateNames.BROADCAST_MODE, -1, msg);
+					}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+
+}
+(DIFF_FROM_PREVIOUS_FILE)
+=2555	-41	+0	=115	-7	=1217
+//END OF FILE
+//START OF FILE: comp533/client/GIPCClientImpl.java
+package comp533.client;
+
+import java.rmi.RemoteException;
+
+import assignments.util.mainArgs.ClientArgsProcessor;
+import comp533.server.GIPCServer;
+import comp533.server.ServerGIPC;
+import coupledsims.AStandAloneTwoCoupledHalloweenSimulations;
+import inputport.rpc.GIPCLocateRegistry;
+import inputport.rpc.GIPCRegistry;
+import util.annotations.Tags;
+import util.interactiveMethodInvocation.IPCMechanism;
+import util.interactiveMethodInvocation.SimulationParametersControllerFactory;
+import util.tags.DistributedTags;
+import util.trace.bean.BeanTraceUtility;
+import util.trace.port.consensus.ProposalLearnedNotificationReceived;
+import util.trace.port.consensus.ProposalMade;
+import util.trace.port.consensus.ProposedStateSet;
+import util.trace.port.consensus.RemoteProposeRequestSent;
+import util.trace.port.consensus.communication.CommunicationStateNames;
+import util.trace.port.nio.NIOTraceUtility;
+import util.trace.port.rpc.gipc.GIPCObjectLookedUp;
+import util.trace.port.rpc.gipc.GIPCRPCTraceUtility;
+import util.trace.port.rpc.gipc.GIPCRegistryLocated;
+
+@Tags({DistributedTags.CLIENT, DistributedTags.CLIENT_CONFIGURER, DistributedTags.CLIENT_REMOTE_OBJECT, DistributedTags.RMI, DistributedTags.GIPC})
+public class GIPCClientImpl extends ClientRMIImpl implements GIPCClient, RemoteClient {
+	private GIPCServer serverProxy;
+	private int gipcId;
+	private GIPCRegistry gipcRegistry;
+	private static int id = 0;
+	
+	public GIPCClientImpl() {
+		id++;
+	}
+	
+	public void broadcastChangeGIPC(String command) {
+		// notify GIPC server of local change in order to keep replicated objects consistent
+		try {
+			ProposalMade.newCase(this, CommunicationStateNames.COMMAND, -1, command);
+			this.localSim.setInputString(command);
+			RemoteProposeRequestSent.newCase(this, CommunicationStateNames.COMMAND, -1, command);
+			System.out.println("broadcasting from client: " + this.getId());
+			this.serverProxy.broadcastChangesGIPC(command, this.getId());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@Override
+	public int getId() {
+		return this.gipcId;
+	}
+	
+	@Override
+	public void setId(int newVal) {
+		this.gipcId = newVal;
+		System.out.println("setting gipc id: " + this.getId());
+	}
+	
+	public void locateRegistry(String[] args) {
+		System.out.println(id);
+		try {
+			GIPCRegistryLocated.newCase(
+					this, 
+					ClientArgsProcessor.getRegistryHost(args), 
+					ClientArgsProcessor.getGIPCPort(args), 
+					String.valueOf(id));
+			this.gipcRegistry = GIPCLocateRegistry.getRegistry(ClientArgsProcessor.getRegistryHost(args), 
+					ClientArgsProcessor.getGIPCPort(args), 
+					CLIENT+Math.random()*1000000);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@Override
+	protected void init(String[] args) {
+		this.setTracing();
+		super.init(args);
+		this.locateRegistry(args);
+		this.findGIPCServerProxy();
+		try {
+			this.serverProxy.registerClientGIPC(this);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	@Override
+	public void simulationCommand(String command) {
+		if (this.ipcMechanism.equals(IPCMechanism.RMI)) {
+			super.simulationCommand(command);
+		} else {
+			this.broadcastChangeGIPC(command);
+		}
+	}
+
+	@Override
+	public void receiveChangeGIPC(String command) {
+		// receiving message from GIPC server
+		ProposalLearnedNotificationReceived.newCase(this, CommunicationStateNames.BROADCAST_MODE, -1, command);
+		ProposedStateSet.newCase(this, CommunicationStateNames.COMMAND, -1, command);
+		this.localSim.setInputString(command);
+	}
+	
+	public void findGIPCServerProxy() {
+		try {
+			this.serverProxy = (GIPCServer) gipcRegistry.lookup(GIPCServer.class, GIPCServer.SERVER);
+//			GIPCObjectLookedUp.newCase(this, serverProxy, GIPCServer.class, GIPCServer.SERVER, gipcRegistry);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	
+	@Override
+	public void setTracing() {
+		super.setTracing();
+		BeanTraceUtility.setTracing();
+		GIPCRPCTraceUtility.setTracing();
+		NIOTraceUtility.setTracing();
+	}
+	
+	@Override
+	public void start(String[] args) {
+		try {
+			this.init(args);
+			SimulationParametersControllerFactory.getSingleton().addSimulationParameterListener(this);
+			SimulationParametersControllerFactory.getSingleton().processCommands();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static void main(String[] args) {
+		GIPCClient client = new GIPCClientImpl();
+		// init client
+		client.start(args);
+	}
+}
+(DIFF_FROM_PREVIOUS_FILE)
+=879	+nio.NIOTraceUtility;%0Aimport util.trace.port.	=143	+DistributedTags.CLIENT, 	=2787	+TraceUtility.setTracing();%0A%09%09NIO	=464
+//END OF FILE
+//START OF FILE: comp533/server/ServerGIPC.java
+package comp533.server;
+
+import java.rmi.RemoteException;
+import port.ATracingConnectionListener;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+import assignments.util.mainArgs.ServerArgsProcessor;
+import comp533.client.Client;
+import comp533.client.GIPCClient;
+import comp533.client.RemoteClient;
+import inputport.InputPort;
+import inputport.rpc.GIPCLocateRegistry;
+import inputport.rpc.GIPCRegistry;
+import util.annotations.Tags;
+import util.trace.bean.BeanTraceUtility;
+import util.trace.factories.FactoryTraceUtility;
+import util.trace.misc.ThreadDelayed;
+import util.trace.port.consensus.ConsensusTraceUtility;
+import util.trace.port.nio.NIOTraceUtility;
+import util.trace.port.rpc.gipc.GIPCObjectRegistered;
+import util.trace.port.rpc.gipc.GIPCRPCTraceUtility;
+import util.trace.port.rpc.gipc.GIPCRegistryCreated;
+import util.trace.port.rpc.gipc.GIPCRegistryLocated;
+import util.trace.port.rpc.rmi.RMITraceUtility;
+import util.tags.DistributedTags;
+
+@Tags({DistributedTags.SERVER, DistributedTags.SERVER_REMOTE_OBJECT, DistributedTags.SERVER_CONFIGURER, DistributedTags.RMI, DistributedTags.GIPC})
+public class ServerGIPC extends Server implements GIPCServer {
+	List<GIPCClient> clientProxies;
+	GIPCRegistry gipcRegistry;
+	
+	public ServerGIPC() {
+		this.clientProxies = new ArrayList<>();
+	}
+	
+	@Override
+	public void setTracing() {
+		FactoryTraceUtility.setTracing();
+		BeanTraceUtility.setTracing();
+		RMITraceUtility.setTracing();
+		ConsensusTraceUtility.setTracing();
+        ThreadDelayed.enablePrint();
+        GIPCRPCTraceUtility.setTracing();
+        NIOTraceUtility.setTracing();
+        super.trace(true);
+	}
+	
+	
+	@Override
+	protected void init(String args[]) {
+		this.setTracing();
+		super.init(args);
+		this.createRegistry(args);
+		this.registerServer();
+		InputPort gipcPort = this.gipcRegistry.getInputPort();
+		ATracingConnectionListener listener = new ATracingConnectionListener(gipcPort);
+        gipcPort.addConnectionListener(listener);
+
+	}
+
+	@Override
+	public void registerClientGIPC(GIPCClient client) {
+		// TODO Auto-generated method stub
+		this.clientProxies.add(client);
+		 try {
+			 client.setId(this.clientProxies.size());
+			 System.out.println("gipc id init: " + client.getId());
+		 } catch (Exception e) {
+			 e.printStackTrace();
+		 }
+		
+	}
+
+	@Override
+	public void broadcastChangesGIPC(String cmd, int id) throws RemoteException {
+		// out coupler calls this method. If the IPCMechanism is GIPC, coupler will call this method
+		System.out.println("originating client gipc id: " + id);
+		for (GIPCClient c : clientProxies) {
+			System.out.println("gipc id from server: " + c.getId());
+			if (c.getId() != id) {
+				System.out.println("broadcasting to gipc id from server: " + c.getId());
+				((GIPCClient)c).receiveChangeGIPC(cmd);
+			}
+		}
+		
+	}
+	
+	@Override
+	public void start(String[] args) {
+		this.init(args);
+	}
+	
+	public void registerServer() {
+		try {
+			GIPCObjectRegistered.newCase(this, GIPCServer.SERVER, this.gipcRegistry, this.gipcRegistry);
+			this.gipcRegistry.rebind(GIPCServer.SERVER, this);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void createRegistry(String[] args) {
+		try {
+			GIPCRegistryCreated.newCase(this, ServerArgsProcessor.getGIPCServerPort(args));
+			this.gipcRegistry= GIPCLocateRegistry.createRegistry(ServerArgsProcessor.getGIPCServerPort(args));
+			
+//			GIPCRegistryLocated.newCase(this, ServerArgsProcessor.getRegistryHost(args), ServerArgsProcessor.getRegistryPort(args), SERVER);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
+	public static void main(String[] args) {
+			GIPCServer gipcServer = new ServerGIPC();
+			gipcServer.start(args);
+	}
+
+}
+
+(DIFF_FROM_PREVIOUS_FILE)
+=879	+gipc.GIPCRegistryLocated;%0Aimport util.trace.port.rpc.	=2362	-1	=79	+);%0A%09%09%09%0A//%09%09%09GIPCRegistryLocated.newCase(this, ServerArgsProcessor.getRegistryHost(args), ServerArgsProcessor.getRegistryPort(args), SERVER	=185
+//END OF FILE
+
+//SESSION END
+
+//SESSION START
+10,Mon Apr 29 18:04:45 EDT 2024,759
+//START OF FILE: comp533/client/GIPCClientImpl.java
+package comp533.client;
+
+import java.rmi.RemoteException;
+
+import assignments.util.mainArgs.ClientArgsProcessor;
+import comp533.server.GIPCServer;
+import comp533.server.ServerGIPC;
+import coupledsims.AStandAloneTwoCoupledHalloweenSimulations;
+import inputport.rpc.GIPCLocateRegistry;
+import inputport.rpc.GIPCRegistry;
+import util.annotations.Tags;
+import util.interactiveMethodInvocation.IPCMechanism;
+import util.interactiveMethodInvocation.SimulationParametersControllerFactory;
+import util.tags.DistributedTags;
+import util.trace.bean.BeanTraceUtility;
+import util.trace.factories.FactoryTraceUtility;
+import util.trace.misc.ThreadDelayed;
+import util.trace.port.consensus.ConsensusTraceUtility;
+import util.trace.port.consensus.ProposalLearnedNotificationReceived;
+import util.trace.port.consensus.ProposalMade;
+import util.trace.port.consensus.ProposedStateSet;
+import util.trace.port.consensus.RemoteProposeRequestSent;
+import util.trace.port.consensus.communication.CommunicationStateNames;
+import util.trace.port.nio.NIOTraceUtility;
+import util.trace.port.rpc.gipc.GIPCObjectLookedUp;
+import util.trace.port.rpc.gipc.GIPCRPCTraceUtility;
+import util.trace.port.rpc.gipc.GIPCRegistryLocated;
+import util.trace.port.rpc.rmi.RMITraceUtility;
+
+@Tags({DistributedTags.CLIENT, DistributedTags.CLIENT_CONFIGURER, DistributedTags.CLIENT_REMOTE_OBJECT, DistributedTags.RMI, DistributedTags.GIPC})
+public class GIPCClientImpl extends ClientRMIImpl implements GIPCClient, RemoteClient {
+	private GIPCServer serverProxy;
+	private int gipcId;
+	private GIPCRegistry gipcRegistry;
+	private static int id = 0;
+	
+	public GIPCClientImpl() {
+		id++;
+	}
+	
+	public void broadcastChangeGIPC(String command) {
+		// notify GIPC server of local change in order to keep replicated objects consistent
+		try {
+			ProposalMade.newCase(this, CommunicationStateNames.COMMAND, -1, command);
+			this.localSim.setInputString(command);
+			RemoteProposeRequestSent.newCase(this, CommunicationStateNames.COMMAND, -1, command);
+			System.out.println("broadcasting from client: " + this.getId());
+			this.serverProxy.broadcastChangesGIPC(command, this.getId());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@Override
+	public int getId() {
+		return this.gipcId;
+	}
+	
+	@Override
+	public void setId(int newVal) {
+		this.gipcId = newVal;
+		System.out.println("setting gipc id: " + this.getId());
+	}
+	
+	public void locateRegistry(String[] args) {
+		System.out.println(id);
+		try {
+			GIPCRegistryLocated.newCase(
+					this, 
+					ClientArgsProcessor.getRegistryHost(args), 
+					ClientArgsProcessor.getGIPCPort(args), 
+					String.valueOf(id));
+			this.gipcRegistry = GIPCLocateRegistry.getRegistry(ClientArgsProcessor.getRegistryHost(args), 
+					ClientArgsProcessor.getGIPCPort(args), 
+					CLIENT+Math.random()*1000000);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@Override
+	protected void init(String[] args) {
+		this.setTracing();
+		super.init(args);
+		this.locateRegistry(args);
+		this.findGIPCServerProxy();
+		try {
+			this.serverProxy.registerClientGIPC(this);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	@Override
+	public void simulationCommand(String command) {
+		if (this.ipcMechanism.equals(IPCMechanism.RMI)) {
+			super.simulationCommand(command);
+		} else {
+			this.broadcastChangeGIPC(command);
+		}
+	}
+
+	@Override
+	public void receiveChangeGIPC(String command) {
+		// receiving message from GIPC server
+		ProposalLearnedNotificationReceived.newCase(this, CommunicationStateNames.BROADCAST_MODE, -1, command);
+		ProposedStateSet.newCase(this, CommunicationStateNames.COMMAND, -1, command);
+		this.localSim.setInputString(command);
+	}
+	
+	public void findGIPCServerProxy() {
+		try {
+			this.serverProxy = (GIPCServer) gipcRegistry.lookup(GIPCServer.class, GIPCServer.SERVER);
+//			GIPCObjectLookedUp.newCase(this, serverProxy, GIPCServer.class, GIPCServer.SERVER, gipcRegistry);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	
+	@Override
+	public void setTracing() {
+		super.setTracing();
+		BeanTraceUtility.setTracing();
+		GIPCRPCTraceUtility.setTracing();
+		NIOTraceUtility.setTracing();
+	}
+	
+	@Override
+	public void start(String[] args) {
+		try {
+			this.init(args);
+			SimulationParametersControllerFactory.getSingleton().addSimulationParameterListener(this);
+			SimulationParametersControllerFactory.getSingleton().processCommands();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static void main(String[] args) {
+		FactoryTraceUtility.setTracing();
+		BeanTraceUtility.setTracing();
+		RMITraceUtility.setTracing();
+		ConsensusTraceUtility.setTracing();
+		ThreadDelayed.enablePrint();
+		GIPCRPCTraceUtility.setTracing();
+		NIOTraceUtility.setTracing();
+
+		GIPCClient client = new GIPCClientImpl();
+		// init client
+		client.start(args);
+	}
+}
+(DIFF_FROM_PREVIOUS_FILE)
+=575	+factories.FactoryTraceUtility;%0Aimport util.trace.misc.ThreadDelayed;%0Aimport util.trace.port.consensus.ConsensusTraceUtility;%0Aimport util.trace.	=481	+;%0Aimport util.trace.port.rpc.rmi.RMITraceUtility	=3229	+%0A%09%09FactoryTraceUtility.setTracing();%0A%09%09BeanTraceUtility.setTracing();%0A%09%09RMITraceUtility.setTracing();%0A%09%09ConsensusTraceUtility.setTracing();%0A%09%09ThreadDelayed.enablePrint();%0A%09%09GIPCRPCTraceUtility.setTracing();%0A%09%09NIOTraceUtility.setTracing();%0A	=88
+//END OF FILE
+//START OF FILE: comp533/client/ClientRMIImpl.java
+package comp533.client;
+
+import java.rmi.RemoteException;
+import java.rmi.registry.Registry;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.server.UnicastRemoteObject;
+
+import assignments.util.mainArgs.ClientArgsProcessor;
+import comp533.server.RemoteServer;
+import coupledsims.AStandAloneTwoCoupledHalloweenSimulations;
+import coupledsims.Simulation;
+import coupledsims.Simulation1;
+import main.BeauAndersonFinalProject;
+import stringProcessors.HalloweenCommandProcessor;
+import util.interactiveMethodInvocation.IPCMechanism;
+import util.interactiveMethodInvocation.SimulationParametersControllerFactory;
+import util.misc.ThreadSupport;
+import util.annotations.Tags;
+import util.tags.DistributedTags;
+import util.trace.bean.BeanTraceUtility;
+import util.trace.port.consensus.ProposalLearnedNotificationReceived;
+import util.trace.port.consensus.ProposalMade;
+import util.trace.port.consensus.ProposedStateSet;
+import util.trace.port.consensus.RemoteProposeRequestSent;
+import util.trace.port.consensus.communication.CommunicationStateNames;
+import util.trace.port.rpc.gipc.GIPCRPCTraceUtility;
+import util.trace.port.rpc.rmi.RMIObjectLookedUp;
+import util.trace.port.rpc.rmi.RMIObjectRegistered;
+import util.trace.port.rpc.rmi.RMIRegistryLocated;
+
+@Tags({DistributedTags.CLIENT, DistributedTags.CLIENT_CONFIGURER, DistributedTags.CLIENT_REMOTE_OBJECT, DistributedTags.RMI})
+public class ClientRMIImpl extends AStandAloneTwoCoupledHalloweenSimulations implements RemoteClient {
+	RemoteServer serverProxy;
+	InCoupler in;
+	OutCoupler out;
+	HalloweenCommandProcessor localSim;
+	public static int numClients = 0;
+	private int clientId;
+	private Registry rmiRegistry;
+	
+	public ClientRMIImpl() {
+		this.localSim = createSimulation(numClients + ":");
+		this.out = new RemoteOutCoupler(this.localSim, this.ipcMechanism);
+		this.localSim.addPropertyChangeListener(out);
+	}
+	
+	private HalloweenCommandProcessor createSimulation(String prefix) {
+		return 	BeauAndersonFinalProject.createSimulation(
+                prefix,
+                0,
+                Simulation.SIMULATION_Y_OFFSET,
+                Simulation.SIMULATION_WIDTH,
+                Simulation.SIMULATION_HEIGHT,
+                0,
+                Simulation.SIMULATION_Y_OFFSET);
+	}
+	
+	@Override
+	public void broadcastMetaState(boolean newValue) {
+		this.broadcastIPCMechanism = true;
+		try {
+			this.serverProxy.broadcastChanges(newValue, this.getId());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@Override
+	public void ipcMechanism(IPCMechanism newValue) {
+		// called when an IPC changing command is executed by the user
+		// change an internal local copy of a replicable object/variable whose logical, traced name, is “ipc_mechanism”. 
+		// choose the IPC mechanism used to communicate simulation commands based on this object/variable.
+		// use the ProposalMade trace class to trace the execution of the interactive command.
+		// use the ProposalSet trace class to trace the setting of the internal object/variable
+		ProposalMade.newCase(this, CommunicationStateNames.IPC_MECHANISM, -1, newValue);
+		ProposedStateSet.newCase(this, CommunicationStateNames.IPC_MECHANISM, -1, newValue);
+		this.ipcMechanism = newValue;
+		if (this.broadcastIPCMechanism) {
+			// callback in server
+			try {
+				ProposalMade.newCase(this, CommunicationStateNames.COMMAND, -1, newValue);
+				this.serverProxy.broadcastChanges(newValue, this.getId());
+				RemoteProposeRequestSent.newCase(this, CommunicationStateNames.COMMAND, -1, newValue);
+			} catch (RemoteException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	private void exportClient() throws RemoteException {
+		try {
+			UnicastRemoteObject.exportObject(this, 0);
+			this.rmiRegistry.rebind(CLIENT, this);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static void main(String args[]) {
+		try {
+			ClientRMIImpl client = new ClientRMIImpl();
+			client.start(args);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	protected void init(String[] args) {
+		try {
+			this.setTracing();
+			this.locateRegistry(ClientArgsProcessor.getRegistryHost(args), ClientArgsProcessor.getRegistryPort(args));
+			this.findServer(args);
+			this.exportClient();
+			RMIObjectRegistered.newCase(this, CLIENT, this, rmiRegistry);
+			this.serverProxy.registerClient(this);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	private void findServer(String[] args) {
+		// TODO Auto-generated method stub
+		try {
+			this.serverProxy = (RemoteServer)this.rmiRegistry.lookup(RemoteServer.SERVER);
+			RMIObjectLookedUp.newCase(this, this.serverProxy, CLIENT, this.rmiRegistry);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
+
+	private void locateRegistry(String host, int port) {
+		try {
+			this.rmiRegistry = LocateRegistry.getRegistry(port);
+			RMIRegistryLocated.newCase(
+					this, 
+					host,
+					port,
+					rmiRegistry
+					);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
+
+	@Override
+	public void broadcastChangeRMI(String cmd) {
+		// invoke server callback to update all other proxies
+		try {
+			ProposalMade.newCase(this, CommunicationStateNames.COMMAND, -1, cmd);
+			this.localSim.setInputString(cmd);
+			RemoteProposeRequestSent.newCase(this, CommunicationStateNames.COMMAND, -1, cmd);
+//			System.out.println("broadcasting from client: " + this.getId());
+			this.serverProxy.broadcastChanges(cmd, this.getId());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
+	 @Override
+	 public void simulationCommand(String aCommand) {
+	     long aDelay = this.getDelay();
+	     if (aDelay > 0) {
+	         ThreadSupport.sleep(aDelay);
+	     }
+	     this.broadcastChangeRMI(aCommand);
+	 }
+	
+	
+	@Override
+	public void start(String args[]) {
+		// register client with server
+		try {
+			this.init(args);
+			SimulationParametersControllerFactory.getSingleton().addSimulationParameterListener(this);
+			SimulationParametersControllerFactory.getSingleton().processCommands();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public int getId() {
+		return this.clientId;
+	}
+	
+	public void setId(int id) {
+		this.clientId = id;
+//		System.out.println("setting rmi id: " + this.clientId);
+	}
+	
+	
+
+	void processArgs(String args[]) {
+		System.out.println("Client name:" + ClientArgsProcessor.getClientName(args));
+		System.out.println("Registry host:" + ClientArgsProcessor.getRegistryHost(args));
+		System.out.println("Registry port:" + ClientArgsProcessor.getRegistryPort(args));
+
+		System.out.println("Headless:" + ClientArgsProcessor.getHeadless(args));
+		System.setProperty("java.awt.headless", ClientArgsProcessor.getHeadless(args));
+	}
+	
+	@Override
+	public void receiveIPCChange(IPCMechanism ipc) {
+		ProposalLearnedNotificationReceived.newCase(this, CommunicationStateNames.IPC_MECHANISM, -1, ipc);
+		ProposedStateSet.newCase(this, CommunicationStateNames.IPC_MECHANISM, -1, ipc);
+		this.ipcMechanism = ipc;
+	}
+	
+	@Override
+	public void receiveMetaStateChange(boolean newValue) {
+		this.broadcastIPCMechanism = true;
+	}
+
+	@Override
+	public void receiveChangeRMI(String command) throws RemoteException {
+		// TODO Auto-generated method stu
+		ProposalLearnedNotificationReceived.newCase(this, CommunicationStateNames.BROADCAST_MODE, -1, command);
+		ProposedStateSet.newCase(this, CommunicationStateNames.COMMAND, -1, command);
+		this.localSim.setInputString(command);
+	}
+
+}
+
+(DIFF_FROM_PREVIOUS_FILE)
+=1755	-2	=69	-2	=3476	+//	=845	+//	=1247
+//END OF FILE
+//START OF FILE: comp533/A5Grader.java
+package comp533;
+import grader.basics.execution.BasicProjectExecution;
+import gradingTools.comp533.flexible.PortNumbers;
+import gradingTools.comp533s24.assignment5.S24Assignment5Suite;
+import trace.grader.basics.GraderBasicsTraceUtility;
+
+public class A5Grader {
+	// if you set this to false, grader steps will not be traced
+	public static void main(String args[]) {
+			GraderBasicsTraceUtility.setTracerShowInfo(true);	
+			// if you set this to false, all grader steps will be traced,
+			// not just the ones that failed		
+			GraderBasicsTraceUtility.setBufferTracedMessages(true);
+			// Change this number if a test trace gets longer than 600 and is clipped
+			int maxPrintedTraces = 100;
+			GraderBasicsTraceUtility.setMaxPrintedTraces(maxPrintedTraces);
+			// Change this number if all traces together are longer than 2000
+			int maxTraces = 2000;
+			GraderBasicsTraceUtility.setMaxTraces(maxTraces);
+			// Change this number if your process times out prematurely
+			int processTimeOut = 45;
+			BasicProjectExecution.setProcessTimeOut(processTimeOut);
+			// You need to always call such a method
+			PortNumbers.setTestPortNIOStart(1100);
+			S24Assignment5Suite.main(args);
+		}
+}
+
+(DIFF_FROM_PREVIOUS_FILE)
+=98	+.flexible.PortNumbers;%0Aimport gradingTools.comp533	=951	+%0A%09%09%09PortNumbers.setTestPortNIOStart(1100);	=42
+//END OF FILE
+//START OF FILE: comp533/server/ServerGIPC.java
+package comp533.server;
+
+import java.rmi.RemoteException;
+import port.ATracingConnectionListener;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+import assignments.util.mainArgs.ServerArgsProcessor;
+import comp533.client.Client;
+import comp533.client.GIPCClient;
+import comp533.client.RemoteClient;
+import inputport.InputPort;
+import inputport.rpc.GIPCLocateRegistry;
+import inputport.rpc.GIPCRegistry;
+import util.annotations.Tags;
+import util.trace.bean.BeanTraceUtility;
+import util.trace.factories.FactoryTraceUtility;
+import util.trace.misc.ThreadDelayed;
+import util.trace.port.consensus.ConsensusTraceUtility;
+import util.trace.port.nio.NIOTraceUtility;
+import util.trace.port.rpc.gipc.GIPCObjectRegistered;
+import util.trace.port.rpc.gipc.GIPCRPCTraceUtility;
+import util.trace.port.rpc.gipc.GIPCRegistryCreated;
+import util.trace.port.rpc.gipc.GIPCRegistryLocated;
+import util.trace.port.rpc.rmi.RMITraceUtility;
+import util.tags.DistributedTags;
+
+@Tags({DistributedTags.SERVER, DistributedTags.SERVER_REMOTE_OBJECT, DistributedTags.SERVER_CONFIGURER, DistributedTags.RMI, DistributedTags.GIPC})
+public class ServerGIPC extends Server implements GIPCServer {
+	List<GIPCClient> clientProxies;
+	GIPCRegistry gipcRegistry;
+	
+	public ServerGIPC() {
+		this.clientProxies = new ArrayList<>();
+	}
+	
+	@Override
+	public void setTracing() {
+		FactoryTraceUtility.setTracing();
+		BeanTraceUtility.setTracing();
+		RMITraceUtility.setTracing();
+		ConsensusTraceUtility.setTracing();
+        ThreadDelayed.enablePrint();
+        GIPCRPCTraceUtility.setTracing();
+        NIOTraceUtility.setTracing();
+        super.trace(true);
+	}
+	
+	
+	@Override
+	protected void init(String args[]) {
+		this.setTracing();
+		super.init(args);
+		this.createRegistry(args);
+		this.registerServer();
+		InputPort gipcPort = this.gipcRegistry.getInputPort();
+		ATracingConnectionListener listener = new ATracingConnectionListener(gipcPort);
+        gipcPort.addConnectionListener(listener);
+
+	}
+
+	@Override
+	public void registerClientGIPC(GIPCClient client) {
+		// TODO Auto-generated method stub
+		this.clientProxies.add(client);
+		 try {
+			 client.setId(this.clientProxies.size());
+			 System.out.println("gipc id init: " + client.getId());
+		 } catch (Exception e) {
+			 e.printStackTrace();
+		 }
+		
+	}
+
+	@Override
+	public void broadcastChangesGIPC(String cmd, int id) throws RemoteException {
+		// out coupler calls this method. If the IPCMechanism is GIPC, coupler will call this method
+		System.out.println("originating client gipc id: " + id);
+		for (GIPCClient c : clientProxies) {
+			System.out.println("gipc id from server: " + c.getId());
+			if (c.getId() != id) {
+				System.out.println("broadcasting to gipc id from server: " + c.getId());
+				((GIPCClient)c).receiveChangeGIPC(cmd);
+			}
+		}
+		
+	}
+	
+	@Override
+	public void start(String[] args) {
+		this.init(args);
+	}
+	
+	public void registerServer() {
+		try {
+			GIPCObjectRegistered.newCase(this, GIPCServer.SERVER, this.gipcRegistry, this.gipcRegistry);
+			this.gipcRegistry.rebind(GIPCServer.SERVER, this);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void createRegistry(String[] args) {
+		try {
+			GIPCRegistryCreated.newCase(this, ServerArgsProcessor.getGIPCServerPort(args));
+			this.gipcRegistry= GIPCLocateRegistry.createRegistry(ServerArgsProcessor.getGIPCServerPort(args));
+			
+//			GIPCRegistryLocated.newCase(this, ServerArgsProcessor.getRegistryHost(args), ServerArgsProcessor.getRegistryPort(args), SERVER);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
+	public static void main(String[] args) {
+		FactoryTraceUtility.setTracing();
+		BeanTraceUtility.setTracing();
+		RMITraceUtility.setTracing();
+		ConsensusTraceUtility.setTracing();
+		ThreadDelayed.enablePrint();
+		GIPCRPCTraceUtility.setTracing();
+		NIOTraceUtility.setTracing();
+
+		GIPCServer gipcServer = new ServerGIPC();
+		gipcServer.start(args);
+	}
+
+}
+
+(DIFF_FROM_PREVIOUS_FILE)
+=3620	+FactoryTraceUtility.setTracing();%0A%09%09BeanTraceUtility.setTracing();%0A%09%09RMITraceUtility.setTracing();%0A%09%09ConsensusTraceUtility.setTracing();%0A%09%09ThreadDelayed.enablePrint();%0A%09%09GIPCRPCTraceUtility.setTracing();%0A%09%09NIOTraceUtility.setTracing();%0A%0A%09	=43	-1	=32
+//END OF FILE
+
+//SESSION END
+
+//SESSION START
+11,Mon Apr 29 18:19:46 EDT 2024,44
+//START OF FILE: comp533/A5Grader.java
+package comp533;
+import grader.basics.execution.BasicProjectExecution;
+import gradingTools.comp533.flexible.PortNumbers;
+import gradingTools.comp533s24.assignment5.S24Assignment5Suite;
+import trace.grader.basics.GraderBasicsTraceUtility;
+
+public class A5Grader {
+	// if you set this to false, grader steps will not be traced
+	public static void main(String args[]) {
+			GraderBasicsTraceUtility.setTracerShowInfo(true);	
+			// if you set this to false, all grader steps will be traced,
+			// not just the ones that failed		
+			GraderBasicsTraceUtility.setBufferTracedMessages(true);
+			// Change this number if a test trace gets longer than 600 and is clipped
+			int maxPrintedTraces = 100;
+			GraderBasicsTraceUtility.setMaxPrintedTraces(maxPrintedTraces);
+			// Change this number if all traces together are longer than 2000
+			int maxTraces = 2000;
+			GraderBasicsTraceUtility.setMaxTraces(maxTraces);
+			// Change this number if your process times out prematurely
+			int processTimeOut = 45;
+			BasicProjectExecution.setProcessTimeOut(processTimeOut);
+			// You need to always call such a method
+			PortNumbers.setTestPortGIPCStart(11000);
+			PortNumbers.setTestPortGIPCEnd(12000);
+			S24Assignment5Suite.main(args);
+		}
+}
+
+(DIFF_FROM_PREVIOUS_FILE)
+=1126	-1	+G	=1	-1	+PC	=8	+000);%0A%09%09%09PortNumbers.setTestPortGIPCEnd(120	=46
+//END OF FILE
+
+//SESSION END
+
+//SESSION START
+12,Tue Apr 30 01:41:28 EDT 2024,3151
+//START OF FILE: comp533/client/ClientNIO.java
+package comp533.client;
+
+public class ClientNIO {
+
+}
+
+//END OF FILE
+//START OF FILE: comp533/server/Server.java
+package comp533.server;
+
+import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
+import java.rmi.server.UnicastRemoteObject;
+import java.util.ArrayList;
+import java.util.List;
+
+import assignments.util.mainArgs.RegistryArgsProcessor;
+import assignments.util.mainArgs.ServerArgsProcessor;
+import comp533.client.RemoteClient;
+import coupledsims.AStandAloneTwoCoupledHalloweenSimulations;
+import util.interactiveMethodInvocation.IPCMechanism;
+import util.interactiveMethodInvocation.SimulationParametersControllerFactory;
+import util.annotations.Tags;
+import util.tags.DistributedTags;
+import util.trace.port.consensus.ProposalLearnedNotificationSent;
+import util.trace.port.consensus.ProposalMade;
+import util.trace.port.consensus.ProposedStateSet;
+import util.trace.port.consensus.RemoteProposeRequestReceived;
+import util.trace.port.consensus.RemoteProposeRequestSent;
+import util.trace.port.consensus.communication.CommunicationStateNames;
+import util.trace.port.rpc.rmi.RMIObjectRegistered;
+import util.trace.port.rpc.rmi.RMIRegistryLocated;
+
+@Tags({DistributedTags.SERVER, DistributedTags.SERVER_REMOTE_OBJECT, DistributedTags.SERVER_CONFIGURER, DistributedTags.RMI})
+public class Server extends AStandAloneTwoCoupledHalloweenSimulations implements RemoteServer {
+	private static final String SERVER = "SERVER";
+	// register server proxy with RMIRegisty
+	// provide method to register client in coupler proxies with server
+	// provide method to notify all
+	// when a client proxy forwards an input to the server, the server sends this message to
+	// all other in-couplers
+
+	List<RemoteClient> clientProxies;
+	Registry rmiRegistry;
+
+	public Server() {
+
+		this.clientProxies = new ArrayList<>();
+	}
+	
+	@Override
+	public void registerClient(RemoteClient client) {
+		clientProxies.add(client);
+		try {
+			client.setId(clientProxies.size());
+			 System.out.println("rmi id init: " + client.getId());
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	void processArgs(String[] args) {
+		System.out.println("Registry host:" + ServerArgsProcessor.getRegistryHost(args));
+		System.out.println("Registry port:" + ServerArgsProcessor.getRegistryPort(args));
+		
+	}
+	
+	
+	@Override
+	protected void init(String args[]) {
+		this.processArgs(args);
+		this.setTracing();
+		try {
+			this.rmiRegistry = LocateRegistry.getRegistry(ServerArgsProcessor.getRegistryPort(args));
+			RMIRegistryLocated.newCase(Server.class, 
+					ServerArgsProcessor.getRegistryHost(args), 
+					ServerArgsProcessor.getRegistryPort(args),
+					this.rmiRegistry);
+			RemoteServer serverProxy = (RemoteServer)UnicastRemoteObject.exportObject(this, 0);
+			RMIObjectRegistered.newCase(Server.class, SERVER, serverProxy, this.rmiRegistry);
+			this.rmiRegistry.rebind(SERVER, this);
+		} catch (RemoteException e) { // TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+
+	@Override
+	public void ipcMechanism(IPCMechanism newValue) {
+		ProposalMade.newCase(this, CommunicationStateNames.IPC_MECHANISM, -1, newValue);
+		ProposedStateSet.newCase(this, CommunicationStateNames.IPC_MECHANISM, -1, newValue);
+		this.ipcMechanism = newValue;
+		if (this.broadcastMetaState) {
+			// callback in server
+			try {
+				this.broadcastChanges(newValue, -1);
+				RemoteProposeRequestSent.newCase(this, CommunicationStateNames.COMMAND, -1, newValue);
+			} catch (RemoteException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	@Override
+	public void broadcastMetaState(boolean newValue) {
+		ProposalMade.newCase(this, CommunicationStateNames.BROADCAST_MODE, -1, newValue);
+		this.broadcastMetaState = newValue;
+		ProposedStateSet.newCase(this, CommunicationStateNames.BROADCAST_MODE, -1, newValue);
+		try {
+			RemoteProposeRequestSent.newCase(this, CommunicationStateNames.BROADCAST_MODE, -1, newValue);
+			this.broadcastChanges(newValue, -1);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
+
+	public static void main(String args[]) {
+		Server server = new Server();
+		server.init(args);
+	
+		// blocking server start
+		server.start();
+			
+	}
+	
+
+	@Override
+	public void receiveMetaState(boolean newValue) {
+		this.broadcastMetaState = newValue;
+	}
+
+	
+	@Override
+	public void receiveIPCMechanism(IPCMechanism newValue) {
+		this.ipcMechanism = newValue;
+	}
+
+	
+	public void start() {
+		SimulationParametersControllerFactory.getSingleton().addSimulationParameterListener(this);
+        SimulationParametersControllerFactory.getSingleton().processCommands();
+	}
+
+	@Override
+	public void broadcastChanges(Object msg, int id) throws RemoteException {
+		RemoteProposeRequestReceived.newCase(this, CommunicationStateNames.COMMAND, -1, msg);
+		// broadcasts messages to incouplers of clients except for the original sender
+		System.out.println("originating rmi id: " + id);
+		for (RemoteClient c : clientProxies) {
+			try {
+				System.out.println("rmi id from server: " + c.getId());
+				if (c.getId() != id) {
+					System.out.println("broadcasting to rmi id from server: " + c.getId());
+					if (msg instanceof IPCMechanism)
+						c.receiveIPCChange((IPCMechanism)msg);
+					else if (msg instanceof String)
+						c.receiveChangeRMI((String)msg);
+					else
+						c.receiveMetaStateChange((boolean)msg);	
+					ProposalLearnedNotificationSent.newCase(this, CommunicationStateNames.BROADCAST_MODE, -1, msg);
+					}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+
+}
+(DIFF_FROM_PREVIOUS_FILE)
+=734	+ProposalMade;%0Aimport util.trace.port.consensus.ProposedStateSet;%0Aimport util.trace.port.consensus.	=28	+;%0Aimport util.trace.port.consensus.RemoteProposeRequestSent	=2026	+%09@Override%0A%09public void ipcMechanism(IPCMechanism newValue) %7B%0A%09%09ProposalMade.newCase(this, CommunicationStateNames.IPC_MECHANISM, -1, newValue);%0A%09%09ProposedStateSet.newCase(this, CommunicationStateNames.IPC_MECHANISM, -1, newValue);%0A%09%09this.ipcMechanism = newValue;%0A%09%09if (this.broadcastMetaState) %7B%0A%09%09%09// callback in server%0A%09%09%09try %7B%0A%09%09%09%09this.broadcastChanges(newValue, -1);%0A%09%09%09%09RemoteProposeRequestSent.newCase(this, CommunicationStateNames.COMMAND, -1, newValue);%0A%09%09%09%7D catch (RemoteException e) %7B%0A%09%09%09%09// TODO Auto-generated catch block%0A%09%09%09%09e.printStackTrace();%0A%09%09%09%7D%0A%09%09%7D%0A%09%7D%0A%09%0A%09@Override%0A%09public void broadcastMetaState(boolean newValue) %7B%0A%09%09ProposalMade.newCase(this, CommunicationStateNames.BROADCAST_MODE, -1, newValue);%0A%09%09this.broadcastMetaState = newValue;%0A%09%09ProposedStateSet.newCase(this, CommunicationStateNames.BROADCAST_MODE, -1, newValue);%0A%09%09try %7B%0A%09%09%09RemoteProposeRequestSent.newCase(this, CommunicationStateNames.BROADCAST_MODE, -1, newValue);%0A%09%09%09this.broadcastChanges(newValue, -1);%0A%09%09%7D catch (Exception e) %7B%0A%09%09%09e.printStackTrace();%0A%09%09%7D%0A%09%09%0A%09%7D%0A	=152	+%0A%09@Override%0A	=8	+void receiveMetaState(boolean newValue) %7B%0A%09%09thi	=1	+.broadcastMetaS	=3	+e = newValue;%0A%09%7D%0A%0A%09%0A%09@Override%0A%09public void receiveIPCMechanism(IPCMechanism newValue) %7B%0A%09%09this.ipcMechanism = newValue;%0A%09%7D%0A%0A%09%0A%09publ	=20	+SimulationParametersControllerFactory.getSingleton().addSimulationParameterListener(this);%0A        SimulationParametersControllerFactory.getSingleton().processCommands();	=916
+//END OF FILE
+//START OF FILE: comp533/client/GIPCClientImpl.java
+package comp533.client;
+
+import java.rmi.RemoteException;
+
+import assignments.util.mainArgs.ClientArgsProcessor;
+import comp533.server.GIPCServer;
+import comp533.server.ServerGIPC;
+import coupledsims.AStandAloneTwoCoupledHalloweenSimulations;
+import inputport.rpc.GIPCLocateRegistry;
+import inputport.rpc.GIPCRegistry;
+import util.annotations.Tags;
+import util.interactiveMethodInvocation.IPCMechanism;
+import util.interactiveMethodInvocation.SimulationParametersControllerFactory;
+import util.tags.DistributedTags;
+import util.trace.bean.BeanTraceUtility;
+import util.trace.factories.FactoryTraceUtility;
+import util.trace.misc.ThreadDelayed;
+import util.trace.port.consensus.ConsensusTraceUtility;
+import util.trace.port.consensus.ProposalLearnedNotificationReceived;
+import util.trace.port.consensus.ProposalMade;
+import util.trace.port.consensus.ProposedStateSet;
+import util.trace.port.consensus.RemoteProposeRequestSent;
+import util.trace.port.consensus.communication.CommunicationStateNames;
+import util.trace.port.nio.NIOTraceUtility;
+import util.trace.port.rpc.gipc.GIPCObjectLookedUp;
+import util.trace.port.rpc.gipc.GIPCRPCTraceUtility;
+import util.trace.port.rpc.gipc.GIPCRegistryLocated;
+import util.trace.port.rpc.rmi.RMITraceUtility;
+
+@Tags({DistributedTags.CLIENT, DistributedTags.CLIENT_CONFIGURER, DistributedTags.CLIENT_REMOTE_OBJECT, DistributedTags.RMI, DistributedTags.GIPC})
+public class GIPCClientImpl extends ClientRMIImpl implements GIPCClient, RemoteClient {
+	private GIPCServer serverProxy;
+	private int gipcId;
+	private GIPCRegistry gipcRegistry;
+	private static int id = 0;
+	
+	public GIPCClientImpl() {
+		id++;
+	}
+	
+	public void broadcastChangeGIPC(String command) {
+		// notify GIPC server of local change in order to keep replicated objects consistent
+		try {
+			ProposalMade.newCase(this, CommunicationStateNames.COMMAND, -1, command);
+			this.localSim.setInputString(command);
+			RemoteProposeRequestSent.newCase(this, CommunicationStateNames.COMMAND, -1, command);
+			System.out.println("broadcasting from client: " + this.getId());
+			this.serverProxy.broadcastChangesGIPC(command, this.getId());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@Override
+	public int getId() {
+		return this.gipcId;
+	}
+	
+	@Override
+	public void setId(int newVal) {
+		this.gipcId = newVal;
+		System.out.println("setting gipc id: " + this.getId());
+	}
+	
+	public void locateRegistry(String[] args) {
+		System.out.println(id);
+		try {
+			GIPCRegistryLocated.newCase(
+					this, 
+					ClientArgsProcessor.getRegistryHost(args), 
+					ClientArgsProcessor.getGIPCPort(args), 
+					String.valueOf(id));
+			this.gipcRegistry = GIPCLocateRegistry.getRegistry(ClientArgsProcessor.getRegistryHost(args), 
+					ClientArgsProcessor.getGIPCPort(args), 
+					ClientArgsProcessor.DEFAULT_CLIENT_NAME);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@Override
+	protected void init(String[] args) {
+		this.setTracing();
+		super.init(args);
+		this.locateRegistry(args);
+		this.findGIPCServerProxy();
+		try {
+			this.serverProxy.registerClientGIPC(this);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	@Override
+	public void simulationCommand(String command) {
+		if (this.ipcMechanism.equals(IPCMechanism.RMI)) {
+			super.simulationCommand(command);
+		} else {
+			this.broadcastChangeGIPC(command);
+		}
+	}
+
+	@Override
+	public void receiveChangeGIPC(String command) {
+		// receiving message from GIPC server
+		ProposalLearnedNotificationReceived.newCase(this, CommunicationStateNames.BROADCAST_MODE, -1, command);
+		ProposedStateSet.newCase(this, CommunicationStateNames.COMMAND, -1, command);
+		this.localSim.setInputString(command);
+	}
+	
+	public void findGIPCServerProxy() {
+		try {
+			this.serverProxy = (GIPCServer) gipcRegistry.lookup(GIPCServer.class, GIPCServer.SERVER);
+			GIPCObjectLookedUp.newCase(this, serverProxy, GIPCServer.class, GIPCServer.SERVER, gipcRegistry);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	
+	@Override
+	public void setTracing() {
+		super.setTracing();
+		BeanTraceUtility.setTracing();
+		GIPCRPCTraceUtility.setTracing();
+		NIOTraceUtility.setTracing();
+	}
+	
+	@Override
+	public void start(String[] args) {
+		try {
+			this.init(args);
+			SimulationParametersControllerFactory.getSingleton().addSimulationParameterListener(this);
+			SimulationParametersControllerFactory.getSingleton().processCommands();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static void main(String[] args) {
+		FactoryTraceUtility.setTracing();
+		BeanTraceUtility.setTracing();
+		RMITraceUtility.setTracing();
+		ConsensusTraceUtility.setTracing();
+		ThreadDelayed.enablePrint();
+		GIPCRPCTraceUtility.setTracing();
+		NIOTraceUtility.setTracing();
+
+		GIPCClient client = new GIPCClientImpl();
+		// init client
+		client.start(args);
+	}
+}
+(DIFF_FROM_PREVIOUS_FILE)
+=2775	+lientArgsProcessor.DEFAULT_C	=5	-1	+_NA	=1	-20	+E	=999	-2	=1000
+//END OF FILE
+//START OF FILE: comp533/server/NIOServer.java
+package comp533.server;
+
+public interface NIOServer {
+
+}
+
+//END OF FILE
+//START OF FILE: comp533/client/NIOClient.java
+package comp533.client;
+
+public interface NIOClient {
+
+}
+
+//END OF FILE
+//START OF FILE: comp533/client/ClientRMIImpl.java
+package comp533.client;
+
+import java.rmi.RemoteException;
+import java.rmi.registry.Registry;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.server.UnicastRemoteObject;
+
+import assignments.util.mainArgs.ClientArgsProcessor;
+import comp533.server.RemoteServer;
+import coupledsims.AStandAloneTwoCoupledHalloweenSimulations;
+import coupledsims.Simulation;
+import coupledsims.Simulation1;
+import main.BeauAndersonFinalProject;
+import stringProcessors.HalloweenCommandProcessor;
+import util.interactiveMethodInvocation.IPCMechanism;
+import util.interactiveMethodInvocation.SimulationParametersControllerFactory;
+import util.misc.ThreadSupport;
+import util.annotations.Tags;
+import util.tags.DistributedTags;
+import util.trace.bean.BeanTraceUtility;
+import util.trace.port.consensus.ProposalLearnedNotificationReceived;
+import util.trace.port.consensus.ProposalMade;
+import util.trace.port.consensus.ProposedStateSet;
+import util.trace.port.consensus.RemoteProposeRequestSent;
+import util.trace.port.consensus.communication.CommunicationStateNames;
+import util.trace.port.rpc.gipc.GIPCRPCTraceUtility;
+import util.trace.port.rpc.rmi.RMIObjectLookedUp;
+import util.trace.port.rpc.rmi.RMIObjectRegistered;
+import util.trace.port.rpc.rmi.RMIRegistryLocated;
+
+@Tags({DistributedTags.CLIENT, DistributedTags.CLIENT_CONFIGURER, DistributedTags.CLIENT_REMOTE_OBJECT, DistributedTags.RMI})
+public class ClientRMIImpl extends AStandAloneTwoCoupledHalloweenSimulations implements RemoteClient {
+	RemoteServer serverProxy;
+	InCoupler in;
+	OutCoupler out;
+	HalloweenCommandProcessor localSim;
+	public static int numClients = 0;
+	private int clientId;
+	private Registry rmiRegistry;
+	
+	public ClientRMIImpl() {
+		this.localSim = createSimulation(numClients + ":");
+		this.out = new RemoteOutCoupler(this.localSim, this.ipcMechanism);
+		this.localSim.addPropertyChangeListener(out);
+	}
+	
+	private HalloweenCommandProcessor createSimulation(String prefix) {
+		return 	BeauAndersonFinalProject.createSimulation(
+                prefix,
+                0,
+                Simulation.SIMULATION_Y_OFFSET,
+                Simulation.SIMULATION_WIDTH,
+                Simulation.SIMULATION_HEIGHT,
+                0,
+                Simulation.SIMULATION_Y_OFFSET);
+	}
+	
+	@Override
+	public void broadcastMetaState(boolean newValue) {
+		ProposalMade.newCase(this, CommunicationStateNames.BROADCAST_MODE, -1, newValue);
+		this.broadcastMetaState = newValue;
+		ProposedStateSet.newCase(this, CommunicationStateNames.BROADCAST_MODE, -1, newValue);
+		try {
+			this.serverProxy.receiveMetaState(newValue);
+			this.serverProxy.broadcastChanges(newValue, this.getId());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@Override
+	public void ipcMechanism(IPCMechanism newValue) {
+		// called when an IPC changing command is executed by the user
+		// change an internal local copy of a replicable object/variable whose logical, traced name, is “ipc_mechanism”. 
+		// choose the IPC mechanism used to communicate simulation commands based on this object/variable.
+		// use the ProposalMade trace class to trace the execution of the interactive command.
+		// use the ProposalSet trace class to trace the setting of the internal object/variable
+		ProposalMade.newCase(this, CommunicationStateNames.IPC_MECHANISM, -1, newValue);
+		ProposedStateSet.newCase(this, CommunicationStateNames.IPC_MECHANISM, -1, newValue);
+		this.ipcMechanism = newValue;
+		if (this.broadcastMetaState) {
+			// callback in server
+			try {
+				this.serverProxy.receiveIPCMechanism(newValue);
+				this.serverProxy.broadcastChanges(newValue, this.getId());
+			} catch (RemoteException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	private void exportClient() throws RemoteException {
+		try {
+			UnicastRemoteObject.exportObject(this, 0);
+			this.rmiRegistry.rebind(CLIENT, this);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static void main(String args[]) {
+		try {
+			ClientRMIImpl client = new ClientRMIImpl();
+			client.start(args);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	protected void init(String[] args) {
+		try {
+			this.setTracing();
+			this.locateRegistry(ClientArgsProcessor.getRegistryHost(args), ClientArgsProcessor.getRegistryPort(args));
+			this.findServer(args);
+			this.exportClient();
+			RMIObjectRegistered.newCase(this, CLIENT, this, rmiRegistry);
+			this.serverProxy.registerClient(this);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	private void findServer(String[] args) {
+		// TODO Auto-generated method stub
+		try {
+			this.serverProxy = (RemoteServer)this.rmiRegistry.lookup(RemoteServer.SERVER);
+			RMIObjectLookedUp.newCase(this, this.serverProxy, CLIENT, this.rmiRegistry);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
+
+	private void locateRegistry(String host, int port) {
+		try {
+			this.rmiRegistry = LocateRegistry.getRegistry(port);
+			RMIRegistryLocated.newCase(
+					this, 
+					host,
+					port,
+					rmiRegistry
+					);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
+
+	@Override
+	public void broadcastChangeRMI(String cmd) {
+		// invoke server callback to update all other proxies
+		try {
+			ProposalMade.newCase(this, CommunicationStateNames.COMMAND, -1, cmd);
+			this.localSim.setInputString(cmd);
+			RemoteProposeRequestSent.newCase(this, CommunicationStateNames.COMMAND, -1, cmd);
+//			System.out.println("broadcasting from client: " + this.getId());
+			this.serverProxy.broadcastChanges(cmd, this.getId());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
+	 @Override
+	 public void simulationCommand(String aCommand) {
+	     long aDelay = this.getDelay();
+	     if (aDelay > 0) {
+	         ThreadSupport.sleep(aDelay);
+	     }
+	     this.broadcastChangeRMI(aCommand);
+	 }
+	
+	
+	@Override
+	public void start(String args[]) {
+		// register client with server
+		try {
+			this.init(args);
+			SimulationParametersControllerFactory.getSingleton().addSimulationParameterListener(this);
+			SimulationParametersControllerFactory.getSingleton().processCommands();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public int getId() {
+		return this.clientId;
+	}
+	
+	public void setId(int id) {
+		this.clientId = id;
+//		System.out.println("setting rmi id: " + this.clientId);
+	}
+	
+	
+
+	void processArgs(String args[]) {
+		System.out.println("Client name:" + ClientArgsProcessor.getClientName(args));
+		System.out.println("Registry host:" + ClientArgsProcessor.getRegistryHost(args));
+		System.out.println("Registry port:" + ClientArgsProcessor.getRegistryPort(args));
+
+		System.out.println("Headless:" + ClientArgsProcessor.getHeadless(args));
+		System.setProperty("java.awt.headless", ClientArgsProcessor.getHeadless(args));
+	}
+	
+	@Override
+	public void receiveIPCChange(IPCMechanism ipc) {
+		ProposalLearnedNotificationReceived.newCase(this, CommunicationStateNames.IPC_MECHANISM, -1, ipc);
+		ProposalMade.newCase(this, CommunicationStateNames.IPC_MECHANISM, -1, ipc);
+		ProposedStateSet.newCase(this, CommunicationStateNames.IPC_MECHANISM, -1, ipc);
+		this.ipcMechanism = ipc;
+	}
+	
+	@Override
+	public void receiveMetaStateChange(boolean newValue) {
+		ProposalLearnedNotificationReceived.newCase(this, CommunicationStateNames.BROADCAST_MODE, -1, newValue);
+		ProposalMade.newCase(this, CommunicationStateNames.BROADCAST_MODE, -1, newValue);
+		ProposedStateSet.newCase(this, CommunicationStateNames.BROADCAST_MODE, -1, newValue);
+		this.broadcastMetaState = newValue;
+	}
+
+	@Override
+	public void receiveChangeRMI(String command) throws RemoteException {
+		// TODO Auto-generated method stu
+		ProposalLearnedNotificationReceived.newCase(this, CommunicationStateNames.COMMAND, -1, command);
+		ProposedStateSet.newCase(this, CommunicationStateNames.COMMAND, -1, command);
+		this.localSim.setInputString(command);
+	}
+
+}
+
+(DIFF_FROM_PREVIOUS_FILE)
+=2319	+ProposalMade.newCase(this, CommunicationStateNames.BROADCAST_MODE, -1, newValue);%0A%09%09	=14	-1	+MetaState = newValue;%0A%09%09	=1	+roposedStateSet.new	=1	-1	+as	=1	-1	+(t	=1	+is, Communic	=1	+tio	=1	-1	+StateName	=1	-1	+.BROADCAST_MODE,	=1	-1	+-1,	=1	-2	+newVal	=2	+)	=9	+%0A%09%09%09this.serverProxy.receiveMetaState(newValue);	=867	-3	=2	-2	+taSt	=1	-4	+te	=42	+this.server	=3	-9	+xy	=1	-1	+r	=1	-4	+c	=1	-3	=1	-3	+veIP	=1	-6	+Me	=1	+h	=1	-3	=1	-9	+i	=1	-14	+m(	=71	-91	=3323	+alMade.newCase(this, CommunicationStateNames.IPC_MECHANISM, -1, ipc);%0A%09%09Propos	=175	+ProposalLearnedNotificationReceived.newCase(	=4	+, CommunicationStateNames	=1	-1	+BROADCAST_MODE, -1, newValue);%0A%09%09P	=2	+posalM	=2	+e.newCase(this, Communi	=2	+tionStateName	=1	-3	+.BROAD	=1	+AST_	=1	+ODE, -1, n	=1	-2	+wV	=1	+lue);%0A%09%09ProposedStateSet.	=1	+ewCase(th	=2	+, Co	=1	+municationStateNames.BROADCAST_MODE,	=1	-1	+-1,	=1	+newValue);%0A%09%09	=1	+his.b	=1	+oadcastMetaState = newVal	=202	-2	+C	=1	+MM	=1	+N	=1	-9	=143
+//END OF FILE
+//START OF FILE: comp533/server/RemoteServer.java
+package comp533.server;
+
+import java.io.Serializable;
+import util.annotations.Tags;
+import util.interactiveMethodInvocation.IPCMechanism;
+
+import java.rmi.Remote;
+import java.rmi.RemoteException;
+
+import comp533.client.RemoteClient;
+import util.tags.DistributedTags;
+
+@Tags({DistributedTags.SERVER_REMOTE_INTERFACE})
+public interface RemoteServer extends Remote, Serializable {
+	public static final String SERVER = "SERVER";
+	void registerClient(RemoteClient client) throws RemoteException;
+	void broadcastChanges(Object cmd, int id) throws RemoteException;
+	void receiveIPCMechanism(IPCMechanism newValue) throws RemoteException;
+	void receiveMetaState(boolean newValue) throws RemoteException;
+}
+
+(DIFF_FROM_PREVIOUS_FILE)
+=91	+util.interactiveMethodInvocation.IPCMechanism;%0A%0Aimport 	=386	+) throws RemoteException;%0A%09void receiveIPCMechanism(IPCMechanism newValue) throws RemoteException;%0A%09void receiveMetaState(boolean newValue	=28
+//END OF FILE
+//START OF FILE: comp533/server/ServerNIO.java
+package comp533.server;
+
+public class ServerNIO {
+
+}
+
+//END OF FILE
+//START OF FILE: comp533/server/ServerGIPC.java
+package comp533.server;
+
+import java.rmi.RemoteException;
+import port.ATracingConnectionListener;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+import assignments.util.mainArgs.ServerArgsProcessor;
+import comp533.client.Client;
+import comp533.client.GIPCClient;
+import comp533.client.RemoteClient;
+import inputport.InputPort;
+import inputport.rpc.GIPCLocateRegistry;
+import inputport.rpc.GIPCRegistry;
+import util.annotations.Tags;
+import util.interactiveMethodInvocation.IPCMechanism;
+import util.interactiveMethodInvocation.SimulationParametersControllerFactory;
+import util.trace.bean.BeanTraceUtility;
+import util.trace.factories.FactoryTraceUtility;
+import util.trace.misc.ThreadDelayed;
+import util.trace.port.consensus.ConsensusTraceUtility;
+import util.trace.port.consensus.ProposalLearnedNotificationSent;
+import util.trace.port.consensus.RemoteProposeRequestReceived;
+import util.trace.port.consensus.communication.CommunicationStateNames;
+import util.trace.port.nio.NIOTraceUtility;
+import util.trace.port.rpc.gipc.GIPCObjectRegistered;
+import util.trace.port.rpc.gipc.GIPCRPCTraceUtility;
+import util.trace.port.rpc.gipc.GIPCRegistryCreated;
+import util.trace.port.rpc.gipc.GIPCRegistryLocated;
+import util.trace.port.rpc.rmi.RMITraceUtility;
+import util.tags.DistributedTags;
+
+@Tags({DistributedTags.SERVER, DistributedTags.SERVER_REMOTE_OBJECT, DistributedTags.SERVER_CONFIGURER, DistributedTags.RMI, DistributedTags.GIPC})
+public class ServerGIPC extends Server implements GIPCServer {
+	List<GIPCClient> clientProxies;
+	GIPCRegistry gipcRegistry;
+	
+	public ServerGIPC() {
+		this.clientProxies = new ArrayList<>();
+	}
+	
+	@Override
+	public void setTracing() {
+		FactoryTraceUtility.setTracing();
+		BeanTraceUtility.setTracing();
+		RMITraceUtility.setTracing();
+		ConsensusTraceUtility.setTracing();
+        ThreadDelayed.enablePrint();
+        GIPCRPCTraceUtility.setTracing();
+        NIOTraceUtility.setTracing();
+        super.trace(true);
+	}
+	
+	
+	@Override
+	protected void init(String args[]) {
+		this.setTracing();
+		super.init(args);
+		this.createRegistry(args);
+		this.registerServer();
+		InputPort gipcPort = this.gipcRegistry.getInputPort();
+		ATracingConnectionListener listener = new ATracingConnectionListener(gipcPort);
+        gipcPort.addConnectionListener(listener);
+
+	}
+
+	@Override
+	public void registerClientGIPC(GIPCClient client) {
+		// TODO Auto-generated method stub
+		this.clientProxies.add(client);
+		 try {
+			 client.setId(this.clientProxies.size());
+			 System.out.println("gipc id init: " + client.getId());
+		 } catch (Exception e) {
+			 e.printStackTrace();
+		 }
+		
+	}
+
+	@Override
+	public void broadcastChangesGIPC(String cmd, int id) throws RemoteException {
+		RemoteProposeRequestReceived.newCase(this, CommunicationStateNames.COMMAND, -1, cmd);
+		// out coupler calls this method. If the IPCMechanism is GIPC, coupler will call this method
+//		System.out.println("originating client gipc id: " + id);
+		for (GIPCClient c : clientProxies) {
+//			System.out.println("gipc id from server: " + c.getId());
+			if (c.getId() != id) {
+				ProposalLearnedNotificationSent.newCase(this, CommunicationStateNames.COMMAND, -1, cmd);
+				System.out.println("broadcasting to gipc id from server: " + c.getId());
+				((GIPCClient)c).receiveChangeGIPC(cmd);
+			}
+		}
+		
+	}
+	
+	
+	
+	@Override
+	public void start(String[] args) {
+		this.init(args);
+		SimulationParametersControllerFactory.getSingleton().addSimulationParameterListener(this);
+		SimulationParametersControllerFactory.getSingleton().processCommands();
+		
+	}
+	
+	public void registerServer() {
+		try {
+			GIPCObjectRegistered.newCase(this, GIPCServer.SERVER, this.gipcRegistry, this.gipcRegistry);
+			this.gipcRegistry.rebind(GIPCServer.SERVER, this);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void createRegistry(String[] args) {
+		try {
+			GIPCRegistryCreated.newCase(this, ServerArgsProcessor.getGIPCServerPort(args));
+			this.gipcRegistry= GIPCLocateRegistry.createRegistry(ServerArgsProcessor.getGIPCServerPort(args));
+			
+//			GIPCRegistryLocated.newCase(this, ServerArgsProcessor.getRegistryHost(args), ServerArgsProcessor.getRegistryPort(args), SERVER);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
+	public static void main(String[] args) {
+		FactoryTraceUtility.setTracing();
+		BeanTraceUtility.setTracing();
+		RMITraceUtility.setTracing();
+		ConsensusTraceUtility.setTracing();
+		ThreadDelayed.enablePrint();
+		GIPCRPCTraceUtility.setTracing();
+		NIOTraceUtility.setTracing();
+
+		GIPCServer gipcServer = new ServerGIPC();
+		gipcServer.start(args);
+	}
+
+}
+
+(DIFF_FROM_PREVIOUS_FILE)
+=476	+interactiveMethodInvocation.IPCMechanism;%0Aimport util.interactiveMethodInvocation.SimulationParametersControllerFactory;%0Aimport util.	=170	+;%0Aimport util.trace.port.consensus.ProposalLearnedNotificationSent;%0Aimport util.trace.port.consensus.RemoteProposeRequestReceived;%0Aimport util.trace.port.consensus.communication.CommunicationStateNames	=1757	+RemoteProposeRequestReceived.newCase(this, CommunicationStateNames.COMMAND, -1, cmd);%0A%09%09	=93	+//	=98	+//	=85	+%0A%09%09%09%09ProposalLearnedNotificationSent.newCase(this, CommunicationStateNames.COMMAND, -1, cmd);	=140	+%0A%09%0A%09	=64	+%0A%09%09SimulationParametersControllerFactory.getSingleton().addSimulationParameterListener(this);%0A%09%09SimulationParametersControllerFactory.getSingleton().processCommands();%0A%09%09	=1050
+//END OF FILE
+
+//SESSION END
+
+//SESSION START
+13,Tue Apr 30 01:44:51 EDT 2024,84
+//START OF FILE: comp533/A5Grader.java
+package comp533;
+import grader.basics.execution.BasicProjectExecution;
+import gradingTools.comp533.flexible.PortNumbers;
+import gradingTools.comp533s24.assignment5.S24Assignment5Suite;
+import trace.grader.basics.GraderBasicsTraceUtility;
+
+public class A5Grader {
+	// if you set this to false, grader steps will not be traced
+	public static void main(String args[]) {
+			GraderBasicsTraceUtility.setTracerShowInfo(true);	
+			// if you set this to false, all grader steps will be traced,
+			// not just the ones that failed		
+			GraderBasicsTraceUtility.setBufferTracedMessages(true);
+			// Change this number if a test trace gets longer than 600 and is clipped
+			int maxPrintedTraces = 100;
+			GraderBasicsTraceUtility.setMaxPrintedTraces(maxPrintedTraces);
+			// Change this number if all traces together are longer than 2000
+			int maxTraces = 2000;
+			GraderBasicsTraceUtility.setMaxTraces(maxTraces);
+			// Change this number if your process times out prematurely
+			int processTimeOut = 45;
+			BasicProjectExecution.setProcessTimeOut(processTimeOut);
+			// You need to always call such a method
+			PortNumbers.setTestPortRMIStart(8001);
+			PortNumbers.setTestPortRMIStart(9001);
+			PortNumbers.setTestPortGIPCStart(11000);
+			PortNumbers.setTestPortGIPCEnd(12000);
+			S24Assignment5Suite.main(args);
+		}
+}
+
+(DIFF_FROM_PREVIOUS_FILE)
+=1126	+RMIStart(8001);%0A%09%09%09PortNumbers.setTestPortRMIStart(9001);%0A%09%09%09PortNumbers.setTestPort	=101
+//END OF FILE
+
+//SESSION END
+
+//SESSION START
+14,Tue Apr 30 01:53:58 EDT 2024,-170
+//START OF FILE: comp533/A5Grader.java
+package comp533;
+import grader.basics.execution.BasicProjectExecution;
+import gradingTools.comp533.flexible.PortNumbers;
+import gradingTools.comp533s24.assignment5.S24Assignment5Suite;
+import trace.grader.basics.GraderBasicsTraceUtility;
+
+public class A5Grader {
+	// if you set this to false, grader steps will not be traced
+	public static void main(String args[]) {
+			GraderBasicsTraceUtility.setTracerShowInfo(true);	
+			// if you set this to false, all grader steps will be traced,
+			// not just the ones that failed		
+			GraderBasicsTraceUtility.setBufferTracedMessages(true);
+			// Change this number if a test trace gets longer than 600 and is clipped
+			int maxPrintedTraces = 100;
+			GraderBasicsTraceUtility.setMaxPrintedTraces(maxPrintedTraces);
+			// Change this number if all traces together are longer than 2000
+			int maxTraces = 2000;
+			GraderBasicsTraceUtility.setMaxTraces(maxTraces);
+			// Change this number if your process times out prematurely
+			int processTimeOut = 45;
+			BasicProjectExecution.setProcessTimeOut(processTimeOut);
+			// You need to always call such a method
+			S24Assignment5Suite.main(args);
+		}
+}
+
+(DIFF_FROM_PREVIOUS_FILE)
+=1103	-170	=38
+//END OF FILE
+
+//SESSION END
+
+//SESSION START
+15,Tue Apr 30 02:02:43 EDT 2024,128
+//START OF FILE: comp533/A5Grader.java
+package comp533;
+import grader.basics.execution.BasicProjectExecution;
+import gradingTools.comp533.flexible.PortNumbers;
+import gradingTools.comp533s24.assignment5.S24Assignment5Suite;
+import trace.grader.basics.GraderBasicsTraceUtility;
+
+public class A5Grader {
+	// if you set this to false, grader steps will not be traced
+	public static void main(String args[]) {
+			GraderBasicsTraceUtility.setTracerShowInfo(true);	
+			// if you set this to false, all grader steps will be traced,
+			// not just the ones that failed		
+			GraderBasicsTraceUtility.setBufferTracedMessages(true);
+			// Change this number if a test trace gets longer than 600 and is clipped
+			int maxPrintedTraces = 100;
+			GraderBasicsTraceUtility.setMaxPrintedTraces(maxPrintedTraces);
+			// Change this number if all traces together are longer than 2000
+			int maxTraces = 2000;
+			GraderBasicsTraceUtility.setMaxTraces(maxTraces);
+			// Change this number if your process times out prematurely
+			int processTimeOut = 45;
+			BasicProjectExecution.setProcessTimeOut(processTimeOut);
+			// You need to always call such a method
+			PortNumbers.setTestPortRMIEnd(7001);
+			PortNumbers.setTestPortGIPCStart(8001);
+			PortNumbers.setTestPortGIPCEnd(9001);
+			
+			S24Assignment5Suite.main(args);
+		}
+}
+
+(DIFF_FROM_PREVIOUS_FILE)
+=1103	+PortNumbers.setTestPortRMIEnd(7001);%0A%09%09%09PortNumbers.setTestPortGIPCStart(8001);%0A%09%09%09PortNumbers.setTestPortGIPCEnd(9001);%0A%09%09%09%0A%09%09%09	=38
+//END OF FILE
+
+//SESSION END
+
+//SESSION START
+19,Tue Apr 30 02:30:09 EDT 2024,42
+//START OF FILE: comp533/client/RemoteClient.java
+package comp533.client;
+
+import java.io.Serializable;
+import java.rmi.Remote;
+import java.rmi.RemoteException;
+
+import util.annotations.Tags;
+import util.interactiveMethodInvocation.IPCMechanism;
+import util.tags.DistributedTags;
+
+@Tags({DistributedTags.CLIENT_REMOTE_INTERFACE, DistributedTags.RMI})
+public interface RemoteClient extends Remote, Serializable {
+	public static final String CLIENT = "CLIENT";
+	int getId() throws RemoteException;
+	void setId(int id) throws RemoteException;
+	void broadcastChangeRMI(String command) throws RemoteException;
+	void receiveChangeRMI(String command) throws RemoteException;
+	void receiveIPCChange(IPCMechanism ipc) throws RemoteException;
+	void receiveMetaStateChange(boolean newValue) throws RemoteException;
+	void ipcMechanism(IPCMechanism newValue) throws RemoteException;
+}
+
+(DIFF_FROM_PREVIOUS_FILE)
+=277	+, DistributedTags.RMI	=524
+//END OF FILE
+//START OF FILE: comp533/server/RemoteServer.java
+package comp533.server;
+
+import java.io.Serializable;
+import util.annotations.Tags;
+import util.interactiveMethodInvocation.IPCMechanism;
+
+import java.rmi.Remote;
+import java.rmi.RemoteException;
+
+import comp533.client.RemoteClient;
+import util.tags.DistributedTags;
+
+@Tags({DistributedTags.SERVER_REMOTE_INTERFACE, DistributedTags.RMI})
+public interface RemoteServer extends Remote, Serializable {
+	public static final String SERVER = "SERVER";
+	void registerClient(RemoteClient client) throws RemoteException;
+	void broadcastChanges(Object cmd, int id) throws RemoteException;
+	void receiveIPCMechanism(IPCMechanism newValue) throws RemoteException;
+	void receiveMetaState(boolean newValue) throws RemoteException;
+}
+
+(DIFF_FROM_PREVIOUS_FILE)
+=314	+, DistributedTags.RMI	=384
+//END OF FILE
+
+//SESSION END
+
+//SESSION START
+21,Tue Apr 30 02:50:30 EDT 2024,15
+//START OF FILE: comp533/server/Server.java
+package comp533.server;
+
+import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
+import java.rmi.server.UnicastRemoteObject;
+import java.util.ArrayList;
+import java.util.List;
+
+import assignments.util.mainArgs.RegistryArgsProcessor;
+import assignments.util.mainArgs.ServerArgsProcessor;
+import comp533.client.RemoteClient;
+import coupledsims.AStandAloneTwoCoupledHalloweenSimulations;
+import util.interactiveMethodInvocation.IPCMechanism;
+import util.interactiveMethodInvocation.SimulationParametersControllerFactory;
+import util.annotations.Tags;
+import util.tags.DistributedTags;
+import util.trace.port.consensus.ProposalLearnedNotificationSent;
+import util.trace.port.consensus.ProposalMade;
+import util.trace.port.consensus.ProposedStateSet;
+import util.trace.port.consensus.RemoteProposeRequestReceived;
+import util.trace.port.consensus.RemoteProposeRequestSent;
+import util.trace.port.consensus.communication.CommunicationStateNames;
+import util.trace.port.rpc.rmi.RMIObjectRegistered;
+import util.trace.port.rpc.rmi.RMIRegistryLocated;
+
+@Tags({DistributedTags.SERVER_REMOTE_OBJECT, DistributedTags.SERVER_CONFIGURER, DistributedTags.RMI})
+public class Server extends AStandAloneTwoCoupledHalloweenSimulations implements RemoteServer {
+	private static final String SERVER = "SERVER";
+	// register server proxy with RMIRegisty
+	// provide method to register client in coupler proxies with server
+	// provide method to notify all
+	// when a client proxy forwards an input to the server, the server sends this message to
+	// all other in-couplers
+
+	List<RemoteClient> clientProxies;
+	Registry rmiRegistry;
+
+	public Server() {
+
+		this.clientProxies = new ArrayList<>();
+	}
+	
+	@Override
+	public void registerClient(RemoteClient client) {
+		clientProxies.add(client);
+		try {
+			client.setId(clientProxies.size());
+			 System.out.println("rmi id init: " + client.getId());
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	void processArgs(String[] args) {
+		System.out.println("Registry host:" + ServerArgsProcessor.getRegistryHost(args));
+		System.out.println("Registry port:" + ServerArgsProcessor.getRegistryPort(args));
+		
+	}
+	
+	
+	@Override
+	protected void init(String args[]) {
+		this.processArgs(args);
+		this.setTracing();
+		try {
+			this.rmiRegistry = LocateRegistry.getRegistry(ServerArgsProcessor.getRegistryPort(args));
+			RMIRegistryLocated.newCase(Server.class, 
+					ServerArgsProcessor.getRegistryHost(args), 
+					ServerArgsProcessor.getRegistryPort(args),
+					this.rmiRegistry);
+			RemoteServer serverProxy = (RemoteServer)UnicastRemoteObject.exportObject(this, 0);
+			RMIObjectRegistered.newCase(Server.class, SERVER, serverProxy, this.rmiRegistry);
+			this.rmiRegistry.rebind(SERVER, this);
+		} catch (RemoteException e) { // TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+
+	@Override
+	public void ipcMechanism(IPCMechanism newValue) {
+		ProposalMade.newCase(this, CommunicationStateNames.IPC_MECHANISM, -1, newValue);
+		ProposedStateSet.newCase(this, CommunicationStateNames.IPC_MECHANISM, -1, newValue);
+		setIPCMechanism(newValue);
+		if (this.broadcastMetaState) {
+			// callback in server
+			try {
+				this.broadcastChanges(newValue, -1);
+				RemoteProposeRequestSent.newCase(this, CommunicationStateNames.COMMAND, -1, newValue);
+			} catch (RemoteException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	@Override
+	public void broadcastMetaState(boolean newValue) {
+		ProposalMade.newCase(this, CommunicationStateNames.BROADCAST_MODE, -1, newValue);
+		setBroadcastMetaState(newValue);
+		ProposedStateSet.newCase(this, CommunicationStateNames.BROADCAST_MODE, -1, newValue);
+		try {
+			RemoteProposeRequestSent.newCase(this, CommunicationStateNames.BROADCAST_MODE, -1, newValue);
+			this.broadcastChanges(newValue, -1);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
+
+	public static void main(String args[]) {
+		Server server = new Server();
+		server.init(args);
+	
+		// blocking server start
+		server.start();
+			
+	}
+	
+
+	@Override
+	public void receiveMetaState(boolean newValue) {
+		setBroadcastMetaState(newValue);
+	}
+
+	
+	@Override
+	public void receiveIPCMechanism(IPCMechanism newValue) {
+		setIPCMechanism(newValue);
+		this.ipcMechanism = newValue;
+	}
+
+	
+	public void start() {
+		SimulationParametersControllerFactory.getSingleton().addSimulationParameterListener(this);
+        SimulationParametersControllerFactory.getSingleton().processCommands();
+	}
+
+	@Override
+	public void broadcastChanges(Object msg, int id) throws RemoteException {
+		RemoteProposeRequestReceived.newCase(this, CommunicationStateNames.COMMAND, -1, msg);
+		// broadcasts messages to incouplers of clients except for the original sender
+		System.out.println("originating rmi id: " + id);
+		for (RemoteClient c : clientProxies) {
+			try {
+				System.out.println("rmi id from server: " + c.getId());
+				if (c.getId() != id) {
+					System.out.println("broadcasting to rmi id from server: " + c.getId());
+					if (msg instanceof IPCMechanism)
+						c.receiveIPCChange((IPCMechanism)msg);
+					else if (msg instanceof String)
+						c.receiveChangeRMI((String)msg);
+					else
+						c.receiveMetaStateChange((boolean)msg);	
+					ProposalLearnedNotificationSent.newCase(this, CommunicationStateNames.BROADCAST_MODE, -1, msg);
+					}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+
+}
+(DIFF_FROM_PREVIOUS_FILE)
+=1126	-24	=2029	+se	=1	-7	+IPC	=9	-3	+(	=8	+)	=461	-3	=1	-2	+etB	=17	-3	+(	=8	+)	=511	-3	=1	-2	+etB	=17	-3	+(	=8	+)	=76	+%0A%09%09setIPCMechanism(newValue);	=1150
+//END OF FILE
+//START OF FILE: comp533/client/GIPCClientImpl.java
+package comp533.client;
+
+import java.rmi.RemoteException;
+
+import assignments.util.mainArgs.ClientArgsProcessor;
+import comp533.server.GIPCServer;
+import comp533.server.ServerGIPC;
+import coupledsims.AStandAloneTwoCoupledHalloweenSimulations;
+import inputport.rpc.GIPCLocateRegistry;
+import inputport.rpc.GIPCRegistry;
+import util.annotations.Tags;
+import util.interactiveMethodInvocation.IPCMechanism;
+import util.interactiveMethodInvocation.SimulationParametersControllerFactory;
+import util.tags.DistributedTags;
+import util.trace.bean.BeanTraceUtility;
+import util.trace.factories.FactoryTraceUtility;
+import util.trace.misc.ThreadDelayed;
+import util.trace.port.consensus.ConsensusTraceUtility;
+import util.trace.port.consensus.ProposalLearnedNotificationReceived;
+import util.trace.port.consensus.ProposalMade;
+import util.trace.port.consensus.ProposedStateSet;
+import util.trace.port.consensus.RemoteProposeRequestSent;
+import util.trace.port.consensus.communication.CommunicationStateNames;
+import util.trace.port.nio.NIOTraceUtility;
+import util.trace.port.rpc.gipc.GIPCObjectLookedUp;
+import util.trace.port.rpc.gipc.GIPCRPCTraceUtility;
+import util.trace.port.rpc.gipc.GIPCRegistryLocated;
+import util.trace.port.rpc.rmi.RMITraceUtility;
+
+@Tags({DistributedTags.CLIENT, DistributedTags.CLIENT_CONFIGURER, DistributedTags.CLIENT_REMOTE_OBJECT, DistributedTags.RMI, DistributedTags.GIPC})
+public class GIPCClientImpl extends ClientRMIImpl implements GIPCClient, RemoteClient {
+	private GIPCServer serverProxy;
+	private int gipcId;
+	private GIPCRegistry gipcRegistry;
+	private static int id = 0;
+	
+	public GIPCClientImpl() {
+		id++;
+	}
+	
+	public void broadcastChangeGIPC(String command) {
+		// notify GIPC server of local change in order to keep replicated objects consistent
+		try {
+			ProposalMade.newCase(this, CommunicationStateNames.COMMAND, -1, command);
+			this.localSim.setInputString(command);
+			RemoteProposeRequestSent.newCase(this, CommunicationStateNames.COMMAND, -1, command);
+			System.out.println("broadcasting from client: " + this.getId());
+			this.serverProxy.broadcastChangesGIPC(command, this.getId());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@Override
+	public int getId() {
+		return this.gipcId;
+	}
+	
+	@Override
+	public void setId(int newVal) {
+		this.gipcId = newVal;
+		System.out.println("setting gipc id: " + this.getId());
+	}
+	
+	public void locateRegistry(String[] args) {
+		System.out.println(id);
+		try {
+			GIPCRegistryLocated.newCase(
+					this, 
+					ClientArgsProcessor.getRegistryHost(args), 
+					ClientArgsProcessor.getGIPCPort(args), 
+					String.valueOf(id));
+			this.gipcRegistry = GIPCLocateRegistry.getRegistry(ClientArgsProcessor.getRegistryHost(args), 
+					ClientArgsProcessor.getGIPCPort(args), 
+					ClientArgsProcessor.DEFAULT_CLIENT_NAME);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@Override
+	protected void init(String[] args) {
+		this.setTracing();
+		super.init(args);
+		this.locateRegistry(args);
+		this.findGIPCServerProxy();
+		try {
+			this.serverProxy.registerClientGIPC(this);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	@Override
+	public void simulationCommand(String command) {
+		if (getIPCMechanism().equals(IPCMechanism.RMI)) {
+			super.simulationCommand(command);
+		} else {
+			this.broadcastChangeGIPC(command);
+		}
+	}
+
+	@Override
+	public void receiveChangeGIPC(String command) {
+		// receiving message from GIPC server
+		ProposalLearnedNotificationReceived.newCase(this, CommunicationStateNames.BROADCAST_MODE, -1, command);
+		ProposedStateSet.newCase(this, CommunicationStateNames.COMMAND, -1, command);
+		this.localSim.setInputString(command);
+	}
+	
+	public void findGIPCServerProxy() {
+		try {
+			this.serverProxy = (GIPCServer) gipcRegistry.lookup(GIPCServer.class, GIPCServer.SERVER);
+			GIPCObjectLookedUp.newCase(this, serverProxy, GIPCServer.class, GIPCServer.SERVER, gipcRegistry);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	
+	@Override
+	public void setTracing() {
+		super.setTracing();
+		BeanTraceUtility.setTracing();
+		GIPCRPCTraceUtility.setTracing();
+		NIOTraceUtility.setTracing();
+	}
+	
+	@Override
+	public void start(String[] args) {
+		try {
+			this.init(args);
+			SimulationParametersControllerFactory.getSingleton().addSimulationParameterListener(this);
+			SimulationParametersControllerFactory.getSingleton().processCommands();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static void main(String[] args) {
+		FactoryTraceUtility.setTracing();
+		BeanTraceUtility.setTracing();
+		RMITraceUtility.setTracing();
+		ConsensusTraceUtility.setTracing();
+		ThreadDelayed.enablePrint();
+		GIPCRPCTraceUtility.setTracing();
+		NIOTraceUtility.setTracing();
+
+		GIPCClient client = new GIPCClientImpl();
+		// init client
+		client.start(args);
+	}
+}
+(DIFF_FROM_PREVIOUS_FILE)
+=3202	+ge	=1	-7	+IPC	=9	+()	=1593
+//END OF FILE
+//START OF FILE: comp533/client/RemoteOutCoupler.java
+package comp533.client;
+import java.beans.PropertyChangeEvent;
+import java.rmi.RemoteException;
+
+import assignments.util.inputParameters.AnAbstractSimulationParametersBean;
+import stringProcessors.HalloweenCommandProcessor;
+import util.annotations.Tags;
+import util.interactiveMethodInvocation.IPCMechanism;
+import util.tags.DistributedTags;
+import util.trace.port.consensus.ProposalMade;
+import util.trace.port.consensus.RemoteProposeRequestSent;
+import util.trace.port.consensus.communication.CommunicationStateNames;
+import util.trace.trickOrTreat.LocalCommandObserved;
+
+@Tags({DistributedTags.CLIENT_OUT_COUPLER, DistributedTags.RMI, DistributedTags.GIPC})
+public class RemoteOutCoupler extends AnAbstractSimulationParametersBean implements OutCoupler {
+	private static final long serialVersionUID = 1L;
+	// sends message to Server that change has occurred
+	// observes client
+	HalloweenCommandProcessor localSim;
+	IPCMechanism mode;
+
+	public RemoteOutCoupler(HalloweenCommandProcessor observable, IPCMechanism mode) {
+		this.localSim = observable;
+		this.mode = mode;
+	}
+	
+
+	@Override
+	public void propertyChange(PropertyChangeEvent evt) {
+		// new command is received, update local sim and notify server to broadcast changes to in couplers
+		if (!evt.getPropertyName().equals("InputString")) return;
+		String newCommand = (String)evt.getNewValue();
+		LocalCommandObserved.newCase(this, newCommand);
+		if (getIPCMechanism().equals(IPCMechanism.RMI))
+		localSim.processCommand(newCommand);
+	}
+
+
+	@Override
+	public void broadcastToServer(String command) throws RemoteException {
+		// TODO Auto-generated method stub
+		
+	}
+}
+
+(DIFF_FROM_PREVIOUS_FILE)
+=691	+extends AnAbstractSimulationParametersBean 	=670	+%0A%09%09if (getIPCMechanism().equals(IPCMechanism.RMI))	=173
+//END OF FILE
+//START OF FILE: comp533/client/ClientRMIImpl.java
+package comp533.client;
+
+import java.rmi.RemoteException;
+import java.rmi.registry.Registry;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.server.UnicastRemoteObject;
+
+import assignments.util.mainArgs.ClientArgsProcessor;
+import comp533.server.RemoteServer;
+import coupledsims.AStandAloneTwoCoupledHalloweenSimulations;
+import coupledsims.Simulation;
+import coupledsims.Simulation1;
+import main.BeauAndersonFinalProject;
+import stringProcessors.HalloweenCommandProcessor;
+import util.interactiveMethodInvocation.IPCMechanism;
+import util.interactiveMethodInvocation.SimulationParametersControllerFactory;
+import util.misc.ThreadSupport;
+import util.annotations.Tags;
+import util.tags.DistributedTags;
+import util.trace.bean.BeanTraceUtility;
+import util.trace.port.consensus.ProposalLearnedNotificationReceived;
+import util.trace.port.consensus.ProposalMade;
+import util.trace.port.consensus.ProposedStateSet;
+import util.trace.port.consensus.RemoteProposeRequestSent;
+import util.trace.port.consensus.communication.CommunicationStateNames;
+import util.trace.port.rpc.gipc.GIPCRPCTraceUtility;
+import util.trace.port.rpc.rmi.RMIObjectLookedUp;
+import util.trace.port.rpc.rmi.RMIObjectRegistered;
+import util.trace.port.rpc.rmi.RMIRegistryLocated;
+
+@Tags({DistributedTags.CLIENT_CONFIGURER, DistributedTags.RMI})
+public class ClientRMIImpl extends AStandAloneTwoCoupledHalloweenSimulations implements RemoteClient {
+	RemoteServer serverProxy;
+	InCoupler in;
+	OutCoupler out;
+	HalloweenCommandProcessor localSim;
+	public static int numClients = 0;
+	private int clientId;
+	private Registry rmiRegistry;
+	
+	public ClientRMIImpl() {
+		this.localSim = createSimulation(numClients + ":");
+		this.out = new RemoteOutCoupler(this.localSim, getIPCMechanism());
+		this.localSim.addPropertyChangeListener(out);
+	}
+	
+	private HalloweenCommandProcessor createSimulation(String prefix) {
+		return 	BeauAndersonFinalProject.createSimulation(
+                prefix,
+                0,
+                Simulation.SIMULATION_Y_OFFSET,
+                Simulation.SIMULATION_WIDTH,
+                Simulation.SIMULATION_HEIGHT,
+                0,
+                Simulation.SIMULATION_Y_OFFSET);
+	}
+	
+	@Override
+	public void broadcastMetaState(boolean newValue) {
+		ProposalMade.newCase(this, CommunicationStateNames.BROADCAST_MODE, -1, newValue);
+		setBroadcastMetaState(newValue);
+		ProposedStateSet.newCase(this, CommunicationStateNames.BROADCAST_MODE, -1, newValue);
+		try {
+			this.serverProxy.receiveMetaState(newValue);
+			this.serverProxy.broadcastChanges(newValue, this.getId());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@Override
+	public void ipcMechanism(IPCMechanism newValue) {
+		// called when an IPC changing command is executed by the user
+		// change an internal local copy of a replicable object/variable whose logical, traced name, is “ipc_mechanism”. 
+		// choose the IPC mechanism used to communicate simulation commands based on this object/variable.
+		// use the ProposalMade trace class to trace the execution of the interactive command.
+		// use the ProposalSet trace class to trace the setting of the internal object/variable
+		ProposalMade.newCase(this, CommunicationStateNames.IPC_MECHANISM, -1, newValue);
+		ProposedStateSet.newCase(this, CommunicationStateNames.IPC_MECHANISM, -1, newValue);
+		setIPCMechanism(newValue);
+		if (this.broadcastMetaState) {
+			// callback in server
+			try {
+				this.serverProxy.receiveIPCMechanism(newValue);
+				this.serverProxy.broadcastChanges(newValue, this.getId());
+			} catch (RemoteException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	private void exportClient() throws RemoteException {
+		try {
+			UnicastRemoteObject.exportObject(this, 0);
+			this.rmiRegistry.rebind(CLIENT, this);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static void main(String args[]) {
+		try {
+			ClientRMIImpl client = new ClientRMIImpl();
+			client.start(args);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	protected void init(String[] args) {
+		try {
+			this.setTracing();
+			this.locateRegistry(ClientArgsProcessor.getRegistryHost(args), ClientArgsProcessor.getRegistryPort(args));
+			this.findServer(args);
+			this.exportClient();
+			RMIObjectRegistered.newCase(this, CLIENT, this, rmiRegistry);
+			this.serverProxy.registerClient(this);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	private void findServer(String[] args) {
+		// TODO Auto-generated method stub
+		try {
+			this.serverProxy = (RemoteServer)this.rmiRegistry.lookup(RemoteServer.SERVER);
+			RMIObjectLookedUp.newCase(this, this.serverProxy, CLIENT, this.rmiRegistry);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
+
+	private void locateRegistry(String host, int port) {
+		try {
+			this.rmiRegistry = LocateRegistry.getRegistry(port);
+			RMIRegistryLocated.newCase(
+					this, 
+					host,
+					port,
+					rmiRegistry
+					);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
+
+	@Override
+	public void broadcastChangeRMI(String cmd) {
+		// invoke server callback to update all other proxies
+		try {
+			ProposalMade.newCase(this, CommunicationStateNames.COMMAND, -1, cmd);
+			this.localSim.setInputString(cmd);
+			RemoteProposeRequestSent.newCase(this, CommunicationStateNames.COMMAND, -1, cmd);
+//			System.out.println("broadcasting from client: " + this.getId());
+			this.serverProxy.broadcastChanges(cmd, this.getId());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
+	 @Override
+	 public void simulationCommand(String aCommand) {
+	     long aDelay = this.getDelay();
+	     if (aDelay > 0) {
+	         ThreadSupport.sleep(aDelay);
+	     }
+	     this.broadcastChangeRMI(aCommand);
+	 }
+	
+	
+	@Override
+	public void start(String args[]) {
+		// register client with server
+		try {
+			this.init(args);
+			SimulationParametersControllerFactory.getSingleton().addSimulationParameterListener(this);
+			SimulationParametersControllerFactory.getSingleton().processCommands();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public int getId() {
+		return this.clientId;
+	}
+	
+	public void setId(int id) {
+		this.clientId = id;
+//		System.out.println("setting rmi id: " + this.clientId);
+	}
+	
+	
+
+	void processArgs(String args[]) {
+		System.out.println("Client name:" + ClientArgsProcessor.getClientName(args));
+		System.out.println("Registry host:" + ClientArgsProcessor.getRegistryHost(args));
+		System.out.println("Registry port:" + ClientArgsProcessor.getRegistryPort(args));
+
+		System.out.println("Headless:" + ClientArgsProcessor.getHeadless(args));
+		System.setProperty("java.awt.headless", ClientArgsProcessor.getHeadless(args));
+	}
+	
+	@Override
+	public void receiveIPCChange(IPCMechanism ipc) {
+		ProposalLearnedNotificationReceived.newCase(this, CommunicationStateNames.IPC_MECHANISM, -1, ipc);
+		ProposalMade.newCase(this, CommunicationStateNames.IPC_MECHANISM, -1, ipc);
+		ProposedStateSet.newCase(this, CommunicationStateNames.IPC_MECHANISM, -1, ipc);
+		setIPCMechanism(ipc);
+	}
+	
+	@Override
+	public void receiveMetaStateChange(boolean newValue) {
+		ProposalLearnedNotificationReceived.newCase(this, CommunicationStateNames.BROADCAST_MODE, -1, newValue);
+		ProposalMade.newCase(this, CommunicationStateNames.BROADCAST_MODE, -1, newValue);
+		ProposedStateSet.newCase(this, CommunicationStateNames.BROADCAST_MODE, -1, newValue);
+		setBroadcastMetaState(newValue);
+	}
+
+	@Override
+	public void receiveChangeRMI(String command) throws RemoteException {
+		// TODO Auto-generated method stu
+		ProposalLearnedNotificationReceived.newCase(this, CommunicationStateNames.COMMAND, -1, command);
+		ProposedStateSet.newCase(this, CommunicationStateNames.COMMAND, -1, command);
+		this.localSim.setInputString(command);
+	}
+
+}
+
+(DIFF_FROM_PREVIOUS_FILE)
+=1288	-24	=11	-38	=443	+ge	=1	-7	+IPC	=9	+()	=582	-3	=1	-2	+etB	=17	-3	+(	=8	+)	=962	+se	=1	-7	+IPC	=9	-3	+(	=8	+)	=3658	+se	=1	-7	+IPC	=9	-3	+(	=3	+)	=355	-3	=1	-2	+etB	=17	-3	+(	=8	+)	=350
+//END OF FILE
+
+//SESSION END
