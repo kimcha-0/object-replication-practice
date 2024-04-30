@@ -1,17 +1,17 @@
 *PRE_OUTPUT*
->>Running suite Assignment5TwoClientSuite
+>>Running suite A5GeneralStyleSuite
 <<
->>Running test GIPCRMITwoClientConnection
+>>Running test A5NoCheckstyleWarnings
 <<
->>Running test GIPCRMITwoClientReadWriteNonAtomic
+>>Running test A5NamedConstants
 <<
->>Running test GIPCRMIClientMetaStateNoBroadcast
+>>Running test A5PublicMethodsOverride
 <<
->>Running test GIPCRMIClientMetaStateBroadcast
+>>Running test A5InterfaceAsType
 <<
->>Running test GIPCRMIServerMetaStateNoBroadcast
+>>Running test A5MnemonicNames
 <<
->>Running test GIPCRMIServerMetaStateBroadcast
+>>Running test A5AccessModifiersMatched
 <<
 *OUTPUT*
 *ERROR*
@@ -50,5 +50,32 @@ GIPCRMIServerMetaStateNoBroadcast,100.0% complete,20.0,20.0,
 <<
 >>Test Result:
 GIPCRMIServerMetaStateBroadcast,100.0% complete,20.0,20.0,
+<<
+>>Test Result:
+GIPCRMIStaticArguments,87.5% complete,17.5,20.0,Error in client (args as 'nio-host nio-port name headless registry-host registry-port gipc-port'): Client not using provided name.
+<<
+>>Test Result:
+GIPCRMIOneClientConnection,100.0% complete,20.0,20.0,
+<<
+>>Test Result:
+GIPCRMIOneClientReadWriteNonAtomic,100.0% complete,20.0,20.0,
+<<
+>>Test Result:
+A5NoCheckstyleWarnings,0.0% complete,0.0,10.0,Warnings found in checkstyle text, see traced console output
+<<
+>>Test Result:
+A5NamedConstants,62.5% complete,0.6,1.0,See console trace about lines failing  this check
+<<
+>>Test Result:
+A5PublicMethodsOverride,28.57142857142857% complete,1.4,5.0,See console trace about lines failing  this check
+<<
+>>Test Result:
+A5InterfaceAsType,86.66666666666667% complete,8.7,10.0,See console trace about lines failing  this check
+<<
+>>Test Result:
+A5MnemonicNames,92.1875% complete,9.2,10.0,See console trace about lines failing  this check
+<<
+>>Test Result:
+A5AccessModifiersMatched,77.77777777777779% complete,3.9,5.0,See console trace about lines failing  this check
 <<
 *END_OUTPUT*
