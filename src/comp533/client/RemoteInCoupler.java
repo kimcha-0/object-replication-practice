@@ -8,16 +8,19 @@ import java.util.List;
 
 import assignments.util.inputParameters.AnAbstractSimulationParametersBean;
 import stringProcessors.HalloweenCommandProcessor;
+import util.interactiveMethodInvocation.IPCMechanism;
 
 public class RemoteInCoupler extends AnAbstractSimulationParametersBean implements InCoupler {
 	private HalloweenCommandProcessor localSim;
 	static int numCouplers;
 	private int inCouplerId;
+	private IPCMechanism mode;
 	
-	public RemoteInCoupler(HalloweenCommandProcessor localSim) {
+	public RemoteInCoupler(HalloweenCommandProcessor localSim, IPCMechanism ipc) {
 		this.inCouplerId = numCouplers;
 		this.localSim = localSim;
 		numCouplers++;
+		this.mode = ipc;
 	}
 
 	@Override

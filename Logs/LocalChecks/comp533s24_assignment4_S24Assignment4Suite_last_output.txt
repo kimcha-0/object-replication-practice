@@ -16,39 +16,6 @@
 
 *POST_OUTPUT*
 >>Test Result:
-RMITwoClientConnection,100.0% complete,20.0,20.0,
-<<
->>Test Result:
-RMITwoClientReadWriteNonAtomic,100.0% complete,20.0,20.0,
-<<
->>Test Result:
-RMIStaticArguments,100.0% complete,20.0,20.0,
-<<
->>Test Result:
-RMIOneClientConnection,100.0% complete,20.0,20.0,
-<<
->>Test Result:
-RMIOneClientReadWriteNonAtomic,100.0% complete,20.0,20.0,
-<<
->>Test Result:
-A4NoCheckstyleWarnings,100.0% complete,10.0,10.0,
-<<
->>Test Result:
-A4NamedConstants,0.0% complete,0.0,1.0,No checkstyle output, check console error messages
-<<
->>Test Result:
-A4PublicMethodsOverride,0.0% complete,0.0,5.0,No checkstyle output, check console error messages
-<<
->>Test Result:
-A4InterfaceAsType,0.0% complete,0.0,10.0,No checkstyle output, check console error messages
-<<
->>Test Result:
-A4MnemonicNames,0.0% complete,0.0,10.0,No checkstyle output, check console error messages
-<<
->>Test Result:
-A4AccessModifiersMatched,0.0% complete,0.0,5.0,No checkstyle output, check console error messages
-<<
->>Test Result:
 A4TaggedClassesDefined,100.0% complete,10.0,10.0,
 <<
 >>Test Result:

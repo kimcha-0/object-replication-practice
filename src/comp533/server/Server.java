@@ -16,7 +16,10 @@ import util.interactiveMethodInvocation.SimulationParametersControllerFactory;
 import util.annotations.Tags;
 import util.tags.DistributedTags;
 import util.trace.port.consensus.ProposalLearnedNotificationSent;
+import util.trace.port.consensus.ProposalMade;
+import util.trace.port.consensus.ProposedStateSet;
 import util.trace.port.consensus.RemoteProposeRequestReceived;
+import util.trace.port.consensus.RemoteProposeRequestSent;
 import util.trace.port.consensus.communication.CommunicationStateNames;
 import util.trace.port.rpc.rmi.RMIObjectRegistered;
 import util.trace.port.rpc.rmi.RMIRegistryLocated;
@@ -31,6 +34,7 @@ public class Server extends AStandAloneTwoCoupledHalloweenSimulations implements
 	// all other in-couplers
 
 	List<RemoteClient> clientProxies;
+	Registry rmiRegistry;
 
 	public Server() {
 
@@ -42,6 +46,7 @@ public class Server extends AStandAloneTwoCoupledHalloweenSimulations implements
 		clientProxies.add(client);
 		try {
 			client.setId(clientProxies.size());
+			 System.out.println("rmi id init: " + client.getId());
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -53,40 +58,95 @@ public class Server extends AStandAloneTwoCoupledHalloweenSimulations implements
 		System.out.println("Registry port:" + ServerArgsProcessor.getRegistryPort(args));
 		
 	}
-
-
-	public static void main(String args[]) {
+	
+	
+	@Override
+	protected void init(String args[]) {
+		this.processArgs(args);
+		this.setTracing();
 		try {
-			Server server = new Server();
-			server.processArgs(args);
-			server.setTracing();
-			Registry registry = LocateRegistry.getRegistry(ServerArgsProcessor.getRegistryPort(args));
+			this.rmiRegistry = LocateRegistry.getRegistry(ServerArgsProcessor.getRegistryPort(args));
 			RMIRegistryLocated.newCase(Server.class, 
 					ServerArgsProcessor.getRegistryHost(args), 
 					ServerArgsProcessor.getRegistryPort(args),
-					registry);
-			RemoteServer serverProxy = (RemoteServer)UnicastRemoteObject.exportObject(server, 0);
-			RMIObjectRegistered.newCase(Server.class, SERVER, serverProxy, registry);
-			registry.rebind(SERVER, server);
-			// blocking server start
-			server.start();
-			
-		} catch(RemoteException e) {
+					this.rmiRegistry);
+			RemoteServer serverProxy = (RemoteServer)UnicastRemoteObject.exportObject(this, 0);
+			RMIObjectRegistered.newCase(Server.class, SERVER, serverProxy, this.rmiRegistry);
+			this.rmiRegistry.rebind(SERVER, this);
+		} catch (RemoteException e) { // TODO Auto-generated catch block
 			e.printStackTrace();
+		}
+		
+	}
+
+	@Override
+	public void ipcMechanism(IPCMechanism newValue) {
+		ProposalMade.newCase(this, CommunicationStateNames.IPC_MECHANISM, -1, newValue);
+		ProposedStateSet.newCase(this, CommunicationStateNames.IPC_MECHANISM, -1, newValue);
+		this.ipcMechanism = newValue;
+		if (this.broadcastMetaState) {
+			// callback in server
+			try {
+				this.broadcastChanges(newValue, -1);
+				RemoteProposeRequestSent.newCase(this, CommunicationStateNames.COMMAND, -1, newValue);
+			} catch (RemoteException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
 	
-	public static void start() {
+	@Override
+	public void broadcastMetaState(boolean newValue) {
+		ProposalMade.newCase(this, CommunicationStateNames.BROADCAST_MODE, -1, newValue);
+		this.broadcastMetaState = newValue;
+		ProposedStateSet.newCase(this, CommunicationStateNames.BROADCAST_MODE, -1, newValue);
+		try {
+			RemoteProposeRequestSent.newCase(this, CommunicationStateNames.BROADCAST_MODE, -1, newValue);
+			this.broadcastChanges(newValue, -1);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		
+	}
+
+	public static void main(String args[]) {
+		Server server = new Server();
+		server.init(args);
+	
+		// blocking server start
+		server.start();
+			
+	}
+	
+
+	@Override
+	public void receiveMetaState(boolean newValue) {
+		this.broadcastMetaState = newValue;
+	}
+
+	
+	@Override
+	public void receiveIPCMechanism(IPCMechanism newValue) {
+		this.ipcMechanism = newValue;
+	}
+
+	
+	public void start() {
+		SimulationParametersControllerFactory.getSingleton().addSimulationParameterListener(this);
+        SimulationParametersControllerFactory.getSingleton().processCommands();
 	}
 
 	@Override
 	public void broadcastChanges(Object msg, int id) throws RemoteException {
 		RemoteProposeRequestReceived.newCase(this, CommunicationStateNames.COMMAND, -1, msg);
 		// broadcasts messages to incouplers of clients except for the original sender
+		System.out.println("originating rmi id: " + id);
 		for (RemoteClient c : clientProxies) {
-			if (c.getId() != id) {
-				try {
+			try {
+				System.out.println("rmi id from server: " + c.getId());
+				if (c.getId() != id) {
+					System.out.println("broadcasting to rmi id from server: " + c.getId());
 					if (msg instanceof IPCMechanism)
 						c.receiveIPCChange((IPCMechanism)msg);
 					else if (msg instanceof String)
@@ -94,9 +154,9 @@ public class Server extends AStandAloneTwoCoupledHalloweenSimulations implements
 					else
 						c.receiveMetaStateChange((boolean)msg);	
 					ProposalLearnedNotificationSent.newCase(this, CommunicationStateNames.BROADCAST_MODE, -1, msg);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
+					}
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
 		}
 	}

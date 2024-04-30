@@ -5,21 +5,24 @@ import java.rmi.RemoteException;
 import assignments.util.inputParameters.AnAbstractSimulationParametersBean;
 import stringProcessors.HalloweenCommandProcessor;
 import util.annotations.Tags;
+import util.interactiveMethodInvocation.IPCMechanism;
 import util.tags.DistributedTags;
 import util.trace.port.consensus.ProposalMade;
 import util.trace.port.consensus.RemoteProposeRequestSent;
 import util.trace.port.consensus.communication.CommunicationStateNames;
 import util.trace.trickOrTreat.LocalCommandObserved;
 
-@Tags({DistributedTags.CLIENT_OUT_COUPLER, DistributedTags.RMI})
+@Tags({DistributedTags.CLIENT_OUT_COUPLER, DistributedTags.RMI, DistributedTags.GIPC})
 public class RemoteOutCoupler implements OutCoupler {
 	private static final long serialVersionUID = 1L;
 	// sends message to Server that change has occurred
 	// observes client
 	HalloweenCommandProcessor localSim;
+	IPCMechanism mode;
 
-	public RemoteOutCoupler(HalloweenCommandProcessor observable) {
+	public RemoteOutCoupler(HalloweenCommandProcessor observable, IPCMechanism mode) {
 		this.localSim = observable;
+		this.mode = mode;
 	}
 	
 

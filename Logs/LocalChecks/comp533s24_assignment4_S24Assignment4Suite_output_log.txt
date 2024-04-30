@@ -1067,3 +1067,338 @@ A4ExpectedSignatures,0.0% complete,0.0,5.0,No checkstyle output, check console e
 *END_OUTPUT*
 
 
+
+15,Mon Apr 29 17:54:55 EDT 2024*PRE_OUTPUT*
+>>Running suite A4SpecificStyleSuite
+<<
+>>Running test A4TaggedClassesDefined
+<<
+>>Running test A4ExpectedInterfaces
+<<
+>>Running test A4ExpectedCalls
+<<
+>>Running test A4SpuriousCalls
+<<
+>>Running test A4ExpectedSignatures
+<<
+*OUTPUT*
+*ERROR*
+
+*POST_OUTPUT*
+>>Test Result:
+A4TaggedClassesDefined,100.0% complete,10.0,10.0,
+<<
+>>Test Result:
+A4ExpectedInterfaces,0.0% complete,0.0,5.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A4ExpectedCalls,0.0% complete,0.0,20.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A4SpuriousCalls,0.0% complete,0.0,20.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A4ExpectedSignatures,0.0% complete,0.0,5.0,No checkstyle output, check console error messages
+<<
+*END_OUTPUT*
+
+
+
+16,Mon Apr 29 17:58:56 EDT 2024*PRE_OUTPUT*
+>>Running suite Assignment4OneClientSuite
+<<
+>>Running test RMIStaticArguments
+<<
+>>Running test RMIOneClientConnection
+<<
+>>Running test RMIOneClientReadWriteNonAtomic
+<<
+*OUTPUT*
+*ERROR*
+
+*POST_OUTPUT*
+>>Test Result:
+RMIStaticArguments,100.0% complete,20.0,20.0,
+<<
+>>Test Result:
+RMIOneClientConnection,100.0% complete,20.0,20.0,
+<<
+>>Test Result:
+RMIOneClientReadWriteNonAtomic,100.0% complete,20.0,20.0,
+<<
+*END_OUTPUT*
+
+
+
+17,Tue Apr 30 00:21:29 EDT 2024*PRE_OUTPUT*
+>>Running suite Assignment4TwoClientSuite
+<<
+>>Running test RMITwoClientConnection
+<<
+>>Running test RMITwoClientReadWriteNonAtomic
+<<
+*OUTPUT*
+*ERROR*
+
+*POST_OUTPUT*
+>>Test Result:
+RMITwoClientConnection,100.0% complete,20.0,20.0,
+<<
+>>Test Result:
+RMITwoClientReadWriteNonAtomic,100.0% complete,20.0,20.0,
+<<
+*END_OUTPUT*
+
+
+
+17,Tue Apr 30 00:26:50 EDT 2024*PRE_OUTPUT*
+>>Running suite Assignment4OneClientSuite
+<<
+>>Running test RMIStaticArguments
+<<
+>>Running test RMIOneClientConnection
+<<
+>>Running test RMIOneClientReadWriteNonAtomic
+<<
+*OUTPUT*
+*ERROR*
+
+*POST_OUTPUT*
+>>Test Result:
+RMITwoClientConnection,100.0% complete,20.0,20.0,
+<<
+>>Test Result:
+RMITwoClientReadWriteNonAtomic,100.0% complete,20.0,20.0,
+<<
+>>Test Result:
+RMIStaticArguments,100.0% complete,20.0,20.0,
+<<
+>>Test Result:
+RMIOneClientConnection,100.0% complete,20.0,20.0,
+<<
+>>Test Result:
+RMIOneClientReadWriteNonAtomic,100.0% complete,20.0,20.0,
+<<
+*END_OUTPUT*
+
+
+
+17,Tue Apr 30 00:36:03 EDT 2024*PRE_OUTPUT*
+>>Running suite A4GeneralStyleSuite
+<<
+>>Running test A4NoCheckstyleWarnings
+<<
+>>Running test A4NamedConstants
+<<
+>>Running test A4PublicMethodsOverride
+<<
+>>Running test A4InterfaceAsType
+<<
+>>Running test A4MnemonicNames
+<<
+>>Running test A4AccessModifiersMatched
+<<
+*OUTPUT*
+*ERROR*
+
+*POST_OUTPUT*
+>>Test Result:
+RMITwoClientConnection,100.0% complete,20.0,20.0,
+<<
+>>Test Result:
+RMITwoClientReadWriteNonAtomic,100.0% complete,20.0,20.0,
+<<
+>>Test Result:
+RMIStaticArguments,100.0% complete,20.0,20.0,
+<<
+>>Test Result:
+RMIOneClientConnection,100.0% complete,20.0,20.0,
+<<
+>>Test Result:
+RMIOneClientReadWriteNonAtomic,100.0% complete,20.0,20.0,
+<<
+>>Test Result:
+A4NoCheckstyleWarnings,100.0% complete,10.0,10.0,
+<<
+>>Test Result:
+A4NamedConstants,0.0% complete,0.0,1.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A4PublicMethodsOverride,0.0% complete,0.0,5.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A4InterfaceAsType,0.0% complete,0.0,10.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A4MnemonicNames,0.0% complete,0.0,10.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A4AccessModifiersMatched,0.0% complete,0.0,5.0,No checkstyle output, check console error messages
+<<
+*END_OUTPUT*
+
+
+
+17,Tue Apr 30 00:36:03 EDT 2024*PRE_OUTPUT*
+>>Running suite A4SpecificStyleSuite
+<<
+>>Running test A4TaggedClassesDefined
+<<
+>>Running test A4ExpectedInterfaces
+<<
+>>Running test A4ExpectedCalls
+<<
+>>Running test A4SpuriousCalls
+<<
+>>Running test A4ExpectedSignatures
+<<
+*OUTPUT*
+*ERROR*
+
+*POST_OUTPUT*
+>>Test Result:
+RMITwoClientConnection,100.0% complete,20.0,20.0,
+<<
+>>Test Result:
+RMITwoClientReadWriteNonAtomic,100.0% complete,20.0,20.0,
+<<
+>>Test Result:
+RMIStaticArguments,100.0% complete,20.0,20.0,
+<<
+>>Test Result:
+RMIOneClientConnection,100.0% complete,20.0,20.0,
+<<
+>>Test Result:
+RMIOneClientReadWriteNonAtomic,100.0% complete,20.0,20.0,
+<<
+>>Test Result:
+A4NoCheckstyleWarnings,100.0% complete,10.0,10.0,
+<<
+>>Test Result:
+A4NamedConstants,0.0% complete,0.0,1.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A4PublicMethodsOverride,0.0% complete,0.0,5.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A4InterfaceAsType,0.0% complete,0.0,10.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A4MnemonicNames,0.0% complete,0.0,10.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A4AccessModifiersMatched,0.0% complete,0.0,5.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A4TaggedClassesDefined,100.0% complete,10.0,10.0,
+<<
+>>Test Result:
+A4ExpectedInterfaces,0.0% complete,0.0,5.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A4ExpectedCalls,0.0% complete,0.0,20.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A4SpuriousCalls,0.0% complete,0.0,20.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A4ExpectedSignatures,0.0% complete,0.0,5.0,No checkstyle output, check console error messages
+<<
+*END_OUTPUT*
+
+
+
+17,Tue Apr 30 00:36:08 EDT 2024*PRE_OUTPUT*
+>>Running suite A4SpecificStyleSuite
+<<
+*OUTPUT*
+*ERROR*
+
+*POST_OUTPUT*
+>>Test Result:
+RMITwoClientConnection,100.0% complete,20.0,20.0,
+<<
+>>Test Result:
+RMITwoClientReadWriteNonAtomic,100.0% complete,20.0,20.0,
+<<
+>>Test Result:
+RMIStaticArguments,100.0% complete,20.0,20.0,
+<<
+>>Test Result:
+RMIOneClientConnection,100.0% complete,20.0,20.0,
+<<
+>>Test Result:
+RMIOneClientReadWriteNonAtomic,100.0% complete,20.0,20.0,
+<<
+>>Test Result:
+A4NoCheckstyleWarnings,100.0% complete,10.0,10.0,
+<<
+>>Test Result:
+A4NamedConstants,0.0% complete,0.0,1.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A4PublicMethodsOverride,0.0% complete,0.0,5.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A4InterfaceAsType,0.0% complete,0.0,10.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A4MnemonicNames,0.0% complete,0.0,10.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A4AccessModifiersMatched,0.0% complete,0.0,5.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A4TaggedClassesDefined,100.0% complete,10.0,10.0,
+<<
+>>Test Result:
+A4ExpectedInterfaces,0.0% complete,0.0,5.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A4ExpectedCalls,0.0% complete,0.0,20.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A4SpuriousCalls,0.0% complete,0.0,20.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A4ExpectedSignatures,0.0% complete,0.0,5.0,No checkstyle output, check console error messages
+<<
+*END_OUTPUT*
+
+
+
+18,Tue Apr 30 00:37:25 EDT 2024*PRE_OUTPUT*
+>>Running suite A4SpecificStyleSuite
+<<
+>>Running test A4TaggedClassesDefined
+<<
+>>Running test A4ExpectedInterfaces
+<<
+>>Running test A4ExpectedCalls
+<<
+>>Running test A4SpuriousCalls
+<<
+>>Running test A4ExpectedSignatures
+<<
+*OUTPUT*
+*ERROR*
+
+*POST_OUTPUT*
+>>Test Result:
+A4TaggedClassesDefined,100.0% complete,10.0,10.0,
+<<
+>>Test Result:
+A4ExpectedInterfaces,0.0% complete,0.0,5.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A4ExpectedCalls,0.0% complete,0.0,20.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A4SpuriousCalls,0.0% complete,0.0,20.0,No checkstyle output, check console error messages
+<<
+>>Test Result:
+A4ExpectedSignatures,0.0% complete,0.0,5.0,No checkstyle output, check console error messages
+<<
+*END_OUTPUT*
+
+
